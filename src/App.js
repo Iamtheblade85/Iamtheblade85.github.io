@@ -11,7 +11,7 @@ import { motion } from "framer-motion"
 function App() {
   const dispatch = useDispatch()
   const { token } = useSelector(state => state.user)
-  const Variant = {
+  const Variants = {
     initial: { opacity: 0 },
     whileInView: { opacity: 1 }
   }
@@ -27,7 +27,12 @@ function App() {
   }, [dispatch, token])
 
   return (
-    <motion.div className="App" transition={mainTransition} variants={Variant} initial="initial" whileInView="whileInView">
+    <motion.div
+      className="App"
+      transition={mainTransition}
+      variants={Variants}
+      initial="initial"
+      whileInView="whileInView">
       <ToastContainer />
       <MyRouters />
     </motion.div>

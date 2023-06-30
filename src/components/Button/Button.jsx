@@ -10,7 +10,9 @@ const Button = ({ children, onClick, loader, disabled = false, color, size }) =>
       ? styles.btn_white
       : color === "olive"
         ? styles.btn_olive
-        : "",
+        : color === "blue"
+          ? styles.btn_blue
+          : "",
     size === "fit"
       ? styles.btn_fit
       : size === "medium"

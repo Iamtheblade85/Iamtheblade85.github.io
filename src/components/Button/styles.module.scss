@@ -19,7 +19,7 @@
   }
 }
 
-// Color
+// Colors
 .btn_white {
   border: 1px solid $darkBlue;
   color: $darkBlue;
@@ -55,8 +55,25 @@
     color: $white;
   }
 }
+.btn_blue {
+  border: 1px solid $white;
+  color: $spaceLightBlue;
+  background: $spaceBlue;
 
-// Size
+  &:hover,
+  &:focus {
+    background-color: $spaceLightBlue;
+    outline: none;
+    color: $white;
+  }
+
+  &:active {
+    background-color: $spaceLightBlue;
+    color: $white;
+  }
+}
+
+// Sizes
 .btn_medium {
   width: 80px;
 }

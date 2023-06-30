@@ -79,12 +79,8 @@ export const Navbar = () => {
     setMenuPlayerOpen(!menuPlayerOpen)
   }
 
-  const openMenu = () => {
-    setMenuOpen(true)
-  }
-
-  const closeMenu = () => {
-    setMenuOpen(false)
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen)
   }
 
   return (
@@ -114,12 +110,12 @@ export const Navbar = () => {
           <div className={styles.container_navbar_menus}>
             <div className={styles.container_navbar_menus_dropDown}>
               {!menuOpen ?
-                <img rel="preload" onClick={openMenu} className={styles.container_navbar_menus_dropDown_openHamburger} src={hamburgerIcon} alt="hamburger icon" />
-                : <img rel="preload" onClick={closeMenu} className={styles.container_navbar_menus_dropDown_closeHamburger} src={closeIcon} alt="close icon" />
+                <img rel="preload" onClick={toggleMenu} className={styles.container_navbar_menus_dropDown_openHamburger} src={hamburgerIcon} alt="hamburger icon" />
+                : <img rel="preload" onClick={toggleMenu} className={styles.container_navbar_menus_dropDown_closeHamburger} src={closeIcon} alt="close icon" />
               }
               {menuOpen && (
                 <DropdownMenu
-                  closeMenu={closeMenu}
+                  closeMenu={toggleMenu}
                   openWaxModal={openWaxModal}
                   onHandleLogout={onHandleLogout}
                   menuList={menuArray}
@@ -131,7 +127,7 @@ export const Navbar = () => {
               <>
                 <div className={styles.container_navbar_menus_line}></div>
                 <div className={styles.container_navbar_menus_userDropDown}>
-                  <img rel="preload" onClick={togglePlayerMenu} src={defaultUser} alt="" />
+                  <img rel="preload" onClick={togglePlayerMenu} src={defaultUser} alt="user icon" />
                   {menuPlayerOpen && <UserDropdownMenu closeMenu={togglePlayerMenu} />}
                 </div>
               </>

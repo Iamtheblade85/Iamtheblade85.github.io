@@ -18,37 +18,78 @@
     gap: 20px;
     align-items: center;
     text-align: center;
+    min-height: 100vh;
     > h1 {
       text-align: center;
-      color: $chartreuse;
+      color: $spaceBlue;
     }
     > p {
-      color: $olive;
+      color: $spaceLightBlue;
       font-size: 24px;
     }
   }
   &_infoSection {
     text-align: center;
-    color: $white;
     padding: 20px 50px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     background-image: url("../../assets/images/welcome_section_background.jpg");
     background-position: center;
     background-repeat: repeat;
     background-attachment: fixed;
     &:nth-child(6) {
       background-image: url("../../assets/images/welcome_section_bottom_background.jpg");
-      height: 60vh;
+      height: 50vh;
     }
     &_info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       > h2 {
-        color: $lime;
+        color: $spaceBlue;
       }
       > p {
-        color: $olive;
+        color: $spaceLightBlue;
         font-size: 24px;
+      }
+    }
+  }
+}
+
+@media (max-width: $small-screen) {
+  .container {
+    &_mainSection {
+      > p {
+        font-size: 15px;
+      }
+    }
+    &_infoSection {
+      &_info {
+        > p {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: $mobile-screen) {
+  .container {
+    &_mainSection {
+      > h1 {
+        font-size: 6vw;
+      }
+      > p {
+        font-size: 3vw;
+      }
+    }
+    &_infoSection {
+      &_info {
+        > h2 {
+          font-size: 6vw;
+        }
+        > p {
+          font-size: 3vw;
+        }
       }
     }
   }

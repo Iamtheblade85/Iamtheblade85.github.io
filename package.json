@@ -53,6 +53,9 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "node-sass": "^7.0.3"
+    "eslint": "^8.43.0",
+    "eslint-plugin-react": "^7.32.2",
+    "node-sass": "^7.0.3",
+    "prettier": "^2.8.8"
   }
 }
