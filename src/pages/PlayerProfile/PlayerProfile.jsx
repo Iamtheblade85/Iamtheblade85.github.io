@@ -14,9 +14,9 @@ import { motion } from "framer-motion"
 const InventoryCard = React.lazy(() => import("../../components/Nft/InventoryCard/InventoryCard"))
 
 const images = {
-  "Common Bread": "commonBread",
-  "Standard Sword": "standartSword",
-  "Sword": "sword"
+  // "Common Bread": "commonBread",
+  // "Standard Sword": "standartSword",
+  // "Sword": "sword"
 };
 
 const PlayerProfile = () => {

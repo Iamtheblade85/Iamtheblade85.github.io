@@ -37,9 +37,40 @@
     background-position: center;
     background-repeat: repeat;
     background-attachment: fixed;
+    &_links {
+      display: none;
+    }
     &:nth-child(6) {
       background-image: url("../../assets/images/welcome_section_bottom_background.jpg");
       height: 50vh;
+      gap: 3vw;
+      .container_infoSection_links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        > a {
+          > img {
+            width: 100px;
+            height: 100px;
+            @media (max-width: $small-screen) {
+              width: 60px;
+              height: 60px;
+            }
+            @media (max-width: $mobile-screen) {
+              width: 48px;
+              height: 48px;
+            }
+          }
+          :hover {
+            transition: all 0.2s ease-in-out;
+            transform: rotate(360deg);
+          }
+          :not(:hover) {
+            transition: all 0.2s ease-in-out;
+            transform: rotate(0deg);
+          }
+        }
+      }
     }
     &_info {
       display: flex;

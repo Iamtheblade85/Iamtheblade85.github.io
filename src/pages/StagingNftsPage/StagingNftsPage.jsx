@@ -19,9 +19,9 @@ import { motion } from "framer-motion"
 const StagingNftCard = React.lazy(() => import("../../components/Nft/StagingNftCard/StagingNftCard"))
 
 const images = {
-  "Common Bread": "commonBread",
-  "Standard Sword": "standartSword",
-  Sword: "sword"
+  // "Common Bread": "commonBread",
+  // "Standard Sword": "standartSword",
+  // Sword: "sword"
 };
 
 const StagingNftsPage = () => {

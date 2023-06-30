@@ -4,6 +4,11 @@ import { motion } from 'framer-motion'
 import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 
+import discordIcon from "../../assets/images/icons8-discord.svg"
+import telegramIcon from "../../assets/images/icons8-telegram-app.svg"
+import twitterIcon from "../../assets/images/icons8-twitter.svg"
+import neftyBlockIcon from "../../assets/images/NeftyBlocks-icon.png"
+
 const Welcome = () => {
   const scrollRef = useRef(null)
   const navigate = useNavigate()
@@ -95,7 +100,8 @@ const Welcome = () => {
         <motion.div
           style={{ backgroundPositionX: backgroundPosition.x, backgroundPositionY: backgroundPosition.y }}
           key={index}
-          className={styles.container_infoSection} viewport={{ root: scrollRef, once: true }}
+          className={styles.container_infoSection}
+          viewport={{ root: scrollRef, once: true }}
           transition={infoTransition}
         >
           <motion.div
@@ -118,6 +124,24 @@ const Welcome = () => {
               viewport={{ root: scrollRef, once: true }}
             >{info.text}</motion.p>
           </motion.div>
+          <div className={styles.container_infoSection_links}>
+            <a href="https://discord.gg/zAvhwmb6ZM" target="_blank"
+              rel="noreferrer">
+              <img src={discordIcon} alt="discord icon" />
+            </a>
+            <a href="https://t.me/outofcontrolnfts" target="_blank"
+              rel="noreferrer">
+              <img src={telegramIcon} alt="telegram icon" />
+            </a>
+            <a href="https://twitter.com/OOC_nfts" target="_blank"
+              rel="noreferrer">
+              <img src={twitterIcon} alt="twitter icon" />
+            </a>
+            <a href="https://neftyblocks.com/collection/cryptochaos1" target="_blank"
+              rel="noreferrer">
+              <img src={neftyBlockIcon} alt="neftyblock icon" />
+            </a>
+          </div>
         </motion.div>
       ))}
     </motion.section>

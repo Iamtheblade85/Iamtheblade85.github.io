@@ -33,15 +33,6 @@ export const Footer = () => {
           </a>
         </p> */}
 
-        {/* {(waxConnected || anchorConnected) && (
-          <p>
-            Support this project by{" "}
-            <span onClick={openModal}>
-              sending us WAX
-            </span>
-          </p>
-        )} */}
-
         <div>
           <a href="https://discord.gg/zAvhwmb6ZM" target="_blank"
             rel="noreferrer">
