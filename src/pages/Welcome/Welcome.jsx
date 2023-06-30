@@ -42,8 +42,8 @@ const Welcome = () => {
   ]
   useEffect(() => {
     const handleScroll = () => {
-      const newX = Math.random() * 200 - 100;
-      const newY = Math.random() * 200 - 100;
+      const newX = Math.random() * 100 - 100;
+      const newY = Math.random() * 100 - 100;
       setBackgroundPosition({ x: newX, y: newY });
     };
 
@@ -64,15 +64,32 @@ const Welcome = () => {
         style={{ backgroundPositionX: backgroundPosition.x, backgroundPositionY: backgroundPosition.y }}
         className={styles.container_mainSection}
         viewport={{ root: scrollRef, once: true }}
-        transition={infoTransition}
+        transition={mainTransition}
         variants={Variants}
         initial="initial"
         whileInView="whileInView">
-        <h1>Welcome to Chaos X-18</h1>
-        <motion.p transition={infoTransition}>
+        <motion.h1
+          transition={{ delay: 0.7 }}
+          variants={Variants}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ root: scrollRef, once: true }}
+        >Welcome to Chaos X-18</motion.h1>
+        <motion.p
+          transition={{ delay: 0.9 }}
+          variants={Variants}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ root: scrollRef, once: true }}>
           In the vast universe of Chaos X-18 journey to the most mysterious and resource-rich planet ever discovered. The story revolves around scientist E. Agostino, a visionary genius who has identified the most promising mineral deposits ever seen. His discoveries have attracted the attention of countless space adventurers, including you! But how do you reach Chaos X-18 ? The answer lies in the Teleport, a powerful NFT that offers the extraordinary ability to teleport players through the vast expanse of space to the heart of the planet. The Teleport will be your gateway to a world full of opportunities and thrilling challenges.Once you touch down on Chaos X-18, your journey as a space miner begins. Here you will encounter the Aurum and Celium mines, two highly valuable NFTs. Aurum specializes in extracting cosmic gold, a rare and precious resource, while Celium focuses on mining celium, a mysterious element with extraordinary energy properties. The Aurum and Celium mines will be your primary tools for gathering the resources necessary for your prosperity. But they won't be passive tools! You will have the ability to upgrade and customize your mines through a series of enhancements. These upgrades will increase resource production, allowing you to obtain ever-increasing quantities of Aurum and Celium. However, the collected resources are not just an end in themselves but a means to achieve the ultimate goal: Chaos Tokens. Through an elaborate conversion process, the resources extracted from the mines can be transformed into this unique cryptocurrency that represents the pulsating heart of the game ecosystem. Chaos Tokens will play a crucial role in your journey, offering extraordinary opportunities and unlocking advanced features. To maximize your space mining capabilities, you will have access to Slot Building NFTs. These powerful tools will allow you to simultaneously utilize up to 20 mines on Chaos X-18. This will provide you with a significant competitive advantage as you maximize resource production and compete for a share of the generous prize pool put forth by E. Agostino. <br /> <br /> Chaos X-18 is an active game on the Wax blockchain, contributing to the growth of this revolutionary ecosystem. Thanks to blockchain technology, you can enjoy secure and transparent transactions, as well as true ownership and control over your NFTs and resources. Prepare yourself for a one-of-a-kind space adventure where fast-paced action, space exploration, and the quest for power converge in an immersive experience. Chaos X-18 awaits you! Join the race to mining wealth and prove your worth in an unknown universe. Be the best and reach for the stars!
         </motion.p>
-        <Button onClick={() => navigate("/login")} size="large" color="blue">Start</Button>
+        <motion.div transition={{ delay: 1.2 }}
+          variants={Variants}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ root: scrollRef, once: true }}>
+          <Button onClick={() => navigate("/login")} size="large" color="blue">Start</Button>
+        </motion.div>
       </motion.div>
       {information.map((info, index) => (
         <motion.div

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './styles.module.scss';
+import { motion } from "framer-motion"
 
 import { logoutPlayer } from '../../../GlobalState/PlayerSlice/playerSlice';
 import { setPlayerIsLogged, setToken } from '../../../GlobalState/UserReducer';
@@ -12,6 +13,9 @@ const UserDropdownMenu = ({ closeMenu }) => {
   const dispatch = useDispatch()
   const { username, email } = useSelector((store) => store.player);
   const dropdownRef = useRef(null);
+  const infoTransition = {
+    type: "spring", ease: "easeInOut", damping: 30
+  }
 
   useEffect(() => {
     return () => closeMenu()
@@ -38,7 +42,10 @@ const UserDropdownMenu = ({ closeMenu }) => {
   }
 
   return (
-    <div
+    <motion.div
+      transition={infoTransition}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className={styles.dropdownMenu}
       ref={dropdownRef}
     >
@@ -55,7 +62,7 @@ const UserDropdownMenu = ({ closeMenu }) => {
       <span onClick={playerLogout}>
         Logout
       </span>
-    </div>
+    </motion.div>
   )
 }
 

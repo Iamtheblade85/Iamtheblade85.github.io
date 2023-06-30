@@ -4,10 +4,14 @@ import { useSelector } from 'react-redux';
 import EnterIcon from '../../../assets/images/enter.png';
 import ExitIcon from '../../../assets/images/exit.png';
 import styles from './styles.module.scss';
+import { motion } from "framer-motion"
 
 const DropdownMenu = ({ closeMenu, openWaxModal, onHandleLogout, menuList }) => {
   const { waxConnected, anchorConnected } = useSelector((store) => store.user);
   const dropdownRef = useRef(null);
+  const infoTransition = {
+    type: "spring", ease: "easeInOut", damping: 30
+  }
 
   useEffect(() => {
     return () => closeMenu()
@@ -26,9 +30,11 @@ const DropdownMenu = ({ closeMenu, openWaxModal, onHandleLogout, menuList }) => 
     };
   }, [closeMenu]);
 
-
   return (
-    <div
+    <motion.div
+      transition={infoTransition}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className={styles.dropdownMenu}
       ref={dropdownRef}
     >
@@ -64,7 +70,7 @@ const DropdownMenu = ({ closeMenu, openWaxModal, onHandleLogout, menuList }) => 
           </div>
         )
       }
-    </div>
+    </motion.div>
   )
 }
 
