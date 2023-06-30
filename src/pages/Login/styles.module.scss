@@ -1,0 +1,51 @@
+@import "../../assets/styles/variables.scss";
+@import "../../assets/styles/global.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+
+  &_login {
+    color: $white;
+    background: $darkBlue;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    align-items: center;
+    width: 340px;
+    row-gap: 20px;
+
+    &_inputBlock {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      row-gap: 15px;
+    }
+
+    &_error {
+      font-size: 14px;
+      color: $error;
+      text-align: center;
+    }
+
+    > p {
+      > a {
+        color: $chartreuse;
+        @extend .orangeUnderlineHover;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-screen) {
+  .container {
+    &_login {
+      width: 100%;
+    }
+  }
+}

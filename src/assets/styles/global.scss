@@ -1,0 +1,78 @@
+@import "../styles/variables.scss";
+
+.whiteUnderlineHover {
+  text-decoration: none;
+  width: fit-content;
+  cursor: pointer;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.1px;
+    width: 0;
+    height: 1px;
+    background-color: $white;
+    transition: width 0.2s ease-in-out, left 0.2s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+.orangeUnderlineHover {
+  text-decoration: none;
+  width: fit-content;
+  cursor: pointer;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.1px;
+    width: 0;
+    height: 1px;
+    background-color: $chartreuse;
+    transition: width 0.2s ease-in-out, left 0.2s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+.whiteUnderlineHover {
+  text-decoration: none;
+  width: fit-content;
+  cursor: pointer;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.1px;
+    width: 0;
+    height: 1px;
+    background-color: white;
+    transition: width 0.2s ease-in-out, left 0.2s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+.divHoverEffect {
+  &:hover {
+    transform: scale(1.05);
+    ::before {
+      filter: brightness(0.5);
+      top: -10%;
+      left: 200%;
+    }
+  }
+}

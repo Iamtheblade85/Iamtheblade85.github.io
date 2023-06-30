@@ -1,0 +1,13 @@
+@import "../../assets/styles/variables.scss";
+
+.container {
+  width: 100%;
+  background: $darkBlue;
+  height: 250px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  opacity: 0.8;
+}

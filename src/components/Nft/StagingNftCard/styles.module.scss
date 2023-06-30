@@ -1,0 +1,34 @@
+@import "../../../assets/styles/global.scss";
+
+.nftBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  font-size: 20px;
+  width: 270px;
+  border-radius: 15px;
+  border: 1px solid;
+  @extend .divHoverEffect;
+
+  > img {
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 8px;
+  }
+
+  &_infoValue {
+    font-size: 20px;
+
+    > :nth-child(1) {
+      font-weight: 600;
+    }
+  }
+
+  &_buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}

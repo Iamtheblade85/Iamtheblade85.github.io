@@ -1,0 +1,58 @@
+@import "../../assets/styles/variables.scss";
+@import "../../assets/styles/global.scss";
+
+.container {
+  width: 100%;
+  background-color: $darkBlue;
+  color: $white;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  > p {
+    > a {
+      color: $chartreuse;
+      @extend .orangeUnderlineHover;
+    }
+    > span {
+      cursor: pointer;
+      color: $chartreuse;
+      @extend .orangeUnderlineHover;
+    }
+  }
+
+  > div {
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    font-size: 16px;
+    > a {
+      > img {
+        width: 48px;
+        height: 48px;
+      }
+
+      :hover {
+        transition: all 0.2s ease-in-out;
+        transform: scale(1.1);
+      }
+      :not(:hover) {
+        transition: all 0.2s ease-in-out;
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-screen) {
+  .container {
+    font-size: 16px;
+  }
+}

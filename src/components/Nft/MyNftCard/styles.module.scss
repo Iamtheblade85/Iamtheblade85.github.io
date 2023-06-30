@@ -1,0 +1,30 @@
+@import "../../../assets/styles/global.scss";
+
+.container {
+  width: 270px;
+  border-radius: 15px;
+  padding: 10px;
+  border: 1px solid;
+  @extend .divHoverEffect;
+
+  > img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+  }
+
+  &_mainInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    &_nftName {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    &_description {
+      @extend .whiteUnderlineHover;
+    }
+  }
+}

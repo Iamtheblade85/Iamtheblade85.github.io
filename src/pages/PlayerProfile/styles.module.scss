@@ -1,0 +1,72 @@
+@import "../../assets/styles/variables.scss";
+
+.container {
+  width: 100%;
+  // height: 100%;
+  min-height: 100vh;
+  color: $white;
+  padding: 20px 50px;
+
+  &_characterInformation {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &_wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      padding: 20px;
+
+      &_infoDiv {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border: 1px solid $white;
+        border-radius: 15px;
+        row-gap: 2px;
+
+        &_infoValue {
+          font-size: 20px;
+
+          > :nth-child(1) {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  &_characterInventory {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &_inventoryCardWrapper {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+      gap: 20px;
+    }
+  }
+}
+
+@media (max-width: $medium-screen) {
+  .container {
+    &_characterInformation {
+      &_wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media (max-width: $small-screen) {
+  .container {
+    &_characterInventory {
+      &_inventoryCardWrapper {
+        justify-content: center;
+      }
+    }
+  }
+}

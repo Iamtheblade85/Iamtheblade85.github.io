@@ -1,0 +1,30 @@
+@import "../../assets/styles/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+
+  > input {
+    outline: none;
+    border-radius: 10px;
+    width: 100%;
+    padding: 7px;
+  }
+
+  > p {
+    text-align: center;
+    color: $error;
+    font-size: 14px;
+  }
+
+  &_label_error {
+    color: $error;
+  }
+  
+  &_input_error {
+    border-color: $error;
+  }
+}
+
+

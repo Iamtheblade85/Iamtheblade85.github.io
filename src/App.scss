@@ -1,0 +1,97 @@
+@import "~bootstrap/scss/bootstrap.scss";
+@import "./assets/styles/variables.scss";
+@font-face {
+  font-family: "titillium";
+  src: url("./assets/fonts/Titillium/TitilliumWeb-Regular.ttf");
+  font-display: swap;
+}
+@font-face {
+  font-family: "stardos";
+  src: url("./assets/fonts/Stardos/StardosStencil-Regular.ttf");
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  user-select: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: stardos;
+  text-shadow: 0.5px 0.5px 0.5px $white;
+}
+
+p,
+span,
+h4,
+h5,
+a,
+li {
+  font-family: titillium;
+  transition: all 0.2s ease-in-out;
+  text-shadow: 0.5px 0.5px 0.5px $white;
+}
+button,
+div,
+img {
+  transition: all 0.2s ease-in-out;
+}
+
+.App {
+  background-color: $darkBlue;
+}
+
+.Component {
+  background-image: url("./assets/images/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $darkBlue;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $olive;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $lime;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

@@ -1,0 +1,27 @@
+@import "../../assets/styles/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+
+  > textarea {
+    outline: none;
+    border-radius: 10px;
+    width: 100%;
+    padding: 7px;
+  }
+
+  > p {
+    text-align: center;
+    color: $error;
+    font-size: 14px;
+  }
+  &_labelError {
+    color: $error;
+  }
+
+  &_textareaError {
+    border-color: $error;
+  }
+}

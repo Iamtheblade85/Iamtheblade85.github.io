@@ -1,0 +1,55 @@
+@import "../../assets/styles/variables.scss";
+@import "../../assets/styles/global.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  &_mainSection {
+    color: $white;
+    background-image: url("../../assets/images/welcome_section_background.jpg");
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    text-align: center;
+    > h1 {
+      text-align: center;
+      color: $chartreuse;
+    }
+    > p {
+      color: $olive;
+      font-size: 24px;
+    }
+  }
+  &_infoSection {
+    text-align: center;
+    color: $white;
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-image: url("../../assets/images/welcome_section_background.jpg");
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    &:nth-child(6) {
+      background-image: url("../../assets/images/welcome_section_bottom_background.jpg");
+      height: 60vh;
+    }
+    &_info {
+      > h2 {
+        color: $lime;
+      }
+      > p {
+        color: $olive;
+        font-size: 24px;
+      }
+    }
+  }
+}
