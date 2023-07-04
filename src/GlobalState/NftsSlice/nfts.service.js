@@ -1,7 +1,7 @@
 import axios from '../../axios/axios';
 
 function getNfts(waxAccount) {
-  return axios.get(`https://test.wax.api.atomicassets.io/atomicassets/v1/assets/?owner=${waxAccount}&collection_name=xminestokens&sort=rdata`)
+  return axios.get(`https://test.wax.api.atomicassets.io/atomicassets/v1/assets/?owner=${waxAccount}&collection_name=blockchain22&sort=rdata`)
 }
 
 function getStagingNfts(token) {

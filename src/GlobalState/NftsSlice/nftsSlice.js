@@ -13,7 +13,6 @@ export const getMyNfts = createAsyncThunk(
       const state = getState()
       const res = await NftsService.getNfts(state.user.name)
       dispatch(setMyNfts(res.data.data))
-      console.log(res.data.data)
     }
     catch (err) {
       console.log(err)
@@ -28,8 +27,6 @@ export const getStagingNfts = createAsyncThunk(
       const state = getState()
       const res = await NftsService.getStagingNfts(state.user.token)
       dispatch(setStagingNfts(res.data.result?.rows))
-      console.log("STAGING NFTS" + res.data.result?.rows)
-
     }
     catch (err) {
       console.log(err)

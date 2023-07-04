@@ -59,7 +59,6 @@ export const getAuthorizedPlayer = createAsyncThunk(
       const state = getState()
       const res = await PlayerService.getAuthorizedPlayer(state.user.token)
       dispatch(setPlayerData(res.data.result))
-      console.log("PLAYER DATA" + res.data.result)
       dispatch(setPlayerIsLogged(true))
     }
     catch (err) {

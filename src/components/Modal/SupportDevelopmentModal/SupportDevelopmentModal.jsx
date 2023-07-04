@@ -79,7 +79,6 @@ const SupportDevelopmentModal = ({ onClose }) => {
       expireSeconds: 30
     })
       .then(response => {
-        console.log(response)
         onClose();
       })
   }
