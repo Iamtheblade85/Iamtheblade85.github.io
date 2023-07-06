@@ -7,7 +7,7 @@
 
   &_mainSection {
     color: $white;
-    background-image: url("../../assets/images/welcome_section_background.jpg");
+    background-image: url("../../assets/images/backgrounds/welcome_section_background.jpg");
     background-position: center;
     background-repeat: repeat;
     background-attachment: fixed;
@@ -33,7 +33,7 @@
     padding: 20px 50px;
     display: flex;
     flex-direction: column;
-    background-image: url("../../assets/images/welcome_section_background.jpg");
+    background-image: url("../../assets/images/backgrounds/welcome_section_background.jpg");
     background-position: center;
     background-repeat: repeat;
     background-attachment: fixed;
@@ -41,7 +41,7 @@
       display: none;
     }
     &:nth-child(6) {
-      background-image: url("../../assets/images/welcome_section_bottom_background.jpg");
+      background-image: url("../../assets/images/backgrounds/welcome_section_bottom_background.jpg");
       height: 50vh;
       gap: 3vw;
       .container_infoSection_links {

@@ -6,17 +6,18 @@ import styles from "./styles.module.scss";
 
 import {
   getStagingNfts,
-  setStagingNfts
+  setStagingNfts,
 } from "../../GlobalState/NftsSlice/nftsSlice";
 import NftsService from "../../GlobalState/NftsSlice/nfts.service";
-
 
 import Loader from "../../components/Loader/Loader";
 import NoDataMessage from "../../components/NoDataMessage/NoDataMessage";
 import Button from "../../components/Button/Button";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
-const StagingNftCard = React.lazy(() => import("../../components/Nft/StagingNftCard/StagingNftCard"))
+const StagingNftCard = React.lazy(() =>
+  import("../../components/Nft/StagingNftCard/StagingNftCard")
+);
 
 const images = {
   // "Common Bread": "commonBread",
@@ -44,7 +45,7 @@ const StagingNftsPage = () => {
   const stagingNftsWithImages = useMemo(() => {
     return stagingNfts.map((item) => ({
       ...item,
-      image: images[item.nft_name]
+      image: images[item.nft_name],
     }));
   }, [stagingNfts]);
 
@@ -53,7 +54,7 @@ const StagingNftsPage = () => {
 
     const body = {
       nft_name: nft.nft_name,
-      id: nft.id
+      id: nft.id,
     };
 
     setButtonLoaderIntoGame(nft.id);
@@ -73,7 +74,7 @@ const StagingNftsPage = () => {
     const body = {
       wax_id: name,
       nft_name: nft.nft_name,
-      id: nft.id
+      id: nft.id,
     };
 
     setButtonLoaderIntoWallet(nft.id);
@@ -95,15 +96,23 @@ const StagingNftsPage = () => {
   };
 
   return (
-    <motion.div className={styles.container} initial={{ opacity: 0 }}
+    <motion.div
+      className={styles.container}
+      initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}>
+      transition={{ duration: 0.3 }}
+    >
       <h2>Staging Nfts</h2>
-      <p>{!stagingNfts || loader ? "You don't have" : `You have ${stagingNfts.length}`} staging nfts</p>
       <p>
-        Below are the NFTs existing on Smart Contract. You can export them
-        into Wallet or import back into the game.
+        {!stagingNfts || loader
+          ? "You don't have"
+          : `You have ${stagingNfts.length}`}{" "}
+        staging nfts
+      </p>
+      <p>
+        Below are the NFTs existing on Smart Contract. You can export them into
+        Wallet or import back into the game.
       </p>
       {loader ? (
         <div className={styles.container_loader}>
@@ -129,7 +138,9 @@ const StagingNftsPage = () => {
       )}
       <div className={styles.container_seeMoreWrapper}>
         {visibleNfts < stagingNftsWithImages.length && (
-          <Button onClick={handleSeeMore} size="fit" color="olive">See More</Button>
+          <Button onClick={handleSeeMore} size="fit" color="blue">
+            See More
+          </Button>
         )}
       </div>
     </motion.div>

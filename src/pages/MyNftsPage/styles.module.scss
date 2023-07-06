@@ -19,10 +19,18 @@
   }
 
   &_nftsBlock {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 50px 35px;
+    padding: 50px 0;
+    &_tokenSection {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      &_tokenNfts {
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+    }
   }
 
   &_seeMoreWrapper {

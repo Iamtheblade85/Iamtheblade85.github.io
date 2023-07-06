@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import EnterIcon from "../../../assets/images/enter.png";
-import ExitIcon from "../../../assets/images/exit.png";
+import EnterIcon from "../../../assets/images/icons/enter.png";
+import ExitIcon from "../../../assets/images/icons/exit.png";
 import styles from "./styles.module.scss";
 import { motion } from "framer-motion";
 

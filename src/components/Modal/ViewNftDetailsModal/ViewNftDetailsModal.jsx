@@ -1,11 +1,29 @@
+import { useRef } from "react";
+import styles from "./styles.module.scss";
 import Button from "../../Button/Button";
-import styles from './styles.module.scss';
-import closeIcon from '../../../assets/images/close_icon.png';
+import { motion } from "framer-motion";
+import closeIcon from "../../../assets/images/icons/close_icon.png";
 
-const ViewNftDetailsModal = ({ onClose, description }) => {
+const ViewNftDetailsModal = ({ onClose, description, effect }) => {
+  const modalRef = useRef(null);
+  const infoTransition = {
+    type: "spring",
+    ease: "easeInOut",
+    damping: 30,
+  };
   return (
-    <div className={styles.container} onClick={onClose}>
-      <div className={styles.container_modal} onClick={e => e.stopPropagation()}>
+    <motion.div
+      className={styles.container}
+      transition={infoTransition}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      ref={modalRef}
+      onClick={onClose}
+    >
+      <div
+        className={styles.container_modal}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles.container_modal_modalHeader}>
           <h3>Description</h3>
           <img
@@ -19,14 +37,18 @@ const ViewNftDetailsModal = ({ onClose, description }) => {
 
         <div className={styles.container_modal_modalBody}>
           <span>{description}</span>
+          {effect !== "No effect" && <h3>Effect</h3>}
+          <span>{effect}</span>
         </div>
 
         <div className={styles.container_modal_modalFooter}>
-          <Button onClick={onClose} size="medium" color="olive">Close</Button>
+          <Button onClick={onClose} size="medium" color="blue">
+            Close
+          </Button>
         </div>
       </div>
-    </div>
-  )
-}
+    </motion.div>
+  );
+};
 
 export default ViewNftDetailsModal;

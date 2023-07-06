@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import SupportDevelopmentModal from '../Modal/SupportDevelopmentModal/SupportDevelopmentModal';
-import discordIcon from "../../assets/images/icons8-discord.svg"
-import telegramIcon from "../../assets/images/icons8-telegram-app.svg"
-import twitterIcon from "../../assets/images/icons8-twitter.svg"
-import neftyBlockIcon from "../../assets/images/NeftyBlocks-icon.png"
+import discordIcon from "../../assets/images/icons/icons8-discord.svg"
+import telegramIcon from "../../assets/images/icons/icons8-telegram-app.svg"
+import twitterIcon from "../../assets/images/icons/icons8-twitter.svg"
+import neftyBlockIcon from "../../assets/images/icons/NeftyBlocks-icon.png"
 import styles from "./styles.module.scss";
 
 export const Footer = () => {

@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import LogoIcon from "../../assets/images/logo.png";
-// import defaultUser from "../../assets/images/default_user.png";
-import hamburgerIcon from "../../assets/images/hamburger_icon.png";
-import closeIcon from "../../assets/images/close_icon.png";
+import LogoIcon from "../../assets/images/icons/logo.png";
+// import defaultUser from "../../assets/images/icons/default_user.png";
+import hamburgerIcon from "../../assets/images/icons/hamburger_icon.png";
+import closeIcon from "../../assets/images/icons/close_icon.png";
 
 import { UserService } from "../../UserService";
 
@@ -33,11 +33,11 @@ export const Navbar = () => {
       link: "/my-nfts",
       title: "My Nfts",
     },
-    {
-      isShow: walletConnect,
-      link: "/staging-nfts",
-      title: "Staging Nfts",
-    },
+    // {
+    //   isShow: walletConnect,
+    //   link: "/staging-nfts",
+    //   title: "Staging Nfts",
+    // },
     // {
     //   isShow: !userConnect,
     //   link: "/login",
@@ -62,7 +62,8 @@ export const Navbar = () => {
 
   const onHandleLogout = () => {
     UserService.logout();
-    navigate("/home", { replace: true });
+    // navigate("/home", { replace: true });
+    navigate("/", { replace: true });
   };
 
   const openWaxModal = () => {
@@ -94,10 +95,11 @@ export const Navbar = () => {
           <div className={styles.container_navbar_logoDiv}>
             <img
               rel="preload"
-              alt="LogoIcon"
+              alt="no icon"
               src={LogoIcon}
               onClick={
-                walletConnect ? () => navigate("/home") : () => navigate("/")
+                // walletConnect ? () => navigate("/home") : () => navigate("/")
+                walletConnect ? () => navigate("/my-nfts") : () => navigate("/")
               }
             />
             {(waxConnected || anchorConnected) && (

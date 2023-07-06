@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
-import Button from "../../Button/Button";
+// import Button from "../../Button/Button";
 import ViewNftDetailsModal from "../../Modal/ViewNftDetailsModal/ViewNftDetailsModal";
 
-const Nft = ({ nft, importNft, buttonLoader }) => {
+const Nft = ({ nft, importNft, buttonLoader, image }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const openDescriptionModal = () => {
@@ -17,21 +17,34 @@ const Nft = ({ nft, importNft, buttonLoader }) => {
   return (
     <>
       <div className={styles.container}>
-        <img rel="preload" src={`https://ipfs.io/ipfs/${nft.data.img}`} alt="nft img" />
+        <img
+          rel="preload"
+          src={image}
+          alt={image ? nft.data.name + "'s image" : "no image"}
+        />
         <div className={styles.container_mainInfo}>
           <h2 className={styles.container_mainInfo_nftName}>{nft.data.name}</h2>
-          <span className={styles.container_mainInfo_description} onClick={openDescriptionModal}>
-            Description
+          <span
+            className={styles.container_mainInfo_description}
+            onClick={openDescriptionModal}
+          >
+            Details
           </span>
-          <Button onClick={() => importNft(nft)} loader={buttonLoader} size="auto" color="olive">
+          {/* <Button
+            onClick={() => importNft(nft)}
+            loader={buttonLoader}
+            size="auto"
+            color="blue"
+          >
             Export into Staging
-          </Button>
+          </Button> */}
         </div>
       </div>
       {modalOpen && (
         <ViewNftDetailsModal
           onClose={closeDescriptionModal}
-          description={nft.data.description || nft.data.desc}
+          description={nft.data.description || nft.data.descr || nft.data.desc}
+          effect={nft.data.effect ? nft.data.effect : "No effect"}
         />
       )}
     </>

@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
-import discordIcon from "../../assets/images/icons8-discord.svg";
-import telegramIcon from "../../assets/images/icons8-telegram-app.svg";
-import twitterIcon from "../../assets/images/icons8-twitter.svg";
-import neftyBlockIcon from "../../assets/images/NeftyBlocks-icon.png";
+import discordIcon from "../../assets/images/icons/icons8-discord.svg";
+import telegramIcon from "../../assets/images/icons/icons8-telegram-app.svg";
+import twitterIcon from "../../assets/images/icons/icons8-twitter.svg";
+import neftyBlockIcon from "../../assets/images/icons/NeftyBlocks-icon.png";
 
 const Welcome = () => {
   const scrollRef = useRef(null);
@@ -146,7 +146,12 @@ const Welcome = () => {
           whileInView="whileInView"
           viewport={{ root: scrollRef, once: true }}
         >
-          <Button onClick={() => navigate("/home")} size="large" color="blue">
+          <Button
+            // onClick={() => navigate("/home")}
+            onClick={() => navigate("/my-nfts")}
+            size="large"
+            color="blue"
+          >
             Start
           </Button>
         </motion.div>

@@ -59,10 +59,9 @@ img {
 }
 
 .Component {
-  background-image: url("./assets/images/background.jpg");
+  background-image: url("./assets/images/backgrounds/welcome_section_background.jpg");
   background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-repeat: repeat;
   background-attachment: fixed;
 }
 
@@ -76,12 +75,12 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $olive;
+  background: #0700228e;
   border-radius: 15px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $lime;
+  background: $spaceBlue;
 }
 
 // Input type="number" arrows disabling

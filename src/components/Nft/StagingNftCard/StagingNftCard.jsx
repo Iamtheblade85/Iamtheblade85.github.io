@@ -28,7 +28,7 @@ const StagingNftCard = ({
             (buttonLoaderIntoGame && buttonLoaderIntoGame === nft.id)
           }
           loader={buttonLoaderIntoWallet === nft.id}
-          size="auto" color="olive"
+          size="auto" color="blue"
         >
           Export into Wallet
         </Button>
@@ -39,7 +39,7 @@ const StagingNftCard = ({
             (buttonLoaderIntoWallet && buttonLoaderIntoWallet === nft.id)
           }
           loader={buttonLoaderIntoGame === nft.id}
-          size="auto" color="olive"
+          size="auto" color="blue"
         >
           Import back into the game
         </Button>

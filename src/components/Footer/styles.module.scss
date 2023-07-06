@@ -17,12 +17,12 @@
   > p {
     > a {
       color: $chartreuse;
-      @extend .orangeUnderlineHover;
+      @extend .blueUnderlineHover;
     }
     > span {
       cursor: pointer;
-      color: $chartreuse;
-      @extend .orangeUnderlineHover;
+      color: $spaceBlue;
+      @extend .blueUnderlineHover;
     }
   }
 

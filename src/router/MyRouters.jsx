@@ -1,12 +1,13 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Footer } from "../components/Footer/Footer";
 import { Navbar } from "../components/Navbar/Navbar";
 // import PlayerProfile from "../pages/PlayerProfile/PlayerProfile";
-import { Home } from "../pages/Home/Home";
+// import { Home } from "../pages/Home/Home";
 // import Login from '../pages/Login/Login';
 import MyNftsPage from "../pages/MyNftsPage/MyNftsPage";
-import StagingNftsPage from "../pages/StagingNftsPage/StagingNftsPage";
+// import StagingNftsPage from "../pages/StagingNftsPage/StagingNftsPage";
 // import Signup from '../pages/Signup/Signup';
 import GameRules from "../pages/GameRules/GameRules";
 import Leaderboard from "../pages/Leaderboard/Leaderboard";
@@ -17,18 +18,31 @@ const MyRouters = () => {
   const { /* playerIsLogged, */ waxConnected, anchorConnected } = useSelector(
     (state) => state.user
   );
+  const [backgroundPosition, setBackgroundPosition] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    const handleScroll = () => {
+      const newX = Math.random() * 100 - 100;
+      const newY = Math.random() * 100 - 100;
+      setBackgroundPosition({ x: newX, y: newY });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const allPages = [
     { path: "/", component: Welcome },
     // { path: "/login", component: Login, type: "player-not-loggedin" },
     // { path: "/signup", component: Signup, type: "player-not-loggedin" },
-    { path: "/home", component: Home },
+    // { path: "/home", component: Home },
     { path: "/my-nfts", component: MyNftsPage, type: "wax-loggedin" },
-    {
-      path: "/staging-nfts",
-      component: StagingNftsPage,
-      type: "wax-loggedin",
-    },
+    // {
+    //   path: "/staging-nfts",
+    //   component: StagingNftsPage,
+    //   type: "wax-loggedin",
+    // },
     // {
     //   path: "/player-profile",
     //   component: PlayerProfile,
@@ -74,7 +88,13 @@ const MyRouters = () => {
               path === "/" ? (
                 <Component />
               ) : (
-                <div className="Component">
+                <div
+                  style={{
+                    backgroundPositionX: backgroundPosition.x,
+                    backgroundPositionY: backgroundPosition.y,
+                  }}
+                  className="Component"
+                >
                   <Navbar />
                   <Component />
                   <Footer />

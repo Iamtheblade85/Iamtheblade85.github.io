@@ -5,6 +5,11 @@ import styles from "./styles.module.scss";
 
 import { User } from "../../UserService";
 import { toast } from "react-toastify";
+import mineAurum from "../../assets/images/nfts/Mine Aurum.png";
+import mineCelium from "../../assets/images/nfts/Mine Celium.png";
+import buildingSlot from "../../assets/images/nfts/Building Slot.png";
+import levelUpToken from "../../assets/images/nfts/Level-Up Token.png";
+import teleportToChaos from "../../assets/images/nfts/Teleport.png";
 
 import { getMyNfts, setMyNfts } from "../../GlobalState/NftsSlice/nftsSlice";
 
@@ -17,6 +22,14 @@ const MyNftCard = React.lazy(() =>
   import("../../components/Nft/MyNftCard/MyNftCard")
 );
 
+const images = {
+  "ChaosX-18 Mine Aurum": mineAurum,
+  "ChaosX-18 Mine Celium": mineCelium,
+  "ChaosX-18 Building Slot ": buildingSlot,
+  "ChaosX-18 Level Up token": levelUpToken,
+  "Teleport to ChaosX-18": teleportToChaos,
+};
+
 const MyNftsPage = () => {
   const dispatch = useDispatch();
   const { myNfts } = useSelector((state) => state.nfts);
@@ -24,19 +37,46 @@ const MyNftsPage = () => {
   const { waxConnected, anchorConnected } = useSelector((state) => state.user);
   const [loader, setLoader] = useState(false);
   const [buttonLoader, setButtonLoader] = useState(null);
-  const [visibleNfts, setVisibleNfts] = useState(12);
+  const [visibleNfts, setVisibleNfts] = useState({});
+
+  const groupedNfts = myNfts.reduce((groups, nft) => {
+    const { name } = nft;
+    if (!groups[name]) {
+      groups[name] = [];
+    }
+    groups[name].push(nft);
+    return groups;
+  }, {});
+
+  const handleSeeMore = (tokenName) => {
+    setVisibleNfts((prevVisibleNfts) => {
+      const updatedVisibleNfts = { ...prevVisibleNfts };
+      updatedVisibleNfts[tokenName] += 12;
+      return updatedVisibleNfts;
+    });
+  };
 
   useEffect(() => {
     setLoader(true);
-    dispatch(getMyNfts());
-    setLoader(false);
-
-    const interval = setInterval(() => {
-      dispatch(getMyNfts());
-    }, 10000);
-
-    return () => clearInterval(interval);
+    dispatch(getMyNfts())
+      .then(() => {
+        setLoader(false);
+      })
+      .catch((error) => {
+        setLoader(false);
+        console.log(error);
+      });
   }, [dispatch]);
+
+  useEffect(() => {
+    if (myNfts.length > 0) {
+      const initialVisibleNfts = {};
+      Object.keys(groupedNfts).forEach((tokenName) => {
+        initialVisibleNfts[tokenName] = 12;
+      });
+      setVisibleNfts(initialVisibleNfts);
+    }
+  }, [myNfts]);
 
   useEffect(() => {
     return () => dispatch(setMyNfts([]));
@@ -73,7 +113,7 @@ const MyNftsPage = () => {
               ],
               data: {
                 from: User.anchorSession?.auth?.actor.toString(),
-                to: "celium",
+                to: "cryptochaos1",
                 asset_ids: [nft.asset_id],
                 // memo: `staking%${username || email}`,
               },
@@ -117,7 +157,7 @@ const MyNftsPage = () => {
               ],
               data: {
                 from: User.wax?.userAccount,
-                to: "celium",
+                to: "cryptochaos1",
                 asset_ids: [nft.asset_id],
                 // memo: `staking%${username || email}`,
               },
@@ -140,10 +180,6 @@ const MyNftsPage = () => {
         setButtonLoader(null);
         dispatch(getMyNfts());
       });
-  };
-
-  const handleSeeMore = () => {
-    setVisibleNfts((prevVisibleNfts) => prevVisibleNfts + 12);
   };
 
   return (
@@ -171,25 +207,45 @@ const MyNftsPage = () => {
         <NoDataMessage />
       ) : (
         <div className={styles.container_nftsBlock}>
-          {myNfts.slice(0, visibleNfts).map((nft) => (
-            <React.Suspense fallback={<Loader size={250} />} key={nft.asset_id}>
-              <MyNftCard
-                key={nft.asset_id}
-                nft={nft}
-                importNft={importNft}
-                buttonLoader={buttonLoader === nft.asset_id}
-              />
-            </React.Suspense>
+          {Object.entries(groupedNfts).map(([tokenName, nfts]) => (
+            <div
+              key={tokenName}
+              className={styles.container_nftsBlock_tokenSection}
+            >
+              <h3>{tokenName}</h3>
+              <div
+                className={styles.container_nftsBlock_tokenSection_tokenNfts}
+              >
+                {nfts.slice(0, visibleNfts[tokenName]).map((nft) => (
+                  <React.Suspense
+                    fallback={<Loader size={250} />}
+                    key={nft.asset_id}
+                  >
+                    <MyNftCard
+                      key={nft.asset_id}
+                      nft={nft}
+                      image={images[nft.name]}
+                      importNft={importNft}
+                      buttonLoader={buttonLoader === nft.asset_id}
+                    />
+                  </React.Suspense>
+                ))}
+              </div>
+              <div className={styles.container_seeMoreWrapper}>
+                {visibleNfts[tokenName] < nfts.length && (
+                  <Button
+                    onClick={() => handleSeeMore(tokenName)}
+                    size="fit"
+                    color="blue"
+                  >
+                    See More
+                  </Button>
+                )}
+              </div>
+            </div>
           ))}
         </div>
       )}
-      <div className={styles.container_seeMoreWrapper}>
-        {visibleNfts < myNfts.length && (
-          <Button onClick={handleSeeMore} size="fit" color="olive">
-            See More
-          </Button>
-        )}
-      </div>
     </motion.div>
   );
 };
