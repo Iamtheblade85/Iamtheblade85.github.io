@@ -4,7 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Footer } from "../components/Footer/Footer";
 import { Navbar } from "../components/Navbar/Navbar";
 // import PlayerProfile from "../pages/PlayerProfile/PlayerProfile";
-// import { Home } from "../pages/Home/Home";
+import { Home } from "../pages/Home/Home";
 // import Login from '../pages/Login/Login';
 import MyNftsPage from "../pages/MyNftsPage/MyNftsPage";
 // import StagingNftsPage from "../pages/StagingNftsPage/StagingNftsPage";
@@ -36,7 +36,7 @@ const MyRouters = () => {
     { path: "/", component: Welcome },
     // { path: "/login", component: Login, type: "player-not-loggedin" },
     // { path: "/signup", component: Signup, type: "player-not-loggedin" },
-    // { path: "/home", component: Home },
+    { path: "/home", component: Home },
     { path: "/my-nfts", component: MyNftsPage, type: "wax-loggedin" },
     // {
     //   path: "/staging-nfts",

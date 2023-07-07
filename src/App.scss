@@ -63,6 +63,7 @@ img {
   background-position: center;
   background-repeat: repeat;
   background-attachment: fixed;
+  min-height: 100vh;
 }
 
 // Scrollbar
@@ -75,7 +76,7 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0700228e;
+  background: $blackBackground;
   border-radius: 15px;
 }
 

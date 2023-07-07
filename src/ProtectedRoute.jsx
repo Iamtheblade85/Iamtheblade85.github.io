@@ -7,8 +7,8 @@ const ProtectedRoute = ({ Component }) => {
   const { anchorConnected, waxConnected, playerIsLogged } = useSelector((state) => state.user)
 
   if (!waxConnected && !anchorConnected) {
-    // return <Navigate to="/home" replace />;
-    return <Navigate to="/my-nfts" replace />;
+    return <Navigate to="/home" replace />;
+    // return <Navigate to="/my-nfts" replace />;
   }
   if (!playerIsLogged) {
     return <Navigate to="/login" replace />

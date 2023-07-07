@@ -8,9 +8,25 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px 50px;
-  color: $white;
+  color: $golden;
   font-size: 20px;
   background-color: $darkBlue;
+  &_gameRules {
+    > h2 {
+      color: $spaceBlue;
+    }
+    > p {
+      color: $golden;
+    }
+  }
+  &_gameInstructions {
+    > h2 {
+      color: $spaceBlue;
+    }
+    > p {
+      color: $golden;
+    }
+  }
 
   @media (max-width: $small-screen) {
     &_gameRules {

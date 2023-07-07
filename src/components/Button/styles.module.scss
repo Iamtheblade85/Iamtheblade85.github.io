@@ -29,12 +29,12 @@
   &:focus {
     border: 1px solid $white;
     background-color: $lightBlue;
-    color: $white;
+    color: $golden;
   }
 
   &:active {
     background-color: $lightBlue;
-    color: $white;
+    color: $golden;
   }
 }
 
@@ -47,12 +47,12 @@
   &:focus {
     background-color: $emerald;
     outline: none;
-    color: $white;
+    color: $golden;
   }
 
   &:active {
     background-color: $emerald;
-    color: $white;
+    color: $golden;
   }
 }
 .btn_blue {
@@ -64,12 +64,12 @@
   &:focus {
     background-color: $spaceLightBlue;
     outline: none;
-    color: $white;
+    color: $golden;
   }
 
   &:active {
     background-color: $spaceLightBlue;
-    color: $white;
+    color: $golden;
   }
 }
 

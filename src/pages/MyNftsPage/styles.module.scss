@@ -3,11 +3,15 @@
 .container {
   width: 100%;
   min-height: 100vh;
-  color: $white;
+  color: $golden;
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px 50px;
+
+  > h2 {
+    color: $spaceBlue;
+  }
 
   > p {
     font-size: 24px;
@@ -24,6 +28,9 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      > h3 {
+        color: $spaceBlue;
+      }
       &_tokenNfts {
         justify-content: center;
         display: flex;

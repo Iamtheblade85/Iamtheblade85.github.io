@@ -192,18 +192,22 @@ const MyNftsPage = () => {
     >
       <h2>My Nfts</h2>
       <p>
-        {!myNfts || loader ? "You don't have" : `You have ${myNfts.length}`}{" "}
-        nfts
+        {!myNfts[0] || loader
+          ? "You don't have  nfts"
+          : !(waxConnected || anchorConnected)
+          ? ""
+          : `You have ${myNfts.length}  nfts`}
       </p>
       <p>
-        Below are the NFTs you have on your Wallet. You can import them on Smart
-        Contract.
+        {!(waxConnected || anchorConnected)
+          ? "To see your NFTs, please connect to your Wax wallet"
+          : "Below are the NFTs you have on your Wallet. You can import them on Smart Contract."}
       </p>
       {loader ? (
         <div className={styles.container_loader}>
           <Loader size={100} />
         </div>
-      ) : !myNfts[0] ? (
+      ) : !myNfts[0] || !(waxConnected || anchorConnected) ? (
         <NoDataMessage />
       ) : (
         <div className={styles.container_nftsBlock}>

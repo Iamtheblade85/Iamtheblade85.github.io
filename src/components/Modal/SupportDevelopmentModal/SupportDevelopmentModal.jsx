@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import styles from "./styles.module.scss";
 
-import closeIcon from "../../../assets/images/icons/close_icon.png";
+import closeIcon from "../../../assets/images/icons/icons8-close-48.png";
 
 import { User, UserService } from "../../../UserService";
 import { setWaxBalance } from "../../../GlobalState/UserReducer";

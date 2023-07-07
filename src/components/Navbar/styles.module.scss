@@ -23,11 +23,11 @@
 
       > img {
         cursor: pointer;
-        width: 35px;
+        width: 70px;
       }
 
       &_walletBalance {
-        color: $white;
+        color: $spaceLightBlue;
         margin-left: 15px;
       }
     }
@@ -51,22 +51,22 @@
         }
       }
 
-      &_line {
-        width: 1px;
-        height: 20px;
-        border: 1px solid $chartreuse;
-      }
+      // &_line {
+      //   width: 1px;
+      //   height: 20px;
+      //   border: 1px solid $chartreuse;
+      // }
 
-      &_userDropDown {
-        position: relative;
-        background: white;
-        border-radius: 50%;
+      // &_userDropDown {
+      //   position: relative;
+      //   background: white;
+      //   border-radius: 50%;
 
-        > img {
-          width: 35px;
-          cursor: pointer;
-        }
-      }
+      //   > img {
+      //     width: 35px;
+      //     cursor: pointer;
+      //   }
+      // }
     }
   }
 }
@@ -75,6 +75,9 @@
   .container {
     &_navbar {
       &_logoDiv {
+        > img {
+          width: 50px;
+        }
         &_walletBalance {
           font-size: 12px;
         }

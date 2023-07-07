@@ -4,7 +4,44 @@
 .container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   gap: 20px;
   padding: 20px 50px;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  &_welcomeSection {
+    display: flex;
+    flex-direction: column;
+    > h1 {
+      text-align: center;
+      color: $spaceBlue;
+      margin: 20px;
+    }
+    > p {
+      color: $golden;
+      font-size: 24px;
+    }
+  }
+}
+
+@media (max-width: $small-screen) {
+  .container {
+    &_welcomeSection {
+      > p {
+        font-size: 15px;
+      }
+    }
+  }
+}
+@media (max-width: $mobile-screen) {
+  .container {
+    &_welcomeSection {
+      > h1 {
+        font-size: 6vw;
+      }
+      > p {
+        font-size: 3vw;
+      }
+    }
+  }
 }

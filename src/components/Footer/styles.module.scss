@@ -4,7 +4,7 @@
 .container {
   width: 100%;
   background-color: $darkBlue;
-  color: $white;
+  color: $golden;
   padding: 20px 0;
   text-align: center;
   font-size: 20px;
@@ -13,7 +13,6 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
-
   > p {
     > a {
       color: $chartreuse;

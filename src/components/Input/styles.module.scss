@@ -5,6 +5,10 @@
   flex-direction: column;
   row-gap: 5px;
 
+  > label {
+    color: $golden;
+  }
+
   > input {
     outline: none;
     border-radius: 10px;
@@ -21,10 +25,8 @@
   &_label_error {
     color: $error;
   }
-  
+
   &_input_error {
     border-color: $error;
   }
 }
-
-

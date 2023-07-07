@@ -20,17 +20,17 @@
     display: flex;
     text-align: center;
     text-decoration: none;
-    color: $spaceBlue;
+    color: $golden;
     column-gap: 20px;
     cursor: pointer;
-    @extend .blueUnderlineHover;
+    @extend .orangeUnderlineHover;
   }
 
   &_line {
     margin: 10px 0;
     width: 100%;
     height: 1px;
-    background: $white;
+    background: $spaceBlue;
   }
 
   &_walletInfo {
@@ -45,11 +45,11 @@
       font-size: 18px;
       text-align: center;
       text-decoration: none;
-      color: $spaceBlue;
+      color: $golden;
       display: flex;
       column-gap: 5px;
       cursor: pointer;
-      @extend .blueUnderlineHover;
+      @extend .orangeUnderlineHover;
     }
   }
 }

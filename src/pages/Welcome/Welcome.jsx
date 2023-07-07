@@ -89,7 +89,16 @@ const Welcome = () => {
           whileInView="whileInView"
           viewport={{ root: scrollRef, once: true }}
         >
-          Welcome to Chaos X-18
+          Welcome to "Chaos X-18"!
+        </motion.h1>
+        <motion.h1
+          transition={{ delay: 0.7 }}
+          variants={Variants}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ root: scrollRef, once: true }}
+        >
+           Get ready for an epic space adventure in this immersive online game set on a distant mining planet.
         </motion.h1>
         <motion.p
           transition={{ delay: 0.9 }}
@@ -147,8 +156,8 @@ const Welcome = () => {
           viewport={{ root: scrollRef, once: true }}
         >
           <Button
-            // onClick={() => navigate("/home")}
-            onClick={() => navigate("/my-nfts")}
+            onClick={() => navigate("/home")}
+            // onClick={() => navigate("/my-nfts")}
             size="large"
             color="blue"
           >

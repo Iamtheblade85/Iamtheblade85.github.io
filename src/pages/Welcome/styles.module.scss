@@ -6,7 +6,7 @@
   flex-direction: column;
 
   &_mainSection {
-    color: $white;
+    color: $golden;
     background-image: url("../../assets/images/backgrounds/welcome_section_background.jpg");
     background-position: center;
     background-repeat: repeat;
@@ -24,7 +24,7 @@
       color: $spaceBlue;
     }
     > p {
-      color: $spaceLightBlue;
+      color: $golden;
       font-size: 24px;
     }
   }
@@ -80,7 +80,7 @@
         color: $spaceBlue;
       }
       > p {
-        color: $spaceLightBlue;
+        color: $golden;
         font-size: 24px;
       }
     }

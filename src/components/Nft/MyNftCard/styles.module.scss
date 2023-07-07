@@ -5,8 +5,8 @@
   width: 270px;
   border-radius: 10px;
   padding: 10px;
-  background-color:#0700228e;
-  border: 0.5px solid #0078d4cc;
+  background-color: $blackBackground;
+  border: 0.5px solid $blueBorder;
   @extend .divHoverEffect;
   > img {
     width: 100%;
@@ -20,12 +20,13 @@
     gap: 5px;
 
     &_nftName {
+      color: $spaceLightBlue;
       font-size: 18px;
       font-weight: 700;
     }
 
     &_description {
-      @extend .whiteUnderlineHover;
+      @extend .orangeUnderlineHover;
     }
   }
 }
