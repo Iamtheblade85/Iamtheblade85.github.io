@@ -5,11 +5,11 @@ import styles from "./styles.module.scss";
 
 import { User } from "../../UserService";
 import { toast } from "react-toastify";
-import mineAurum from "../../assets/images/nfts/Mine Aurum.png";
-import mineCelium from "../../assets/images/nfts/Mine Celium.png";
-import buildingSlot from "../../assets/images/nfts/Building Slot.png";
-import levelUpToken from "../../assets/images/nfts/Level-Up Token.png";
-import teleportToChaos from "../../assets/images/nfts/Teleport.png";
+import mineAurum from "../../assets/images/nfts/Mine-Aurum.webp";
+import mineCelium from "../../assets/images/nfts/Mine-Celium.webp";
+import buildingSlot from "../../assets/images/nfts/Building-Slot.webp";
+import levelUpToken from "../../assets/images/nfts/Level-Up-Token.webp";
+import teleportToChaos from "../../assets/images/nfts/Teleport.webp";
 
 import { getMyNfts, setMyNfts } from "../../GlobalState/NftsSlice/nftsSlice";
 
@@ -76,6 +76,7 @@ const MyNftsPage = () => {
       });
       setVisibleNfts(initialVisibleNfts);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myNfts]);
 
   useEffect(() => {
@@ -216,7 +217,9 @@ const MyNftsPage = () => {
               key={tokenName}
               className={styles.container_nftsBlock_tokenSection}
             >
-              <h3>{tokenName}</h3>
+              <h3>
+                {tokenName}, {nfts.length} left
+              </h3>
               <div
                 className={styles.container_nftsBlock_tokenSection_tokenNfts}
               >

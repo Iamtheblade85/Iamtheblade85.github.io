@@ -98,7 +98,8 @@ const Welcome = () => {
           whileInView="whileInView"
           viewport={{ root: scrollRef, once: true }}
         >
-           Get ready for an epic space adventure in this immersive online game set on a distant mining planet.
+          Get ready for an epic space adventure in this immersive online game
+          set on a distant mining planet.
         </motion.h1>
         <motion.p
           transition={{ delay: 0.9 }}

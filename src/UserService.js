@@ -14,7 +14,6 @@ export class User {
   /**
    * WAX configuration
   */
-  // static rpcEndpoint = 'https://wax.greymass.com'
   static rpcEndpoint = 'https://testnet.wax.pink.gg'
   static wax = undefined;
   // Shows petition signing and current balance obtaining methods
@@ -34,9 +33,7 @@ export class User {
     chains: [
       {
         chainId: 'f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12',
-        // chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
         nodeUrl: 'https://wax-testnet.eosphere.io',
-        // nodeUrl: 'https://eos.greymass.com',
       },
     ],
   })

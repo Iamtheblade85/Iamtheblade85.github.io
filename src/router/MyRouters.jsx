@@ -13,6 +13,7 @@ import GameRules from "../pages/GameRules/GameRules";
 import Leaderboard from "../pages/Leaderboard/Leaderboard";
 import Welcome from "../pages/Welcome/Welcome";
 import "../App.scss";
+import Error from "../pages/Error/Error";
 
 const MyRouters = () => {
   const { /* playerIsLogged, */ waxConnected, anchorConnected } = useSelector(
@@ -50,6 +51,7 @@ const MyRouters = () => {
     // },
     { path: "/game-rules", component: GameRules },
     { path: "/leaderboard", component: Leaderboard },
+    { path: "/404", component: Error },
   ];
 
   const pages = allPages?.reduce((newPages, item) => {
@@ -85,7 +87,7 @@ const MyRouters = () => {
           <Route
             key={path}
             element={
-              path === "/" ? (
+              path === "/" || path === "/404" ? (
                 <Component />
               ) : (
                 <div
@@ -104,7 +106,7 @@ const MyRouters = () => {
             path={path}
           />
         ))}
-        <Route path="*" element={<Navigate to="/error" />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
     </BrowserRouter>
   );

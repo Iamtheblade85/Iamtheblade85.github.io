@@ -19,7 +19,7 @@ const Nft = ({ nft, importNft, buttonLoader, image }) => {
       <div className={styles.container}>
         <img
           rel="preload"
-          src={image}
+          src={image ? image : ""}
           alt={image ? nft.data.name + "'s image" : "no image"}
         />
         <div className={styles.container_mainInfo}>

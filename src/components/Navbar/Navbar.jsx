@@ -105,10 +105,8 @@ export const Navbar = () => {
             {(waxConnected || anchorConnected) && (
               <div className={styles.container_navbar_logoDiv_walletBalance}>
                 {UserService.testnet && (
-                  <p>
-                    Website is currently using WAX TestNet
-                    <br />
-                    {name} - Wallet: {balance}
+                  <p style={{ textAlign: "center" }}>
+                    Hi {name} <br /> Wallet: {balance}
                   </p>
                 )}
               </div>

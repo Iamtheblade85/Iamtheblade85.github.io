@@ -12,7 +12,6 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  max-width: 250px;
   min-width: 180px;
   cursor: default;
   > a {
@@ -34,11 +33,11 @@
   }
 
   &_walletInfo {
-    display: flex;
-    flex-wrap: nowrap;
     width: fit-content;
-    gap: 5px;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     cursor: pointer;
 
     &_btnItem {
@@ -46,8 +45,6 @@
       text-align: center;
       text-decoration: none;
       color: $golden;
-      display: flex;
-      column-gap: 5px;
       cursor: pointer;
       @extend .orangeUnderlineHover;
     }
@@ -56,9 +53,11 @@
 
 @media (max-width: $mobile-screen) {
   .dropdownMenu {
-    // need to change
-    position: absolute;
-    max-width: unset;
-    min-width: 60vw;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 99vw;
+    align-items: center;
   }
 }
