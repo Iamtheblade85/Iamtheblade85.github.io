@@ -1,60 +1,35 @@
 @import "../../assets/styles/variables.scss";
+@import "../../assets/styles/global.scss";
 
 .container {
   width: 100%;
   min-height: 100vh;
   color: $golden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   padding: 20px 50px;
 
-  &_characterInformation {
+  &_mainInfo {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     gap: 20px;
-
-    &_wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
-      padding: 20px;
-
-      &_infoDiv {
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        border: 1px solid $white;
-        border-radius: 15px;
-        row-gap: 2px;
-
-        &_infoValue {
-          font-size: 20px;
-
-          > :nth-child(1) {
-            font-weight: 600;
-          }
-        }
-      }
-    }
-  }
-
-  &_characterInventory {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    &_inventoryCardWrapper {
+    &_mines,
+    &_limits {
       display: flex;
-      flex-wrap: wrap;
-      padding: 20px;
-      gap: 20px;
-    }
-  }
-}
-
-@media (max-width: $medium-screen) {
-  .container {
-    &_characterInformation {
-      &_wrapper {
+      flex-direction: column;
+      align-items: center;
+      > h2 {
+        color: $spaceBlue;
+      }
+      > div {
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        > p {
+          font-size: 24px;
+        }
       }
     }
   }
@@ -62,9 +37,33 @@
 
 @media (max-width: $small-screen) {
   .container {
-    &_characterInventory {
-      &_inventoryCardWrapper {
-        justify-content: center;
+    &_mainInfo {
+      &_mines,
+      &_limits {
+        text-align: center;
+        > div {
+          > p {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-screen) {
+  .container {
+    &_mainInfo {
+      &_mines,
+      &_limits {
+        > h2 {
+          font-size: 6vw;
+        }
+        > div {
+          > p {
+            font-size: 3vw;
+          }
+        }
       }
     }
   }

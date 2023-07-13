@@ -84,10 +84,6 @@ const MyNftsPage = () => {
   }, [dispatch]);
 
   const importNft = (nft) => {
-    // if (!username && !email) {
-    //   toast.warning("To import an NFT please login into your gaming account")
-    //   return;
-    // }
     if (anchorConnected) {
       importWithAnchor(nft);
     } else if (waxConnected) {
@@ -114,9 +110,9 @@ const MyNftsPage = () => {
               ],
               data: {
                 from: User.anchorSession?.auth?.actor.toString(),
-                to: "cryptochaos1",
+                to: "blockchain44",
                 asset_ids: [nft.asset_id],
-                // memo: `staking%${username || email}`,
+                memo: ``,
               },
             },
           ],
@@ -128,7 +124,7 @@ const MyNftsPage = () => {
       )
       .then((_) => {
         toast.success(
-          "NFT successfully imported. The list will be updated in a few seconds"
+          "NFT successfully transfered. The list will be updated in a few seconds"
         );
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -158,9 +154,9 @@ const MyNftsPage = () => {
               ],
               data: {
                 from: User.wax?.userAccount,
-                to: "cryptochaos1",
+                to: "blockchain44",
                 asset_ids: [nft.asset_id],
-                // memo: `staking%${username || email}`,
+                memo: ``,
               },
             },
           ],
@@ -172,7 +168,7 @@ const MyNftsPage = () => {
       )
       .then((_) => {
         toast.success(
-          "NFT successfully imported. The list will be updated in a few seconds"
+          "NFT successfully transfered. The list will be updated in a few seconds"
         );
         setButtonLoader(null);
         dispatch(getMyNfts());

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
-// import Button from "../../Button/Button";
+import Button from "../../Button/Button";
 import ViewNftDetailsModal from "../../Modal/ViewNftDetailsModal/ViewNftDetailsModal";
 
 const Nft = ({ nft, importNft, buttonLoader, image }) => {
@@ -30,14 +30,29 @@ const Nft = ({ nft, importNft, buttonLoader, image }) => {
           >
             Details
           </span>
-          {/* <Button
-            onClick={() => importNft(nft)}
-            loader={buttonLoader}
-            size="auto"
-            color="blue"
-          >
-            Export into Staging
-          </Button> */}
+          {!(
+            nft.data.name === "ChaosX-18 Level Up token" ||
+            nft.data.name === "Teleport to ChaosX-18"
+          ) && (
+            <>
+              <Button
+                // onClick={() => importNft(nft)}
+                loader={buttonLoader}
+                size="auto"
+                color="blue"
+              >
+                Stake
+              </Button>
+              <Button
+                // onClick={() => importNft(nft)}
+                loader={buttonLoader}
+                size="auto"
+                color="blue"
+              >
+                Burn
+              </Button>
+            </>
+          )}
         </div>
       </div>
       {modalOpen && (

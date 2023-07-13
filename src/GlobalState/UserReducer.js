@@ -23,11 +23,11 @@ const user = createSlice({
     setWaxBalance: (state, action) => {
       state.balance = action.payload
     },
-    setWaxConnected: (state) => {
-      state.waxConnected = true;
+    setWaxConnected: (state, action) => {
+      state.waxConnected = action.payload;
     },
-    setAnchorConnected: (state) => {
-      state.anchorConnected = true;
+    setAnchorConnected: (state, action) => {
+      state.anchorConnected = action.payload;
     },
     setPlayerIsLogged: (state, action) => {
       state.playerIsLogged = action.payload

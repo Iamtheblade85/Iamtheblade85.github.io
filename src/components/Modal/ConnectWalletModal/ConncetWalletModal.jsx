@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import waxIcon from "../../../assets/images/icons/wax_icon.png";
@@ -10,11 +11,12 @@ import { motion } from "framer-motion";
 import { UserService } from "../../../UserService";
 import {
   setAnchorConnected,
+  setPlayerIsLogged,
   setWaxConnected,
   setWaxData,
 } from "../../../GlobalState/UserReducer";
 import Button from "../../Button/Button";
-import { useRef } from "react";
+import { toast } from "react-toastify";
 
 const ConnectWalletModal = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -26,37 +28,65 @@ const ConnectWalletModal = ({ onClose }) => {
   };
 
   const connectWaxWallet = async () => {
-    UserService.waxLogin().then(async (res) => {
-      const waxBalance = await UserService.getWaxBalance(res);
-      dispatch(
-        setWaxData({
-          name: res,
-          isLogged: true,
-          waxBalance: waxBalance,
-        })
-      );
-      dispatch(setWaxConnected());
-      onClose();
+    const waxAddress = await UserService.waxLogin();
+    const waxBalance = await UserService.getWaxBalance(waxAddress);
+
+    dispatch(
+      setWaxData({
+        name: waxAddress,
+        isLogged: true,
+        waxBalance: waxBalance,
+      })
+    );
+    dispatch(setWaxConnected(true));
+    dispatch(setAnchorConnected(false));
+    onClose();
+
+    const players = await UserService.getPlayers().then((players) => {
+      return players.rows;
     });
+    if (players.some((player) => player.player === waxAddress)) {
+      await UserService.loginAccount(waxAddress, false);
+      dispatch(setPlayerIsLogged(true));
+    } else if (players.some((player) => player.player !== waxAddress)) {
+      await UserService.createAccount(waxAddress, false);
+      dispatch(setPlayerIsLogged(true));
+    } else {
+      toast.error("Wax wallet is not connected");
+      dispatch(setPlayerIsLogged(false));
+    }
   };
 
-  const connectAnchorWallet = () => {
-    UserService.anchorConnect().then(async (wallet) => {
-      if (wallet) {
-        let waxAddress = wallet?.session.auth.actor.toString();
-        dispatch(
-          setWaxData({
-            name: waxAddress,
-            isLogged: true,
-            balance: await UserService.getWaxBalance(waxAddress),
-          })
-        );
-        dispatch(setAnchorConnected());
-        onClose();
+  const connectAnchorWallet = async () => {
+    const wallet = await UserService.anchorConnect();
+    if (wallet) {
+      const waxAddress = wallet?.session.auth.actor.toString();
+
+      dispatch(
+        setWaxData({
+          name: waxAddress,
+          isLogged: true,
+          balance: await UserService.getWaxBalance(waxAddress),
+        })
+      );
+      dispatch(setAnchorConnected(true));
+      dispatch(setWaxConnected(false));
+      onClose();
+
+      const players = await UserService.getPlayers().then((players) => {
+        return players.rows;
+      });
+      if (players.some((player) => player.player === waxAddress)) {
+        await UserService.loginAccount(waxAddress, true);
+        dispatch(setPlayerIsLogged(true));
       } else {
-        console.error("anchor error");
+        await UserService.createAccount(waxAddress, true);
+        dispatch(setPlayerIsLogged(true));
       }
-    });
+    } else {
+      toast.error("Anchor wallet is not connected");
+      dispatch(setPlayerIsLogged(false));
+    }
   };
 
   return (

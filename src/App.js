@@ -1,7 +1,6 @@
 import './App.scss';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { getAuthorizedPlayer } from './GlobalState/PlayerSlice/playerSlice';
+import { useDispatch } from 'react-redux'
 import { User } from './UserService';
 import MyRouters from './router/MyRouters'
 import { ToastContainer } from 'react-toastify';
@@ -10,7 +9,6 @@ import { motion } from "framer-motion"
 
 function App() {
   const dispatch = useDispatch()
-  const { token } = useSelector(state => state.user)
   const Variants = {
     initial: { opacity: 0 },
     whileInView: { opacity: 1 }
@@ -21,10 +19,7 @@ function App() {
 
   useEffect(() => {
     User.init();
-    if (token) {
-      dispatch(getAuthorizedPlayer())
-    }
-  }, [dispatch, token])
+  }, [dispatch])
 
   return (
     <motion.div

@@ -1,9 +1,11 @@
 import { WaxJS } from "@waxio/waxjs/dist";
 import AnchorLinkBrowserTransport from 'anchor-link-browser-transport'
-import AnchorLink from 'anchor-link'
+import AnchorLink, { /* AccountName */ } from 'anchor-link'
 import { setWaxData, setWaxLogout } from './GlobalState/UserReducer';
 import { store } from './GlobalState/Store';
 import { clearMyNfts } from "./GlobalState/NftsSlice/nftsSlice";
+import { toast } from "react-toastify";
+
 
 /**
  * Class to manage user data; it will be saved on Login and deleted on Logout
@@ -64,13 +66,6 @@ export class User {
     // Save the session within your application for future use
   }
 
-  logout() {
-    User.wax = undefined;
-    store.dispatch(setWaxLogout())
-    store.dispatch(clearMyNfts())
-    return true;
-  }
-
   async getWaxBalance(waxAccount) {
     if (waxAccount === undefined) {
       return null
@@ -79,6 +74,149 @@ export class User {
       return balance?.core_liquid_balance
     }
   }
+
+  async getMines(waxAccount) {
+    const res = await User.wax?.rpc.get_table_rows({
+      json: true,
+      code: "blockchain44", // Contract that we target
+      scope: "blockchain44", // Account that owns the data
+      table: "mines", // Table name
+      limit: 10, // Maximum number of rows that we want to get
+      reverse: false, // Optional: Get reversed data
+      show_payer: false, // Optional: Show ram payer
+    });
+    return res?.rows.filter((mines) => mines.player === waxAccount)
+  }
+
+  async getPlayers() {
+    const res = await User.wax?.rpc.get_table_rows({
+      json: true,
+      code: "blockchain44", // Contract that we target
+      scope: "blockchain44", // Account that owns the data
+      table: "players", // Table name
+      reverse: false, // Optional: Get reversed data
+      show_payer: false, // Optional: Show ram payer
+    });
+    return res
+  }
+
+  async createAccount(name, isConnected) {
+    try {
+      if (isConnected) {
+        await User.anchorSession.transact(
+          {
+            actions: [
+              {
+                account: "blockchain44",
+                name: "createaccnt",
+                authorization: [
+                  {
+                    actor: name,
+                    permission: "active",
+                  },
+                ],
+                data: {
+                  player: name,
+                },
+              },
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        );
+        toast.success("Player account creation successfully with Anchor");
+      } else {
+        await User.wax.api.transact(
+          {
+            actions: [
+              {
+                account: "blockchain44",
+                name: "createaccnt",
+                authorization: [
+                  {
+                    actor: name,
+                    permission: "active",
+                  },
+                ],
+                data: {
+                  player: name,
+                },
+              },
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        );
+        toast.success("Player account creation successfully with Wax");
+      }
+    } catch (error) {
+      console.error("Error in createAccount:", error);
+      toast.error("Error in createAccount:", error);
+    }
+  };
+
+  async loginAccount(name, isConnected) {
+    try {
+      if (isConnected) {
+        await User.anchorSession.transact(
+          {
+            actions: [
+              {
+                account: "blockchain44",
+                name: "login",
+                authorization: [
+                  {
+                    actor: name,
+                    permission: "active",
+                  },
+                ],
+                data: {
+                  player: name,
+                },
+              },
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        );
+        toast.success("Player logged successfully using Anchor");
+      } else {
+        await User.wax.api.transact(
+          {
+            actions: [
+              {
+                account: "blockchain44",
+                name: "login",
+                authorization: [
+                  {
+                    actor: name,
+                    permission: "active",
+                  },
+                ],
+                data: {
+                  player: name,
+                },
+              },
+            ],
+          },
+          {
+            blocksBehind: 3,
+            expireSeconds: 30,
+          }
+        );
+        toast.success("Player login successful using Wax");
+      }
+    } catch (error) {
+      console.error("Error in loginAccount:", error);
+      toast.error("Error in player login:", error);
+    }
+  };
 
   static restoreWaxSession = async () => {
     if (store.getState().user.waxConnected) {
@@ -90,6 +228,7 @@ export class User {
             isLogged: true,
             balance: await UserService.getWaxBalance(User.wax.userAccount)
           }))
+          UserService.loginAccount(User.wax.userAccount, false)
         }
       });
     }
@@ -106,8 +245,16 @@ export class User {
           isLogged: true,
           balance: await UserService.getWaxBalance(waxAddress)
         }))
+        UserService.loginAccount(waxAddress, true)
       }
     }
+  }
+
+  logout() {
+    User.wax = undefined;
+    store.dispatch(setWaxLogout())
+    store.dispatch(clearMyNfts())
+    return true;
   }
 
   // UserService init called to prepare UAL Login.

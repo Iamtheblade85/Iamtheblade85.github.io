@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import LogoIcon from "../../assets/images/icons/logo.png";
-// import defaultUser from "../../assets/images/icons/default_user.png";
 import hamburgerIcon from "../../assets/images/icons/icons8-menu-48.png";
 import closeIcon from "../../assets/images/icons/icons8-close-48.png";
 
@@ -12,10 +11,11 @@ import { UserService } from "../../UserService";
 import styles from "./styles.module.scss";
 
 import ConnectWalletModal from "../Modal/ConnectWalletModal/ConncetWalletModal";
-// import UserDropdownMenu from "./UserDropdownMenu/UserDropdownMenu";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
+import { setPlayerIsLogged } from "../../GlobalState/UserReducer";
 
 export const Navbar = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { name, balance, waxConnected, anchorConnected } = useSelector(
     (store) => store.user
@@ -30,24 +30,14 @@ export const Navbar = () => {
   const menuArray = [
     {
       isShow: walletConnect,
+      link: "/player-profile",
+      title: "Player Profile",
+    },
+    {
+      isShow: walletConnect,
       link: "/my-nfts",
       title: "My Nfts",
     },
-    // {
-    //   isShow: walletConnect,
-    //   link: "/staging-nfts",
-    //   title: "Staging Nfts",
-    // },
-    // {
-    //   isShow: !userConnect,
-    //   link: "/login",
-    //   title: "Login",
-    // },
-    // {
-    //   isShow: !userConnect,
-    //   link: "/signup",
-    //   title: "Signup",
-    // },
     {
       isShow: true,
       link: "/game-rules",
@@ -62,8 +52,8 @@ export const Navbar = () => {
 
   const onHandleLogout = () => {
     UserService.logout();
+    dispatch(setPlayerIsLogged(false));
     navigate("/home", { replace: true });
-    // navigate("/", { replace: true });
   };
 
   const openWaxModal = () => {
@@ -73,13 +63,6 @@ export const Navbar = () => {
   const closeWaxModal = () => {
     setWaxModalOpen(false);
   };
-
-  // const togglePlayerMenu = () => {
-  //   setMenuPlayerOpen(!menuPlayerOpen);
-  //   if (menuOpen) {
-  //     setMenuOpen(false);
-  //   }
-  // };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -99,7 +82,6 @@ export const Navbar = () => {
               src={LogoIcon}
               onClick={
                 walletConnect ? () => navigate("/home") : () => navigate("/")
-                // walletConnect ? () => navigate("/my-nfts") : () => navigate("/")
               }
             />
             {(waxConnected || anchorConnected) && (
@@ -145,23 +127,6 @@ export const Navbar = () => {
                 />
               )}
             </div>
-            {/* 
-            {id && (
-              <>
-                <div className={styles.container_navbar_menus_line}></div>
-                <div className={styles.container_navbar_menus_userDropDown}>
-                  <img
-                    rel="preload"
-                    onClick={togglePlayerMenu}
-                    src={defaultUser}
-                    alt="user icon"
-                  />
-                  {menuPlayerOpen && (
-                    <UserDropdownMenu closeMenu={togglePlayerMenu} />
-                  )}
-                </div>
-              </>
-            )} */}
           </div>
         </div>
       </nav>
