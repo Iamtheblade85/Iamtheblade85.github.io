@@ -33,7 +33,6 @@ const images = {
 const MyNftsPage = () => {
   const dispatch = useDispatch();
   const { myNfts } = useSelector((state) => state.nfts);
-  // const { username, email } = useSelector(state => state.player)
   const { waxConnected, anchorConnected } = useSelector((state) => state.user);
   const [loader, setLoader] = useState(false);
   const [buttonLoader, setButtonLoader] = useState(null);
@@ -64,6 +63,7 @@ const MyNftsPage = () => {
       })
       .catch((error) => {
         setLoader(false);
+        toast.error("Failed to get your nfts");
         console.log(error);
       });
   }, [dispatch]);
@@ -83,15 +83,102 @@ const MyNftsPage = () => {
     return () => dispatch(setMyNfts([]));
   }, [dispatch]);
 
-  const importNft = (nft) => {
+  const burnWithAnchor = (nft) => {
+    if (buttonLoader) return;
+
+    setButtonLoader(nft.asset_id);
+    User.anchorSession
+      ?.transact(
+        {
+          actions: [
+            {
+              account: "blockchain44",
+              name: "assetburn",
+              authorization: [
+                {
+                  actor: User.anchorSession?.auth?.actor.toString(),
+                  permission: "active",
+                },
+              ],
+              data: {
+                collection_name: nft.collection.collection_name,
+                from: User.anchorSession?.auth?.actor.toString(),
+                to: "atomicassets",
+                asset_ids: [nft.asset_id],
+                memo: ``,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      )
+      .then((_) => {
+        toast.success("NFT successfully burned");
+        setButtonLoader(null);
+        dispatch(getMyNfts());
+      })
+      .catch((_) => {
+        setButtonLoader(null);
+        dispatch(getMyNfts());
+      });
+  };
+
+  const burnWithWaxCloud = (nft) => {
+    if (buttonLoader) return;
+
+    setButtonLoader(nft.asset_id);
+    User.wax.api
+      .transact(
+        {
+          actions: [
+            {
+              account: "blockchain44",
+              name: "assetburn",
+              authorization: [
+                {
+                  actor: User.wax?.userAccount,
+                  permission: "active",
+                },
+              ],
+              data: {
+                collection_name: nft.collection.collection_name,
+                from: User.wax?.userAccount,
+                to: "atomicassets",
+                asset_ids: [nft.asset_id],
+                memo: ``,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      )
+      .then((_) => {
+        toast.success("NFT successfully burned");
+        setButtonLoader(null);
+        dispatch(getMyNfts());
+      })
+      .catch((_) => {
+        setButtonLoader(null);
+        dispatch(getMyNfts());
+      });
+  };
+
+  const burnNft = (nft) => {
     if (anchorConnected) {
-      importWithAnchor(nft);
+      burnWithAnchor(nft);
     } else if (waxConnected) {
-      importWithWaxCloud(nft);
+      burnWithWaxCloud(nft);
     }
   };
 
-  const importWithAnchor = (nft) => {
+  // not final version
+  const stakeNft = (nft) => {
     if (buttonLoader) return;
 
     setButtonLoader(nft.asset_id);
@@ -101,7 +188,7 @@ const MyNftsPage = () => {
           actions: [
             {
               account: "atomicassets",
-              name: "transfer",
+              name: "stakerecords",
               authorization: [
                 {
                   actor: User.anchorSession?.auth?.actor.toString(),
@@ -112,7 +199,7 @@ const MyNftsPage = () => {
                 from: User.anchorSession?.auth?.actor.toString(),
                 to: "blockchain44",
                 asset_ids: [nft.asset_id],
-                memo: ``,
+                timestamp: Date.now(),
               },
             },
           ],
@@ -123,53 +210,7 @@ const MyNftsPage = () => {
         }
       )
       .then((_) => {
-        toast.success(
-          "NFT successfully transfered. The list will be updated in a few seconds"
-        );
-        setButtonLoader(null);
-        dispatch(getMyNfts());
-      })
-      .catch((_) => {
-        setButtonLoader(null);
-        dispatch(getMyNfts());
-      });
-  };
-
-  const importWithWaxCloud = (nft) => {
-    if (buttonLoader) return;
-
-    setButtonLoader(nft.asset_id);
-    User.wax.api
-      .transact(
-        {
-          actions: [
-            {
-              account: "atomicassets",
-              name: "transfer",
-              authorization: [
-                {
-                  actor: User.wax?.userAccount,
-                  permission: "active",
-                },
-              ],
-              data: {
-                from: User.wax?.userAccount,
-                to: "blockchain44",
-                asset_ids: [nft.asset_id],
-                memo: ``,
-              },
-            },
-          ],
-        },
-        {
-          blocksBehind: 3,
-          expireSeconds: 30,
-        }
-      )
-      .then((_) => {
-        toast.success(
-          "NFT successfully transfered. The list will be updated in a few seconds"
-        );
+        toast.success("NFT successfully staked");
         setButtonLoader(null);
         dispatch(getMyNfts());
       })
@@ -228,7 +269,8 @@ const MyNftsPage = () => {
                       key={nft.asset_id}
                       nft={nft}
                       image={images[nft.name]}
-                      importNft={importNft}
+                      burnNft={burnNft}
+                      stakeNft={stakeNft}
                       buttonLoader={buttonLoader === nft.asset_id}
                     />
                   </React.Suspense>

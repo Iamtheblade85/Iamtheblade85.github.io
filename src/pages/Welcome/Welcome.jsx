@@ -13,7 +13,7 @@ const Welcome = () => {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
   const [backgroundPosition, setBackgroundPosition] = useState({ x: 0, y: 0 });
-  const mainTransition = {
+  const welcomeTransition = {
     type: "spring",
     ease: "easeInOut",
     damping: 35,
@@ -77,7 +77,7 @@ const Welcome = () => {
         }}
         className={styles.container_mainSection}
         viewport={{ root: scrollRef, once: true }}
-        transition={mainTransition}
+        transition={welcomeTransition}
         variants={Variants}
         initial="initial"
         whileInView="whileInView"
@@ -156,12 +156,7 @@ const Welcome = () => {
           whileInView="whileInView"
           viewport={{ root: scrollRef, once: true }}
         >
-          <Button
-            onClick={() => navigate("/home")}
-            // onClick={() => navigate("/my-nfts")}
-            size="large"
-            color="blue"
-          >
+          <Button onClick={() => navigate("/home")} size="large" color="blue">
             Start
           </Button>
         </motion.div>
@@ -180,7 +175,7 @@ const Welcome = () => {
           <motion.div
             className={styles.container_infoSection_info}
             viewport={{ root: scrollRef, once: true }}
-            transition={mainTransition}
+            transition={welcomeTransition}
           >
             <motion.h2
               transition={infoTransition}

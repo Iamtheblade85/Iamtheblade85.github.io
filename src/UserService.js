@@ -1,21 +1,17 @@
 import { WaxJS } from "@waxio/waxjs/dist";
 import AnchorLinkBrowserTransport from 'anchor-link-browser-transport'
-import AnchorLink, { /* AccountName */ } from 'anchor-link'
+import AnchorLink from 'anchor-link'
 import { setWaxData, setWaxLogout } from './GlobalState/UserReducer';
 import { store } from './GlobalState/Store';
 import { clearMyNfts } from "./GlobalState/NftsSlice/nftsSlice";
 import { toast } from "react-toastify";
 
+// Class to manage user data; it will be saved on Login and deleted on Logout
 
-/**
- * Class to manage user data; it will be saved on Login and deleted on Logout
- */
 export class User {
   appName = 'Chaos Marketplace'
   static instance;
-  /**
-   * WAX configuration
-  */
+  // WAX configuration
   static rpcEndpoint = 'https://testnet.wax.pink.gg'
   static wax = undefined;
   // Shows petition signing and current balance obtaining methods
@@ -23,12 +19,7 @@ export class User {
   static anchorSession = null
 
   testnet = true
-
-  /**
-   * 
-   * FOR ANCHOR
-   * 
-   */
+  // For ANCHOR
   static transport = new AnchorLinkBrowserTransport()
   static anchorLink = new AnchorLink({
     transport: User.transport,
@@ -43,7 +34,6 @@ export class User {
 
   async waxLogin() {
     try {
-      //if autologged in, this simply returns the userAccount w/no popup
       User.wax = new WaxJS({ rpcEndpoint: User.rpcEndpoint, tryAutoLogin: true });
       let userAccount = await User.wax?.login() || '';
       return userAccount;
@@ -53,7 +43,6 @@ export class User {
   }
 
   async anchorConnect() {
-    // Perform the login, which returns the users identity
     try {
       User.wax = new WaxJS({ rpcEndpoint: User.rpcEndpoint, tryAutoLogin: true });
       const identity = await User.anchorLink.login('mydapp')
@@ -63,7 +52,6 @@ export class User {
       console.error(e)
       return false
     }
-    // Save the session within your application for future use
   }
 
   async getWaxBalance(waxAccount) {
@@ -155,7 +143,7 @@ export class User {
       }
     } catch (error) {
       console.error("Error in createAccount:", error);
-      toast.error("Error in createAccount:", error);
+      toast.error("Failed to create account");
     }
   };
 
@@ -214,7 +202,7 @@ export class User {
       }
     } catch (error) {
       console.error("Error in loginAccount:", error);
-      toast.error("Error in player login:", error);
+      toast.error("Failed to login player");
     }
   };
 

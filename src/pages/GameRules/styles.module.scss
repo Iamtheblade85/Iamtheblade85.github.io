@@ -3,13 +3,11 @@
 
 .container {
   width: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px 50px;
   color: $golden;
-  background-color: $darkBlue;
   &_gameRules,
   &_gameInstructions {
     > h2 {
@@ -24,8 +22,10 @@
       font-size: 18px;
     }
   }
+}
 
-  @media (max-width: $mobile-screen) {
+@media (max-width: $mobile-screen) {
+  .container {
     &_gameRules,
     &_gameInstructions {
       > h2 {

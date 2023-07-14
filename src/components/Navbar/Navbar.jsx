@@ -20,18 +20,16 @@ export const Navbar = () => {
   const { name, balance, waxConnected, anchorConnected } = useSelector(
     (store) => store.user
   );
-  // const { id } = useSelector((store) => store.player);
   const [waxModalOpen, setWaxModalOpen] = useState(false);
   const [menuPlayerOpen, setMenuPlayerOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  // const userConnect = !!id;
   const walletConnect = !!(waxConnected || anchorConnected);
 
   const menuArray = [
     {
       isShow: walletConnect,
       link: "/player-profile",
-      title: "Player Profile",
+      title: "My Profile",
     },
     {
       isShow: walletConnect,
@@ -94,39 +92,32 @@ export const Navbar = () => {
               </div>
             )}
           </div>
-
-          <div className={styles.container_navbar_menus}>
-            <div className={styles.container_navbar_menus_dropDown}>
-              {!menuOpen ? (
-                <img
-                  rel="preload"
-                  onClick={toggleMenu}
-                  className={
-                    styles.container_navbar_menus_dropDown_openHamburger
-                  }
-                  src={hamburgerIcon}
-                  alt="hamburger icon"
-                />
-              ) : (
-                <img
-                  rel="preload"
-                  onClick={toggleMenu}
-                  className={
-                    styles.container_navbar_menus_dropDown_closeHamburger
-                  }
-                  src={closeIcon}
-                  alt="close icon"
-                />
-              )}
-              {menuOpen && (
-                <DropdownMenu
-                  closeMenu={toggleMenu}
-                  openWaxModal={openWaxModal}
-                  onHandleLogout={onHandleLogout}
-                  menuList={menuArray}
-                />
-              )}
-            </div>
+          <div className={styles.container_navbar_dropDown}>
+            {!menuOpen ? (
+              <img
+                rel="preload"
+                onClick={toggleMenu}
+                className={styles.container_navbar_dropDown_openHamburger}
+                src={hamburgerIcon}
+                alt="hamburger icon"
+              />
+            ) : (
+              <img
+                rel="preload"
+                onClick={toggleMenu}
+                className={styles.container_navbar_dropDown_closeHamburger}
+                src={closeIcon}
+                alt="close icon"
+              />
+            )}
+            {menuOpen && (
+              <DropdownMenu
+                closeMenu={toggleMenu}
+                openWaxModal={openWaxModal}
+                onHandleLogout={onHandleLogout}
+                menuList={menuArray}
+              />
+            )}
           </div>
         </div>
       </nav>

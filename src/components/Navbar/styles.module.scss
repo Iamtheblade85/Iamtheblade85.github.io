@@ -31,12 +31,6 @@
         margin-left: 15px;
       }
     }
-
-    &_menus {
-      display: flex;
-      column-gap: 20px;
-      align-items: center;
-
       &_dropDown {
         position: relative;
         cursor: pointer;
@@ -50,51 +44,30 @@
           height: 25px;
         }
       }
-
-      // &_line {
-      //   width: 1px;
-      //   height: 20px;
-      //   border: 1px solid $chartreuse;
-      // }
-
-      // &_userDropDown {
-      //   position: relative;
-      //   background: white;
-      //   border-radius: 50%;
-
-      //   > img {
-      //     width: 35px;
-      //     cursor: pointer;
-      //   }
-      // }
-    }
   }
-}
 
-@media (max-width: $small-screen) {
-  .container {
-    &_navbar {
-      &_logoDiv {
-        > img {
-          width: 50px;
-        }
-        &_walletBalance {
-          font-size: 12px;
+  @media (max-width: $small-screen) {
+    .container {
+      &_navbar {
+        &_logoDiv {
+          > img {
+            width: 50px;
+          }
+          &_walletBalance {
+            font-size: 12px;
+          }
         }
       }
-      // &_menus {
-      //   column-gap: 15px;
-      // }
     }
   }
-}
 
-@media (max-width: $mobile-screen) {
-  .container {
-    &_navbar {
-      &_logoDiv {
-        &_walletBalance {
-          font-size: 2.5vw;
+  @media (max-width: $mobile-screen) {
+    .container {
+      &_navbar {
+        &_logoDiv {
+          &_walletBalance {
+            font-size: 2.5vw;
+          }
         }
       }
     }

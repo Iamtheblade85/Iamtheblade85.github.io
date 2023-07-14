@@ -10,7 +10,7 @@ const Mining = ({ name, mine }) => {
   const scrollRef = useRef(null);
   const [buttonLoader, setButtonLoader] = useState(null);
   const { waxConnected, anchorConnected } = useSelector((state) => state.user);
-  const mainTransition = {
+  const miningTransition = {
     type: "spring",
     ease: "easeInOut",
     damping: 35,
@@ -98,6 +98,7 @@ const Mining = ({ name, mine }) => {
         setButtonLoader(null);
       });
   };
+  
   const mineNft = () => {
     if (anchorConnected) {
       mineWithAnchor();
@@ -105,11 +106,11 @@ const Mining = ({ name, mine }) => {
       mineWithWax();
     }
   };
-
+  
   return (
     <motion.div
       viewport={{ root: scrollRef, once: true }}
-      transition={mainTransition}
+      transition={miningTransition}
       variants={Variants}
       initial="initial"
       whileInView="whileInView"
@@ -151,12 +152,12 @@ const Mining = ({ name, mine }) => {
           <div></div>
           <div className={styles.container_miningInfo_mainInfo}>
             <p>
-              <b>Mine locked: </b>
-              {mine.lock === 0 ? "No" : "Yes"}
-            </p>
-            <p>
               <b>Mine level: </b>
               {mine.level}
+            </p>
+            <p>
+              <b>Mine locked: </b>
+              {mine.lock === 0 ? "No" : "Yes"}
             </p>
           </div>
         </div>

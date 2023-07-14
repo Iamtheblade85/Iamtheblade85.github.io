@@ -1,22 +1,40 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import Button from "../../Button/Button";
+import { motion } from "framer-motion";
 import ViewNftDetailsModal from "../../Modal/ViewNftDetailsModal/ViewNftDetailsModal";
 
-const Nft = ({ nft, importNft, buttonLoader, image }) => {
+const Nft = ({ nft, buttonLoader, image, stakeNft, burnNft }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const scrollRef = useRef(null);
+
+  const cardTransition = {
+    type: "spring",
+    ease: "easeInOut",
+    damping: 30,
+  };
+  const Variants = {
+    initial: { opacity: 0 },
+    whileInView: { opacity: 1 },
+  };
 
   const openDescriptionModal = () => {
     setModalOpen(true);
   };
-
   const closeDescriptionModal = () => {
     setModalOpen(false);
   };
 
   return (
     <>
-      <div className={styles.container}>
+      <motion.div
+        className={styles.container}
+        transition={cardTransition}
+        viewport={{ root: scrollRef, once: true }}
+        variants={Variants}
+        initial="initial"
+        whileInView="whileInView"
+      >
         <img
           rel="preload"
           src={image ? image : ""}
@@ -36,7 +54,7 @@ const Nft = ({ nft, importNft, buttonLoader, image }) => {
           ) && (
             <>
               <Button
-                // onClick={() => importNft(nft)}
+                onClick={() => stakeNft(nft)}
                 loader={buttonLoader}
                 size="auto"
                 color="blue"
@@ -44,7 +62,7 @@ const Nft = ({ nft, importNft, buttonLoader, image }) => {
                 Stake
               </Button>
               <Button
-                // onClick={() => importNft(nft)}
+                onClick={() => burnNft(nft)}
                 loader={buttonLoader}
                 size="auto"
                 color="blue"
@@ -54,7 +72,7 @@ const Nft = ({ nft, importNft, buttonLoader, image }) => {
             </>
           )}
         </div>
-      </div>
+      </motion.div>
       {modalOpen && (
         <ViewNftDetailsModal
           onClose={closeDescriptionModal}

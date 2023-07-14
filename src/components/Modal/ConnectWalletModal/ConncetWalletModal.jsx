@@ -21,7 +21,7 @@ import { toast } from "react-toastify";
 const ConnectWalletModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const modalRef = useRef(null);
-  const infoTransition = {
+  const modalTransition = {
     type: "spring",
     ease: "easeInOut",
     damping: 30,
@@ -91,7 +91,7 @@ const ConnectWalletModal = ({ onClose }) => {
 
   return (
     <motion.div
-      transition={infoTransition}
+      transition={modalTransition}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       ref={modalRef}

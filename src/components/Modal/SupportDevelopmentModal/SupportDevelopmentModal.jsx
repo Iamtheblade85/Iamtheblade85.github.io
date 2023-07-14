@@ -18,7 +18,7 @@ const SupportDevelopmentModal = ({ onClose }) => {
   const { waxConnected, anchorConnected } = useSelector((store) => store.user);
   const [value, setValue] = useState("");
 
-  const infoTransition = {
+  const modalTransition = {
     type: "spring",
     ease: "easeInOut",
     damping: 30,
@@ -103,7 +103,7 @@ const SupportDevelopmentModal = ({ onClose }) => {
 
   return (
     <motion.div
-      transition={infoTransition}
+      transition={modalTransition}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       ref={modalRef}

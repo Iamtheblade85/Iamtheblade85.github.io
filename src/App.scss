@@ -54,16 +54,20 @@ img {
   transition: all 0.2s ease-in-out;
 }
 
+// Background wrapper
 .App {
   background-color: $darkBlue;
 }
 
+// Component background
 .Component {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background-image: url("./assets/images/backgrounds/welcome_section_background.jpg");
   background-position: center;
   background-repeat: repeat;
   background-attachment: fixed;
-  min-height: 100vh;
 }
 
 // Scrollbar

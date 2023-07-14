@@ -14,7 +14,7 @@ const DropdownMenu = ({
 }) => {
   const { waxConnected, anchorConnected } = useSelector((store) => store.user);
   const dropdownRef = useRef(null);
-  const infoTransition = {
+  const dropdownTransition = {
     type: "spring",
     ease: "easeInOut",
     damping: 30,
@@ -42,7 +42,7 @@ const DropdownMenu = ({
 
   return (
     <motion.div
-      transition={infoTransition}
+      transition={dropdownTransition}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className={styles.dropdownMenu}
