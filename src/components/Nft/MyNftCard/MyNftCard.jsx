@@ -25,6 +25,11 @@ const Nft = ({ nft, buttonLoader, image, stakeNft, burnNft }) => {
     setModalOpen(false);
   };
 
+  const shouldShowBurnButton =
+    nft.data.name === "ChaosX-18 Building Slot" ||
+    nft.data.name === "ChaosX-18 Level Up token" ||
+    nft.data.name === "Teleport to ChaosX-18";
+
   return (
     <>
       <motion.div
@@ -48,28 +53,25 @@ const Nft = ({ nft, buttonLoader, image, stakeNft, burnNft }) => {
           >
             Details
           </span>
-          {!(
-            nft.data.name === "ChaosX-18 Level Up token" ||
-            nft.data.name === "Teleport to ChaosX-18"
-          ) && (
-            <>
-              <Button
-                onClick={() => stakeNft(nft)}
-                loader={buttonLoader}
-                size="auto"
-                color="blue"
-              >
-                Stake
-              </Button>
-              <Button
-                onClick={() => burnNft(nft)}
-                loader={buttonLoader}
-                size="auto"
-                color="blue"
-              >
-                Burn
-              </Button>
-            </>
+          {shouldShowBurnButton && (
+            <Button
+              onClick={() => burnNft(nft)}
+              loader={buttonLoader}
+              size="auto"
+              color="blue"
+            >
+              Burn
+            </Button>
+          )}
+          {!shouldShowBurnButton && (
+            <Button
+              onClick={() => stakeNft(nft)}
+              loader={buttonLoader}
+              size="auto"
+              color="blue"
+            >
+              Stake
+            </Button>
           )}
         </div>
       </motion.div>

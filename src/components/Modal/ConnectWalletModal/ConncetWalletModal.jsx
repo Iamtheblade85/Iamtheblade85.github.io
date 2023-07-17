@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-
 import waxIcon from "../../../assets/images/icons/wax_icon.png";
 import closeIcon from "../../../assets/images/icons/icons8-close-48.png";
 import anchorIcon from "../../../assets/images/icons/anchor_icon.png";

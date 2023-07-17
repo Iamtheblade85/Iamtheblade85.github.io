@@ -98,7 +98,7 @@ const Mining = ({ name, mine }) => {
         setButtonLoader(null);
       });
   };
-  
+
   const mineNft = () => {
     if (anchorConnected) {
       mineWithAnchor();
@@ -106,7 +106,7 @@ const Mining = ({ name, mine }) => {
       mineWithWax();
     }
   };
-  
+
   return (
     <motion.div
       viewport={{ root: scrollRef, once: true }}

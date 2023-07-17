@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { UserService } from "../../UserService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import styles from "./styles.module.scss";
 
 import Loader from "../../components/Loader/Loader";
+import { getMyNfts } from "../../GlobalState/NftsSlice/nftsSlice";
+import RequiredNftModal from "../../components/Modal/RequiredNftModal/RequiredNftModal";
 const Mining = React.lazy(() => import("../../components/Mining/Mining"));
 
 const PlayerProfile = () => {
+  const dispatch = useDispatch();
   const [aurum, setAurum] = useState(null);
   const [celium, setCelium] = useState(null);
   const [player, setPlayer] = useState(null);
   const { name } = useSelector((state) => state.user);
+  const { myNfts } = useSelector((state) => state.nfts);
+
   useEffect(() => {
     UserService.getMines(name)
       .then((mines) => {
@@ -31,11 +36,11 @@ const PlayerProfile = () => {
         }
       })
       .catch((error) => console.log(error));
-  }, [name, player]);
+  }, [name]);
 
   useEffect(() => {
-    console.log(player);
-  }, [player]);
+    dispatch(getMyNfts());
+  }, [dispatch]);
 
   return (
     <motion.div
@@ -70,6 +75,10 @@ const PlayerProfile = () => {
       <React.Suspense fallback={<Loader size={250} />}>
         <Mining name="Celium" mine={celium ? celium : {}} />
       </React.Suspense>
+      {myNfts[0] &&
+        !myNfts.some((nft) => nft.name === "Teleport to ChaosX-18") && (
+          <RequiredNftModal />
+        )}
     </motion.div>
   );
 };

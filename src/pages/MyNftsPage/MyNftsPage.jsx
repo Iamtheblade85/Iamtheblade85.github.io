@@ -16,6 +16,7 @@ import { getMyNfts, setMyNfts } from "../../GlobalState/NftsSlice/nftsSlice";
 import NoDataMessage from "../../components/NoDataMessage/NoDataMessage";
 import Loader from "../../components/Loader/Loader";
 import Button from "../../components/Button/Button";
+import RequiredNftModal from "../../components/Modal/RequiredNftModal/RequiredNftModal";
 import { motion } from "framer-motion";
 
 const MyNftCard = React.lazy(() =>
@@ -92,8 +93,8 @@ const MyNftsPage = () => {
         {
           actions: [
             {
-              account: "blockchain44",
-              name: "assetburn",
+              account: "atomicassets",
+              name: "burnasset",
               authorization: [
                 {
                   actor: User.anchorSession?.auth?.actor.toString(),
@@ -101,11 +102,8 @@ const MyNftsPage = () => {
                 },
               ],
               data: {
-                collection_name: nft.collection.collection_name,
-                from: User.anchorSession?.auth?.actor.toString(),
-                to: "atomicassets",
-                asset_ids: [nft.asset_id],
-                memo: ``,
+                asset_owner: User.anchorSession?.auth?.actor.toString(),
+                asset_id: nft.asset_id,
               },
             },
           ],
@@ -135,8 +133,8 @@ const MyNftsPage = () => {
         {
           actions: [
             {
-              account: "blockchain44",
-              name: "assetburn",
+              account: "atomicassets",
+              name: "burnasset",
               authorization: [
                 {
                   actor: User.wax?.userAccount,
@@ -144,11 +142,8 @@ const MyNftsPage = () => {
                 },
               ],
               data: {
-                collection_name: nft.collection.collection_name,
-                from: User.wax?.userAccount,
-                to: "atomicassets",
-                asset_ids: [nft.asset_id],
-                memo: ``,
+                asset_owner: User.wax?.userAccount,
+                asset_id: nft.asset_id,
               },
             },
           ],
@@ -177,8 +172,7 @@ const MyNftsPage = () => {
     }
   };
 
-  // not final version
-  const stakeNft = (nft) => {
+  const stakeWithAnchor = (nft) => {
     if (buttonLoader) return;
 
     setButtonLoader(nft.asset_id);
@@ -188,7 +182,7 @@ const MyNftsPage = () => {
           actions: [
             {
               account: "atomicassets",
-              name: "stakerecords",
+              name: "transfer",
               authorization: [
                 {
                   actor: User.anchorSession?.auth?.actor.toString(),
@@ -199,7 +193,7 @@ const MyNftsPage = () => {
                 from: User.anchorSession?.auth?.actor.toString(),
                 to: "blockchain44",
                 asset_ids: [nft.asset_id],
-                timestamp: Date.now(),
+                memo: ``,
               },
             },
           ],
@@ -218,6 +212,56 @@ const MyNftsPage = () => {
         setButtonLoader(null);
         dispatch(getMyNfts());
       });
+  };
+
+  const stakeWithWaxCloud = (nft) => {
+    if (buttonLoader) return;
+
+    setButtonLoader(nft.asset_id);
+    User.wax.api
+      .transact(
+        {
+          actions: [
+            {
+              account: "atomicassets",
+              name: "transfer",
+              authorization: [
+                {
+                  actor: User.wax?.userAccount,
+                  permission: "active",
+                },
+              ],
+              data: {
+                from: User.wax?.userAccount,
+                to: "blockchain44",
+                asset_ids: [nft.asset_id],
+                memo: ``,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      )
+      .then((_) => {
+        toast.success("NFT successfully burned");
+        setButtonLoader(null);
+        dispatch(getMyNfts());
+      })
+      .catch((_) => {
+        setButtonLoader(null);
+        dispatch(getMyNfts());
+      });
+  };
+
+  const stakeNft = (nft) => {
+    if (anchorConnected) {
+      stakeWithAnchor(nft);
+    } else if (waxConnected) {
+      stakeWithWaxCloud(nft);
+    }
   };
 
   return (
@@ -291,6 +335,10 @@ const MyNftsPage = () => {
           ))}
         </div>
       )}
+      {myNfts[0] &&
+        !myNfts.some((nft) => nft.name === "Teleport to ChaosX-18") && (
+          <RequiredNftModal />
+        )}
     </motion.div>
   );
 };
