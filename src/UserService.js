@@ -99,65 +99,6 @@ export class User {
     return res
   }
 
-  // async createAccount(name, isConnected) {
-  //   try {
-  //     if (isConnected) {
-  //       await User.anchorSession.transact(
-  //         {
-  //           actions: [
-  //             {
-  //               account: "blockchain44",
-  //               name: "createaccnt",
-  //               authorization: [
-  //                 {
-  //                   actor: name,
-  //                   permission: "active",
-  //                 },
-  //               ],
-  //               data: {
-  //                 player: name,
-  //               },
-  //             },
-  //           ],
-  //         },
-  //         {
-  //           blocksBehind: 3,
-  //           expireSeconds: 30,
-  //         }
-  //       );
-  //       toast.success("Player account creation successfully with Anchor");
-  //     } else {
-  //       await User.wax.api.transact(
-  //         {
-  //           actions: [
-  //             {
-  //               account: "blockchain44",
-  //               name: "createaccnt",
-  //               authorization: [
-  //                 {
-  //                   actor: name,
-  //                   permission: "active",
-  //                 },
-  //               ],
-  //               data: {
-  //                 player: name,
-  //               },
-  //             },
-  //           ],
-  //         },
-  //         {
-  //           blocksBehind: 3,
-  //           expireSeconds: 30,
-  //         }
-  //       );
-  //       toast.success("Player account creation successfully with Wax");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error in createAccount:", error);
-  //     toast.error("Failed to create account");
-  //   }
-  // };
-
   async loginAccount(name, isConnected) {
     try {
       if (isConnected) {
@@ -213,7 +154,8 @@ export class User {
       }
     } catch (error) {
       console.error("Error in loginAccount:", error);
-      toast.error("Player doesn't exist, burn season pass nft to create an account");
+      // toast.error("Player doesn't exist, burn season pass nft to create an account");
+      toast.error("Player login canceled");
     }
   };
 
