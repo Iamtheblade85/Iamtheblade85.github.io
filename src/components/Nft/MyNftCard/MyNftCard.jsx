@@ -3,8 +3,22 @@ import styles from "./styles.module.scss";
 import Button from "../../Button/Button";
 import { motion } from "framer-motion";
 import ViewNftDetailsModal from "../../Modal/ViewNftDetailsModal/ViewNftDetailsModal";
+import Checkbox from "../../Checkbox/Checkbox";
 
-const Nft = ({ nft, buttonLoader, image, stakeNft, burnNft }) => {
+const Nft = ({
+  nft,
+  buttonLoader,
+  image,
+  functional,
+  stakeMinesIntoSlot,
+  stakeSlot,
+  unstakeSlot,
+  unstakeMine,
+  burnNft,
+  onSelect,
+  selected,
+  stakedSlot,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const scrollRef = useRef(null);
 
@@ -25,10 +39,9 @@ const Nft = ({ nft, buttonLoader, image, stakeNft, burnNft }) => {
     setModalOpen(false);
   };
 
-  const shouldShowBurnButton =
-    nft.data.name === "ChaosX-18 Building Slot" ||
-    nft.data.name === "ChaosX-18 Level Up token" ||
-    nft.data.name === "Teleport to ChaosX-18";
+  const shouldShowCheckbox =
+    nft?.data.name === "ChaosX-18 Mine Aurum" ||
+    nft?.data.name === "ChaosX-18 Mine Celium";
 
   return (
     <>
@@ -40,38 +53,70 @@ const Nft = ({ nft, buttonLoader, image, stakeNft, burnNft }) => {
         initial="initial"
         whileInView="whileInView"
       >
+        {functional && shouldShowCheckbox && (
+          <Checkbox checked={selected} onChange={onSelect} />
+        )}
         <img
           rel="preload"
           src={image ? image : ""}
           alt={image ? nft.data.name + "'s image" : "no image"}
         />
         <div className={styles.container_mainInfo}>
-          <h2 className={styles.container_mainInfo_nftName}>{nft.data.name}</h2>
+          <h2 className={styles.container_mainInfo_nftName}>
+            {nft?.data.name}
+          </h2>
           <span
             className={styles.container_mainInfo_description}
             onClick={openDescriptionModal}
           >
             Details
           </span>
-          {shouldShowBurnButton && (
-            <Button
-              onClick={() => burnNft(nft)}
-              loader={buttonLoader}
-              size="auto"
-              color="blue"
-            >
-              Burn
-            </Button>
-          )}
-          {!shouldShowBurnButton && (
-            <Button
-              onClick={() => stakeNft(nft)}
-              loader={buttonLoader}
-              size="auto"
-              color="blue"
-            >
-              Stake
-            </Button>
+          {functional && (
+            <>
+              {nft?.data.name === "ChaosX-18 Building Slot " &&
+              stakedSlot === false ? (
+                <Button
+                  onClick={() => stakeSlot(nft)}
+                  loader={buttonLoader}
+                  size="auto"
+                  color="blue"
+                >
+                  Stake Slot
+                </Button>
+              ) : nft?.data.name === "ChaosX-18 Building Slot " &&
+                stakedSlot === true ? (
+                <>
+                  <Button
+                    onClick={() => stakeMinesIntoSlot(nft)}
+                    loader={buttonLoader}
+                    size="auto"
+                    color="blue"
+                  >
+                    Stake Mines
+                  </Button>
+                  <Button
+                    onClick={() => unstakeSlot(nft)}
+                    loader={buttonLoader}
+                    size="auto"
+                    color="blue"
+                  >
+                    Unstake Slot
+                  </Button>
+                </>
+              ) : (
+                ""
+              )}
+              {nft?.data.name === "Teleport to ChaosX-18" && (
+                <Button
+                  onClick={() => burnNft(nft)}
+                  loader={buttonLoader}
+                  size="auto"
+                  color="blue"
+                >
+                  Burn
+                </Button>
+              )}
+            </>
           )}
         </div>
       </motion.div>

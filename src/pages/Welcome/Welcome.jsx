@@ -151,10 +151,8 @@ const Welcome = () => {
         </motion.p>
         <motion.div
           transition={{ delay: 1.2 }}
-          variants={Variants}
-          initial="initial"
-          whileInView="whileInView"
-          viewport={{ root: scrollRef, once: true }}
+          initial={{opacity:0}}
+          animate={{opacity:1}}
         >
           <Button onClick={() => navigate("/home")} size="large" color="blue">
             Start

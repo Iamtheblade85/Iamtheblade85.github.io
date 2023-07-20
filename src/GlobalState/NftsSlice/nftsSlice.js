@@ -3,6 +3,7 @@ import NftsService from './nfts.service';
 
 const initialState = {
   myNfts: [],
+  myWorkingNfts: {},
 };
 
 export const getMyNfts = createAsyncThunk(
@@ -19,6 +20,19 @@ export const getMyNfts = createAsyncThunk(
   }
 )
 
+export const getMyWorkingNfts = createAsyncThunk(
+  'nfts/getmyWorkingNfts',
+  async (id, { dispatch }) => {
+    try {
+      const res = await NftsService.getWorkingNft(id)
+      dispatch(setMyWorkingNfts(res.data.data))
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+)
+
 const nftsSlice = createSlice({
   name: 'nfts',
   initialState,
@@ -26,15 +40,20 @@ const nftsSlice = createSlice({
     setMyNfts: (state, action) => {
       state.myNfts = action.payload
     },
+    setMyWorkingNfts: (state, action) => {
+      const { asset_id } = action.payload;
+      state.myWorkingNfts[asset_id] = action.payload;
+    },
     clearMyNfts: (state) => {
       state.myNfts = []
+      state.myWorkingNfts = {}
     },
   }
 });
 
 export const {
   setMyNfts,
-  setStagingNfts,
+  setMyWorkingNfts,
   clearMyNfts
 } = nftsSlice.actions;
 

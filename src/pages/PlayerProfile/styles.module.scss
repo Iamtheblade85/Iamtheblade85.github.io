@@ -6,14 +6,19 @@
   color: $golden;
   display: flex;
   flex-direction: column;
+  gap: 20px;
   padding: 20px 50px;
-
+  &_mining {
+    text-align: center;
+    color: $spaceBlue;
+  }
   &_mainInfo {
     display: flex;
     justify-content: center;
     gap: 20px;
     &_mines,
-    &_limits {
+    &_limits,
+    &_earnings {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -31,13 +36,19 @@
       }
     }
   }
+  &_miningWrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: $small-screen) {
   .container {
     &_mainInfo {
       &_mines,
-      &_limits {
+      &_limits,
+      &_earnings {
         text-align: center;
         > div {
           > p {
@@ -51,9 +62,13 @@
 
 @media (max-width: $mobile-screen) {
   .container {
+    > h2 {
+      font-size: 6vw;
+    }
     &_mainInfo {
       &_mines,
-      &_limits {
+      &_limits,
+      &_earnings {
         > h2 {
           font-size: 6vw;
         }

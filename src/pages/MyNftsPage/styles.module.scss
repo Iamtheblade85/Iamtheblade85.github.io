@@ -21,6 +21,17 @@
     padding: 70px 0;
   }
 
+  &_slots {
+    text-align: left;
+    color: $spaceBlue;
+  }
+  &_slotsBlock {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px;
+  }
+
   &_nftsBlock {
     padding: 50px 0;
     &_tokenSection {

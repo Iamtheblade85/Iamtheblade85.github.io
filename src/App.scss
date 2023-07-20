@@ -34,7 +34,12 @@ h1,
 h2,
 h3 {
   font-family: stardos;
+  transition: all 0.2s ease-in-out;
   text-shadow: 0.2px 0.2px 0.2px $white;
+  &:hover {
+    font-family: stardos;
+    text-shadow: 0.2px 0.2px 20px $white;
+  }
 }
 
 p,
@@ -46,6 +51,10 @@ li {
   font-family: titillium;
   transition: all 0.2s ease-in-out;
   text-shadow: 0.3px 0.3px 0.3px $white;
+  &:hover {
+    font-family: titillium;
+    text-shadow: 0.3px 0.3px 20px $white;
+  }
 }
 
 button,

@@ -7,35 +7,40 @@ import styles from "./styles.module.scss";
 import Loader from "../../components/Loader/Loader";
 import { getMyNfts } from "../../GlobalState/NftsSlice/nftsSlice";
 import RequiredNftModal from "../../components/Modal/RequiredNftModal/RequiredNftModal";
+import NoDataMessage from "./../../components/NoDataMessage/NoDataMessage";
 const Mining = React.lazy(() => import("../../components/Mining/Mining"));
 
 const PlayerProfile = () => {
   const dispatch = useDispatch();
-  const [aurum, setAurum] = useState(null);
-  const [celium, setCelium] = useState(null);
+  const [allMines, setAllMines] = useState([]);
   const [player, setPlayer] = useState(null);
   const { name } = useSelector((state) => state.user);
   const { myNfts } = useSelector((state) => state.nfts);
+  const pollingInterval = 10000;
 
   useEffect(() => {
-    UserService.getMines(name)
-      .then((mines) => {
+    const fetchData = async () => {
+      try {
+        const [mines, players] = await Promise.all([
+          UserService.getMines(name),
+          UserService.getPlayers(),
+        ]);
+
         if (mines) {
-          const aurumMine = mines[0];
-          const celiumMine = mines[1];
-          setAurum(aurumMine);
-          setCelium(celiumMine);
+          setAllMines(mines);
         }
-      })
-      .catch((error) => console.log(error));
-    UserService.getPlayers()
-      .then((players) => {
+
         if (players && players.rows) {
           const data = players.rows.find((player) => player.player === name);
           setPlayer(data);
         }
-      })
-      .catch((error) => console.log(error));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+    const intervalId = setInterval(fetchData, pollingInterval);
+    return () => clearInterval(intervalId);
   }, [name]);
 
   useEffect(() => {
@@ -53,7 +58,7 @@ const PlayerProfile = () => {
       {player && (
         <div className={styles.container_mainInfo}>
           <div className={styles.container_mainInfo_mines}>
-            <h2>You've mined</h2>
+            <h2>Mined</h2>
             <div>
               <p>{player.aurum}</p>
               <p>{player.celium}</p>
@@ -67,14 +72,31 @@ const PlayerProfile = () => {
               <p>{player.labCeliumLimit} CELIUM</p>
             </div>
           </div>
+          <div className={styles.container_mainInfo_earnings}>
+            <h2>Earnings</h2>
+            <div>
+              <p>Last Season: {player.last_season_earning}</p>
+              <p>Current Season: {player.curr_season_earning}</p>
+            </div>
+          </div>
         </div>
       )}
-      <React.Suspense fallback={<Loader size={250} />}>
-        <Mining name="Aurum" mine={aurum ? aurum : {}} />
-      </React.Suspense>
-      <React.Suspense fallback={<Loader size={250} />}>
-        <Mining name="Celium" mine={celium ? celium : {}} />
-      </React.Suspense>
+      <h2 className={styles.container_mining}>Mining</h2>
+      <div className={styles.container_miningWrapper}>
+        {allMines[0] ? (
+          allMines.map((mine) => {
+            return (
+              <div key={mine.id}>
+                <React.Suspense fallback={<Loader size={250} />}>
+                  <Mining mine={mine ? mine : {}} />
+                </React.Suspense>
+              </div>
+            );
+          })
+        ) : (
+          <NoDataMessage message="Stake Mines into Building Slot to see your mines" />
+        )}
+      </div>
       {myNfts[0] &&
         !myNfts.some((nft) => nft.name === "Teleport to ChaosX-18") && (
           <RequiredNftModal />

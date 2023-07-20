@@ -69,11 +69,22 @@ export class User {
       code: "blockchain44", // Contract that we target
       scope: "blockchain44", // Account that owns the data
       table: "mines", // Table name
-      limit: 10, // Maximum number of rows that we want to get
       reverse: false, // Optional: Get reversed data
       show_payer: false, // Optional: Show ram payer
     });
     return res?.rows.filter((mines) => mines.player === waxAccount)
+  }
+
+  async getSlots(waxAccount) {
+    const res = await User.wax?.rpc.get_table_rows({
+      json: true,
+      code: "blockchain44", // Contract that we target
+      scope: "blockchain44", // Account that owns the data
+      table: "slots", // Table name
+      reverse: false, // Optional: Get reversed data
+      show_payer: false, // Optional: Show ram payer
+    });
+    return res?.rows.filter((slots) => slots.player === waxAccount)
   }
 
   async getPlayers() {
@@ -88,64 +99,64 @@ export class User {
     return res
   }
 
-  async createAccount(name, isConnected) {
-    try {
-      if (isConnected) {
-        await User.anchorSession.transact(
-          {
-            actions: [
-              {
-                account: "blockchain44",
-                name: "createaccnt",
-                authorization: [
-                  {
-                    actor: name,
-                    permission: "active",
-                  },
-                ],
-                data: {
-                  player: name,
-                },
-              },
-            ],
-          },
-          {
-            blocksBehind: 3,
-            expireSeconds: 30,
-          }
-        );
-        toast.success("Player account creation successfully with Anchor");
-      } else {
-        await User.wax.api.transact(
-          {
-            actions: [
-              {
-                account: "blockchain44",
-                name: "createaccnt",
-                authorization: [
-                  {
-                    actor: name,
-                    permission: "active",
-                  },
-                ],
-                data: {
-                  player: name,
-                },
-              },
-            ],
-          },
-          {
-            blocksBehind: 3,
-            expireSeconds: 30,
-          }
-        );
-        toast.success("Player account creation successfully with Wax");
-      }
-    } catch (error) {
-      console.error("Error in createAccount:", error);
-      toast.error("Failed to create account");
-    }
-  };
+  // async createAccount(name, isConnected) {
+  //   try {
+  //     if (isConnected) {
+  //       await User.anchorSession.transact(
+  //         {
+  //           actions: [
+  //             {
+  //               account: "blockchain44",
+  //               name: "createaccnt",
+  //               authorization: [
+  //                 {
+  //                   actor: name,
+  //                   permission: "active",
+  //                 },
+  //               ],
+  //               data: {
+  //                 player: name,
+  //               },
+  //             },
+  //           ],
+  //         },
+  //         {
+  //           blocksBehind: 3,
+  //           expireSeconds: 30,
+  //         }
+  //       );
+  //       toast.success("Player account creation successfully with Anchor");
+  //     } else {
+  //       await User.wax.api.transact(
+  //         {
+  //           actions: [
+  //             {
+  //               account: "blockchain44",
+  //               name: "createaccnt",
+  //               authorization: [
+  //                 {
+  //                   actor: name,
+  //                   permission: "active",
+  //                 },
+  //               ],
+  //               data: {
+  //                 player: name,
+  //               },
+  //             },
+  //           ],
+  //         },
+  //         {
+  //           blocksBehind: 3,
+  //           expireSeconds: 30,
+  //         }
+  //       );
+  //       toast.success("Player account creation successfully with Wax");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error in createAccount:", error);
+  //     toast.error("Failed to create account");
+  //   }
+  // };
 
   async loginAccount(name, isConnected) {
     try {
@@ -202,7 +213,7 @@ export class User {
       }
     } catch (error) {
       console.error("Error in loginAccount:", error);
-      toast.error("Failed to login player");
+      toast.error("Player doesn't exist, burn season pass nft to create an account");
     }
   };
 

@@ -47,9 +47,9 @@ const ConnectWalletModal = ({ onClose }) => {
     if (players.some((player) => player.player === waxAddress)) {
       await UserService.loginAccount(waxAddress, false);
       dispatch(setPlayerIsLogged(true));
-    } else if (players.some((player) => player.player !== waxAddress)) {
-      await UserService.createAccount(waxAddress, false);
-      dispatch(setPlayerIsLogged(true));
+      // } else if (players.some((player) => player.player !== waxAddress)) {
+      //   await UserService.createAccount(waxAddress, false);
+      //   dispatch(setPlayerIsLogged(true));
     } else {
       toast.error("Wax wallet is not connected");
       dispatch(setPlayerIsLogged(false));
@@ -79,9 +79,15 @@ const ConnectWalletModal = ({ onClose }) => {
         await UserService.loginAccount(waxAddress, true);
         dispatch(setPlayerIsLogged(true));
       } else {
-        await UserService.createAccount(waxAddress, true);
-        dispatch(setPlayerIsLogged(true));
+        toast.error(
+          "Failed to login"
+        );
+        dispatch(setPlayerIsLogged(false));
       }
+      // else {
+      //   await UserService.createAccount(waxAddress, true);
+      //   dispatch(setPlayerIsLogged(true));
+      // }
     } else {
       toast.error("Anchor wallet is not connected");
       dispatch(setPlayerIsLogged(false));
