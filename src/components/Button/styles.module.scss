@@ -84,3 +84,10 @@
 .btn_fit {
   width: fit-content;
 }
+
+
+@media (max-width:$mobile-screen){
+.button{
+font-size: 12px;
+}
+}

@@ -31,3 +31,21 @@
     }
   }
 }
+
+@media (max-width: $mobile-screen) {
+  .container {
+    width: 50vw;
+    > img {
+      height: 200px;
+    }
+    &_mainInfo {
+      &_nftName {
+        padding-top: 5px;
+        font-size: 12px;
+      }
+      &_description {
+        font-size: 12px;
+      }
+    }
+  }
+}

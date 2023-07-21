@@ -81,7 +81,7 @@ const Mining = ({ mine }) => {
         setButtonLoader(null);
       })
       .catch((error) => {
-        toast.error("Mining error");
+        toast.error("You can't mine now");
         console.log("Mining error: ", error);
         setButtonLoader(null);
       });
@@ -121,7 +121,7 @@ const Mining = ({ mine }) => {
         setButtonLoader(null);
       })
       .catch((error) => {
-        toast.error("Mining error");
+        toast.error("You can't mine now");
         console.log("Mining error: ", error);
         setButtonLoader(null);
       });
@@ -269,25 +269,43 @@ const Mining = ({ mine }) => {
           <div className={styles.container_miningInfo_aurumBoosters}>
             <p>
               <b>First booster: </b>
-              {new Date(mine.bstrOne).toLocaleString()}
+              {new Date(mine.bstrOne).toLocaleString() ===
+              "1/1/1970, 12:00:00 AM"
+                ? "None"
+                : new Date(mine.bstrOne).toLocaleString()}
             </p>
             <p>
               <b>Second booster: </b>
-              {new Date(mine.bstrTwo).toLocaleString()}
+              {new Date(mine.bstrTwo).toLocaleString() ===
+              "1/1/1970, 12:00:00 AM"
+                ? "None"
+                : new Date(mine.bstrTwo).toLocaleString()}
             </p>
           </div>
           <div className={styles.container_miningInfo_timeInfo}>
             <p>
               <b>Last time mined: </b>
-              {new Date(mine.lastMined).toLocaleString()}
+              {/* {new Date(mine.lastMined).toLocaleString()} */}
+              {new Date(mine.lastMined).toLocaleString() ===
+              "1/1/1970, 12:00:00 AM"
+                ? "None"
+                : new Date(mine.lastMined).toLocaleString()}
             </p>
             <p>
               <b>Last time upgrade: </b>
-              {new Date(mine.lastUpgrade).toLocaleString()}
+              {/* {new Date(mine.lastUpgrade).toLocaleString()} */}
+              {new Date(mine.lastUpgrade).toLocaleString() ===
+              "1/1/1970, 12:00:00 AM"
+                ? "None"
+                : new Date(mine.lastUpgrade).toLocaleString()}
             </p>
             <p>
               <b>Unstake time: </b>
-              {new Date(mine.unstake_time).toLocaleString()}
+              {/* {new Date(mine.unstake_time).toLocaleString()} */}
+              {new Date(mine.unstake_time).toLocaleString() ===
+              "1/1/1970, 12:00:00 AM"
+                ? "None"
+                : new Date(mine.unstake_time).toLocaleString()}
             </p>
           </div>
           <div className={styles.container_miningInfo_mainInfo}>

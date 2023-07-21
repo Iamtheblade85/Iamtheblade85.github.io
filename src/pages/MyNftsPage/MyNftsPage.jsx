@@ -43,6 +43,7 @@ const MyNftsPage = () => {
   const [visibleNfts, setVisibleNfts] = useState({});
   const [selectedNfts, setSelectedNfts] = useState([]);
   const [allSlots, setAllSlots] = useState([]);
+  const [player, setPlayer] = useState(null);
   const pollingInterval = 10000;
 
   const groupedNfts = myNfts.reduce((groups, nft) => {
@@ -454,9 +455,10 @@ const MyNftsPage = () => {
 
   const fetchData = async () => {
     try {
-      const [nfts, slots] = await Promise.all([
+      const [nfts, slots, players] = await Promise.all([
         dispatch(getMyNfts()),
         UserService.getSlots(name),
+        UserService.getPlayers(),
       ]);
       if (nfts) {
         setMyNfts(nfts);
@@ -464,6 +466,11 @@ const MyNftsPage = () => {
 
       if (slots) {
         setAllSlots(slots);
+      }
+
+      if (players && players.rows) {
+        const data = players.rows.find((player) => player.player === name);
+        setPlayer(data);
       }
     } catch (error) {
       console.log(error);
@@ -499,12 +506,13 @@ const MyNftsPage = () => {
       });
       setVisibleNfts(initialVisibleNfts);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myNfts]);
 
   useEffect(() => {
     return () => dispatch(setMyNfts([]));
   }, [dispatch]);
+
   return (
     <motion.div
       className={styles.container}
@@ -542,25 +550,32 @@ const MyNftsPage = () => {
         <NoDataMessage />
       ) : (
         <>
-          <h2 className={styles.container_slots}>Staked Building Slots</h2>
           <div className={styles.container_slotsBlock}>
-            {allSlots[0] ? (
-              allSlots.map((slot) => {
-                return (
-                  <div key={slot.id}>
-                    <React.Suspense fallback={<Loader size={250} />}>
+            <div className={styles.container_slotsBlock_slotsInfoWrapper}>
+              <h2>Staked Building Slots </h2>
+              <h2>{allSlots.length} left</h2>
+            </div>
+            <div className={styles.container_slotsBlock_slotsSection}>
+              {allSlots[0] ? (
+                allSlots.map((slot) => {
+                  return (
+                    <React.Suspense
+                      fallback={<Loader size={250} />}
+                      key={slot.id}
+                    >
                       <Slots
                         stakeMinesIntoSlot={stakeMinesIntoSlot}
                         unstakeSlot={unstakeSlot}
                         slot={slot ? slot : {}}
+                        key={slot.id}
                       />
                     </React.Suspense>
-                  </div>
-                );
-              })
-            ) : (
-              <NoDataMessage message="Stake Building Slot to see your slots" />
-            )}
+                  );
+                })
+              ) : (
+                <NoDataMessage message="Stake Building Slot to see your slots" />
+              )}
+            </div>
           </div>
           <div className={styles.container_nftsBlock}>
             {Object.entries(groupedNfts).map(([tokenName, nfts]) => (
@@ -568,9 +583,14 @@ const MyNftsPage = () => {
                 key={tokenName}
                 className={styles.container_nftsBlock_tokenSection}
               >
-                <h3>
-                  {tokenName}, {nfts.length} left
-                </h3>
+                <div
+                  className={
+                    styles.container_nftsBlock_tokenSection_tokeInfoWrapper
+                  }
+                >
+                  <h3>{tokenName}</h3>
+                  <h3>{nfts.length} left</h3>
+                </div>
                 <div
                   className={styles.container_nftsBlock_tokenSection_tokenNfts}
                 >
@@ -612,10 +632,7 @@ const MyNftsPage = () => {
           </div>
         </>
       )}
-      {myNfts[0] &&
-        !myNfts.some((nft) => nft.name === "Teleport to ChaosX-18") && (
-          <RequiredNftModal />
-        )}
+      {player?.season_asset_id === 0 && <RequiredNftModal />}
     </motion.div>
   );
 };

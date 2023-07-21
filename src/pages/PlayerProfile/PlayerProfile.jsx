@@ -8,6 +8,8 @@ import Loader from "../../components/Loader/Loader";
 import { getMyNfts } from "../../GlobalState/NftsSlice/nftsSlice";
 import RequiredNftModal from "../../components/Modal/RequiredNftModal/RequiredNftModal";
 import NoDataMessage from "./../../components/NoDataMessage/NoDataMessage";
+import Button from "../../components/Button/Button";
+import WithdrawAmountModal from "../../components/Modal/WithdrawAmountModal/WithdrawAmountModal";
 const Mining = React.lazy(() => import("../../components/Mining/Mining"));
 
 const PlayerProfile = () => {
@@ -15,8 +17,16 @@ const PlayerProfile = () => {
   const [allMines, setAllMines] = useState([]);
   const [player, setPlayer] = useState(null);
   const { name } = useSelector((state) => state.user);
-  const { myNfts } = useSelector((state) => state.nfts);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const pollingInterval = 10000;
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +35,6 @@ const PlayerProfile = () => {
           UserService.getMines(name),
           UserService.getPlayers(),
         ]);
-
         if (mines) {
           setAllMines(mines);
         }
@@ -81,6 +90,9 @@ const PlayerProfile = () => {
           </div>
         </div>
       )}
+      <Button onClick={openModal} size="fit" color="blue">
+        Withdraw
+      </Button>
       <h2 className={styles.container_mining}>Mining</h2>
       <div className={styles.container_miningWrapper}>
         {allMines[0] ? (
@@ -97,10 +109,10 @@ const PlayerProfile = () => {
           <NoDataMessage message="Stake Mines into Building Slot to see your mines" />
         )}
       </div>
-      {myNfts[0] &&
-        !myNfts.some((nft) => nft.name === "Teleport to ChaosX-18") && (
-          <RequiredNftModal />
-        )}
+      {player?.season_asset_id === 0 && <RequiredNftModal />}
+      {modalIsOpen && (
+        <WithdrawAmountModal player={player} onClose={closeModal} />
+      )}
     </motion.div>
   );
 };
