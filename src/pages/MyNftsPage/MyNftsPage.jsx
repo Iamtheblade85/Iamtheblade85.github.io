@@ -41,8 +41,12 @@ const MyNftsPage = () => {
   const [loader, setLoader] = useState(false);
   const [buttonLoader, setButtonLoader] = useState(null);
   const [visibleNfts, setVisibleNfts] = useState({});
+  const [visibleFilledSlots, setVisibleFilledSlots] = useState(12);
+  const [visibleEmptySlots, setVisibleEmptySlots] = useState(12);
   const [selectedNfts, setSelectedNfts] = useState([]);
-  const [allSlots, setAllSlots] = useState([]);
+  const [selectedSlots, setSelectedSlots] = useState([]);
+  const [emptySlots, setEmptySlots] = useState([]);
+  const [filledSlots, setFilledSlots] = useState([]);
   const [player, setPlayer] = useState(null);
   const pollingInterval = 10000;
 
@@ -55,12 +59,21 @@ const MyNftsPage = () => {
     return groups;
   }, {});
 
+  // See More logic
   const handleSeeMore = (tokenName) => {
     setVisibleNfts((prevVisibleNfts) => {
       const updatedVisibleNfts = { ...prevVisibleNfts };
       updatedVisibleNfts[tokenName] += 12;
       return updatedVisibleNfts;
     });
+  };
+
+  const handleSeeMoreFilledSlots = () => {
+    setVisibleFilledSlots((prevVisibleSlots) => prevVisibleSlots + 12);
+  };
+
+  const handleSeeMoreEmptySlots = () => {
+    setVisibleEmptySlots((prevVisibleSlots) => prevVisibleSlots + 12);
   };
 
   // burn
@@ -245,12 +258,11 @@ const MyNftsPage = () => {
     }
   };
 
-  // stake mines into slot
-  const stakeMinesWithAnchor = (selectedAssetIds, slot) => {
-    console.log(slot);
+  // stake slots
+  const stakeSlotsWithAnchor = (selectedAssetIds, nft) => {
     if (buttonLoader) return;
 
-    setButtonLoader(selectedAssetIds);
+    setButtonLoader(nft);
     User.anchorSession
       ?.transact(
         {
@@ -268,7 +280,7 @@ const MyNftsPage = () => {
                 from: User.anchorSession?.auth?.actor.toString(),
                 to: "blockchain44",
                 asset_ids: selectedAssetIds,
-                memo: "stake@mines@" + slot.asset_id,
+                memo: "stake@slots",
               },
             },
           ],
@@ -279,7 +291,7 @@ const MyNftsPage = () => {
         }
       )
       .then((_) => {
-        toast.success("NFT successfully staked");
+        toast.success("Slots successfully staked");
         setButtonLoader(null);
         dispatch(getMyNfts());
       })
@@ -289,10 +301,10 @@ const MyNftsPage = () => {
       });
   };
 
-  const stakeMinesWithWaxCloud = (selectedAssetIds, slot) => {
+  const stakeSlotsWithWaxCloud = (selectedAssetIds, nft) => {
     if (buttonLoader) return;
 
-    setButtonLoader(selectedAssetIds);
+    setButtonLoader(nft);
     User.wax.api
       .transact(
         {
@@ -310,7 +322,7 @@ const MyNftsPage = () => {
                 from: User.wax?.userAccount,
                 to: "blockchain44",
                 asset_ids: selectedAssetIds,
-                memo: "stake@mines@" + slot.asset_id,
+                memo: "stake@slots",
               },
             },
           ],
@@ -321,7 +333,7 @@ const MyNftsPage = () => {
         }
       )
       .then((_) => {
-        toast.success("NFT successfully staked");
+        toast.success("Slots successfully staked");
         setButtonLoader(null);
         dispatch(getMyNfts());
       })
@@ -331,12 +343,12 @@ const MyNftsPage = () => {
       });
   };
 
-  const stakeMinesIntoSlot = (slot) => {
-    const selectedAssetIds = selectedNfts.map((nft) => nft.asset_id);
+  const stakeSlots = (nft) => {
+    const selectedAssetIds = selectedSlots.map((nft) => nft.asset_id);
     if (anchorConnected) {
-      stakeMinesWithAnchor(selectedAssetIds, slot);
+      stakeSlotsWithAnchor(selectedAssetIds, nft);
     } else if (waxConnected) {
-      stakeMinesWithWaxCloud(selectedAssetIds, slot);
+      stakeSlotsWithWaxCloud(selectedAssetIds, nft);
     }
   };
 
@@ -430,6 +442,101 @@ const MyNftsPage = () => {
     }
   };
 
+  // stake mines into slot
+  const stakeMinesWithAnchor = (selectedAssetIds, slot) => {
+    if (buttonLoader) return;
+
+    setButtonLoader(selectedAssetIds);
+    User.anchorSession
+      ?.transact(
+        {
+          actions: [
+            {
+              account: "atomicassets",
+              name: "transfer",
+              authorization: [
+                {
+                  actor: User.anchorSession?.auth?.actor.toString(),
+                  permission: "active",
+                },
+              ],
+              data: {
+                from: User.anchorSession?.auth?.actor.toString(),
+                to: "blockchain44",
+                asset_ids: selectedAssetIds,
+                memo: "stake@mines@" + slot.asset_id,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      )
+      .then((_) => {
+        toast.success("NFT successfully staked");
+        setButtonLoader(null);
+        dispatch(getMyNfts());
+      })
+      .catch((_) => {
+        setButtonLoader(null);
+        dispatch(getMyNfts());
+      });
+  };
+
+  const stakeMinesWithWaxCloud = (selectedAssetIds, slot) => {
+    if (buttonLoader) return;
+
+    setButtonLoader(selectedAssetIds);
+    User.wax.api
+      .transact(
+        {
+          actions: [
+            {
+              account: "atomicassets",
+              name: "transfer",
+              authorization: [
+                {
+                  actor: User.wax?.userAccount,
+                  permission: "active",
+                },
+              ],
+              data: {
+                from: User.wax?.userAccount,
+                to: "blockchain44",
+                asset_ids: selectedAssetIds,
+                memo: "stake@mines@" + slot.asset_id,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      )
+      .then((_) => {
+        toast.success("NFT successfully staked");
+        setButtonLoader(null);
+        dispatch(getMyNfts());
+      })
+      .catch((_) => {
+        setButtonLoader(null);
+        dispatch(getMyNfts());
+      });
+  };
+
+  const stakeMinesIntoSlot = (slot) => {
+    const selectedAssetIds = selectedNfts.map((nft) => nft.asset_id);
+    if (anchorConnected) {
+      stakeMinesWithAnchor(selectedAssetIds, slot);
+    } else if (waxConnected) {
+      stakeMinesWithWaxCloud(selectedAssetIds, slot);
+    }
+  };
+
+  // selection
   const handleNftSelection = (nft) => {
     if (
       nft.data.name === "ChaosX-18 Mine Aurum" ||
@@ -440,19 +547,36 @@ const MyNftsPage = () => {
           (selectedNft) => selectedNft.data.name === nft.data.name
         )
       ) {
-        // Uncheck the checkbox and remove the NFT from selectedNfts
         setSelectedNfts((prevSelectedNfts) =>
           prevSelectedNfts.filter(
             (selectedNft) => selectedNft.data.name !== nft.data.name
           )
         );
       } else if (selectedNfts.length < 2) {
-        // Check the checkbox and add the NFT to selectedNfts
         setSelectedNfts((prevSelectedNfts) => [...prevSelectedNfts, nft]);
       }
     }
   };
 
+  const handleSlotSelection = (nft) => {
+    if (nft.data.name === "ChaosX-18 Building Slot ") {
+      setSelectedSlots((prevSelectedSlots) => {
+        const isSelected = prevSelectedSlots.some(
+          (selectedSlot) => selectedSlot.asset_id === nft.asset_id
+        );
+
+        if (isSelected) {
+          return prevSelectedSlots.filter(
+            (selectedSlot) => selectedSlot.asset_id !== nft.asset_id
+          );
+        } else {
+          return [...prevSelectedSlots, nft];
+        }
+      });
+    }
+  };
+
+  // data section
   const fetchData = async () => {
     try {
       const [nfts, slots, players] = await Promise.all([
@@ -460,12 +584,20 @@ const MyNftsPage = () => {
         UserService.getSlots(name),
         UserService.getPlayers(),
       ]);
+
       if (nfts) {
         setMyNfts(nfts);
       }
 
       if (slots) {
-        setAllSlots(slots);
+        const emptySlots = slots.filter(
+          (slot) => slot.aur_mine_id === 0 && slot.cel_mine_id === 0
+        );
+        const filledSlots = slots.filter(
+          (slot) => slot.aur_mine_id !== 0 && slot.cel_mine_id !== 0
+        );
+        setFilledSlots(filledSlots);
+        setEmptySlots(emptySlots);
       }
 
       if (players && players.rows) {
@@ -552,18 +684,19 @@ const MyNftsPage = () => {
         <>
           <div className={styles.container_slotsBlock}>
             <div className={styles.container_slotsBlock_slotsInfoWrapper}>
-              <h2>Staked Building Slots </h2>
-              <h2>{allSlots.length} left</h2>
+              <h2>Staked Building Slots: </h2>
+              <h2>{filledSlots.length}</h2>
             </div>
             <div className={styles.container_slotsBlock_slotsSection}>
-              {allSlots[0] ? (
-                allSlots.map((slot) => {
+              {filledSlots.length > 0 ? (
+                filledSlots.slice(0, visibleFilledSlots).map((slot) => {
                   return (
                     <React.Suspense
                       fallback={<Loader size={250} />}
                       key={slot.id}
                     >
                       <Slots
+                        fullSlot={true}
                         stakeMinesIntoSlot={stakeMinesIntoSlot}
                         unstakeSlot={unstakeSlot}
                         slot={slot ? slot : {}}
@@ -575,8 +708,62 @@ const MyNftsPage = () => {
               ) : (
                 <NoDataMessage message="Stake Building Slot to see your slots" />
               )}
+              {filledSlots.length > visibleFilledSlots && (
+                <div className={styles.container_seeMoreWrapper}>
+                  <Button
+                    onClick={handleSeeMoreFilledSlots}
+                    size="fit"
+                    color="blue"
+                  >
+                    See More
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
+
+          <div className={styles.container_emptySlotsBlock}>
+            <div
+              className={styles.container_emptySlotsBlock_emptySlotsInfoWrapper}
+            >
+              <h2>Empty Staked Building Slots: </h2>
+              <h2>{emptySlots.length}</h2>
+            </div>
+            <div className={styles.container_emptySlotsBlock_emptySlotsSection}>
+              {emptySlots.length > 0 ? (
+                emptySlots.slice(0, visibleEmptySlots).map((slot) => {
+                  return (
+                    <React.Suspense
+                      fallback={<Loader size={250} />}
+                      key={slot.id}
+                    >
+                      <Slots
+                        fullSlot={false}
+                        stakeMinesIntoSlot={stakeMinesIntoSlot}
+                        unstakeSlot={unstakeSlot}
+                        slot={slot ? slot : {}}
+                        key={slot.id}
+                      />
+                    </React.Suspense>
+                  );
+                })
+              ) : (
+                <NoDataMessage message="Stake empty Building Slot to see your slots" />
+              )}
+              {emptySlots.length > visibleEmptySlots && (
+                <div className={styles.container_seeMoreWrapper}>
+                  <Button
+                    onClick={handleSeeMoreEmptySlots}
+                    size="fit"
+                    color="blue"
+                  >
+                    See More
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+
           <div className={styles.container_nftsBlock}>
             {Object.entries(groupedNfts).map(([tokenName, nfts]) => (
               <div
@@ -588,9 +775,17 @@ const MyNftsPage = () => {
                     styles.container_nftsBlock_tokenSection_tokeInfoWrapper
                   }
                 >
-                  <h3>{tokenName}</h3>
-                  <h3>{nfts.length} left</h3>
+                  <h3>{tokenName}: </h3>
+                  <h3>{nfts.length}</h3>
                 </div>
+                {tokenName === "ChaosX-18 Building Slot " &&
+                selectedSlots[0] ? (
+                  <Button size="fit" color="blue" onClick={() => stakeSlots()}>
+                    Stake Slots
+                  </Button>
+                ) : (
+                  ""
+                )}
                 <div
                   className={styles.container_nftsBlock_tokenSection_tokenNfts}
                 >
@@ -609,8 +804,16 @@ const MyNftsPage = () => {
                         unstakeSlot={unstakeSlot}
                         buttonLoader={buttonLoader === nft.asset_id}
                         functional={true}
-                        onSelect={() => handleNftSelection(nft)}
-                        selected={selectedNfts.includes(nft)}
+                        onSelect={
+                          nft.data.name !== "ChaosX-18 Building Slot "
+                            ? () => handleNftSelection(nft)
+                            : () => handleSlotSelection(nft)
+                        }
+                        selected={
+                          nft.data.name !== "ChaosX-18 Building Slot "
+                            ? selectedNfts.includes(nft)
+                            : selectedSlots.includes(nft)
+                        }
                         stakedSlot={false}
                       />
                     </React.Suspense>

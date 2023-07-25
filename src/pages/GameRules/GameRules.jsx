@@ -11,149 +11,256 @@ const GameRules = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className={styles.container_gameRules}>
-        <h2>Game Rules: ChaosX-18</h2>
+      <div className={styles.container_gameInstructions}>
+        <h2>
+          🚀 Welcome to ChaosX-18 - Instructions to Become True Cosmic
+          Explorers! 🚀
+        </h2>
+        <p>
+          <b>
+            🔥 Are you ready for an unprecedented intergalactic adventure? Dive
+            into the secrets and riches of the mining planet ChaosX-18! Here's
+            how to get started:
+          </b>
+        </p>
         <ul>
           <li>
-            <b>Registration:</b> Each player can have only one game account. It
-            is not allowed to sell or share the account.
+            <b>Account Access:</b> To embark on this thrilling journey, you'll
+            need a WAX account. Access the game by "burning" your Teleport NFT
+            directly from your preferred wallet (AtomicHub, NEFTY, HIVE, etc.).
+            Click on the purchased Teleport NFT and burn it to secure access for
+            one season. Then, head to the game's website and log in using your
+            preferred service, Wax Cloud, or Anchor.
           </li>
           <li>
-            <b>Access to the Game:</b> To access the game, players must own a
-            Teleport NFT, which acts as a game pass allowing you to reach the
-            mining planet ChaosX-18. This NFT is burned at the end of each game
-            season.
+            <b>First Access:</b> As you step into the world of ChaosX-18, you'll
+            be granted a fixed amount of 500 Aurum and 500 Celium as a welcome
+            bonus. However, you won't have any mines or Slot Building NFTs yet.
           </li>
           <li>
-            <b>Aurum and Celium Mines:</b> Each player starts with 2 mine slots,
-            one for each type (Aurum and Celium).
+            <b>Purchase Mine and Slot Building NFTs:</b> To kickstart your
+            growth journey, you must acquire Mine and Slot Building NFTs. You
+            can find these items in the official game drops or on secondary
+            markets like neftyblocks.com and wax.atomichub.io. Once obtained,
+            you'll be ready to use them in-game.
           </li>
           <li>
-            <b>Slot Building NFT:</b> Players can activate more mines (if owned)
-            through the use of the Slot Building NFT. This NFT must be staked in
-            the game. The maximum number of Slot Building NFTs a player can own
-            is 20.
+            <b>My Profile - The Heart of the Game:</b> Here's where your mining
+            empire comes to life! The "My Profile" section is the command center
+            for your activities. Observe your precious staked assets and enjoy
+            the opportunity to collect the riches produced by your mines simply
+            by clicking "Mine."
           </li>
           <li>
-            <b>Mine Upgrades:</b> The level of mines can be increased by using
-            the resources produced by the mines themselves and a consumable item
-            called Upgrade Token NFT (burning). Currently, mines can be upgraded
-            up to level 100.
+            <b>Structure Details:</b> The key to your growth lies in optimizing
+            your mines. Click on "Details" next to the building's picture to
+            discover the specifics of each structure. In addition to the upgrade
+            cost, you'll also see the future production you'll gain by
+            upgrading. These tactical tips will help you make strategic
+            decisions and maximize your profits.
           </li>
           <li>
-            <b>Daily Login:</b> Players must log in at least once a day. If the
-            production timer hits zero, the mines' production is paused until
-            the user's next login.
+            <b>Upgrade the Structures:</b> Don't settle for less! Utilize the
+            resources produced by your mines along with Upgrade Token NFTs to
+            improve the level of your structures. Climb higher and higher on the
+            leaderboard, edging closer to the top of the prize pool.
           </li>
           <li>
-            <b>Prize Pool:</b> The prize pool will be defined and published
-            within 7 solar days by the staff and can vary from season to season.
+            <b>Legendary Leaderboard:</b> Glory awaits! Check the "Leaderboard"
+            to see the names of the true heroes of ChaosX-18. Scale the ranks by
+            earning points and earn the respect of all cosmic explorers.
           </li>
           <li>
-            <b>Rewards:</b> End of season rewards (a solar month) will be paid
-            out in Chaos, the token on which the game is based, which is
-            directly connected to WAX.
+            <b>Chaos Token - Your Reward:</b> Your deeds will be rewarded with
+            Chaos Tokens, the potent symbol of this gaming universe. Accumulate
+            Chaos Tokens through the monthly prize pool and become the masters
+            of chaos!
           </li>
           <li>
-            <b>Leaderboards:</b> Leaderboards are updated in real time and show
-            the cumulative points so far from players and the predicted
-            percentage of prize pool share at that given moment.
+            <b>Research and Trade:</b> Explore the secondary markets and
+            discover unique and rare items that will enhance your arsenal. Find
+            what you need to conquer the mining planet.
           </li>
           <li>
-            <b>Game Objective:</b> The aim of ChaosX-18 is to expand your empire
-            to earn more and more rewards in Chaos cryptocurrency.
-          </li>
-          <li>
-            <b>Privacy:</b> We respect your privacy. We will never share your
-            personal information with third parties without your explicit
-            consent.
-          </li>
-          <li>
-            <b>Maintenance and Updates:</b> We reserve the right to carry out
-            maintenance and updates to the game when necessary. During these
-            periods, the game might not be available. We will do our best to
-            minimize these downtimes and usually plan them during off-peak hour
-          </li>
-          <li>
-            <b>Support and Official Channels:</b> For support or any questions
-            regarding the game, you can reach out to us through our official
-            channels. Information about the Chaos token and its uses can also be
-            found on our official channels.
+            <b>Infinite Goal:</b> Your adventure in ChaosX-18 knows no limits.
+            Build, improve, climb the ranks, and reach new horizons! Your
+            destiny is in your hands!
           </li>
         </ul>
+        <p>
+          <b>
+            🕐 Ensure Daily Access: Attention, explorers! To maximize your
+            wealth, remember to log in at least once every 24 hours. If more
+            than 24 hours pass since your last access, the production of your
+            mines will pause until your next login.
+          </b>
+        </p>
+        <p>
+          <b>
+            🚀 Now, Cosmic Explorers, the time has come to immerse yourselves
+            into the abyss of ChaosX-18! 🚀
+          </b>
+        </p>
+        <p>
+          <b>
+            🌌 Discover, Conquer, and Become Legends of the Cosmic Mining! 🌌
+          </b>
+        </p>
+      </div>
+      <div className={styles.container_gameRules}>
+        <h2>Game Rules and Terms of Use - ChaosX-18</h2>
+        <ol>
+          <li>
+            <b>Game Access</b>
+            <ul>
+              <li>
+                To access the game, you must have a WAX account and burn the
+                Teleport NFT (game pass) in your preferred wallet to gain entry
+                to the current season.
+              </li>
+              <li>Login can be done using Wax Cloud or Anchor services.</li>
+            </ul>
+          </li>
+          <li>
+            <b>Registration and Minimum Age</b>
+            <ul>
+              <li>
+                No additional registration is required, but users must be of
+                legal age to participate.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Ownership of NFTs</b>
+            <ul>
+              <li>
+                NFTs (Teleport NFT, Slot Building NFT, Upgrade Token NFT, and
+                other game items) fully belong to the users and can be traded or
+                sold on secondary markets.
+              </li>
+              <li>
+                Consumable materials such as Teleport NFTs and Level-Up Token
+                NFTs are one-time use items and must be burned to activate their
+                effects.
+              </li>
+              <li>
+                Additional consumable materials may be introduced in the future
+                for specific purposes.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Usage of NFTs</b>
+            <ul>
+              <li>
+                NFTs can be used within the game to activate mines, buildings,
+                and upgrades.
+              </li>
+              <li>
+                Each NFT can be used only once and is burned upon activation.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Purchase of Teleport NFT for Each Season</b>
+            <ul>
+              <li>
+                At the beginning of each new season, to participate in the game,
+                you must purchase a new Teleport NFT and burn it to gain access.
+              </li>
+              <li>
+                The Teleport NFT burned at the end of the previous season will
+                not be valid for the new season
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Fair Play and Impediments</b>
+            <ul>
+              <li>
+                Each user is allowed to have only one account, and any attempt
+                to create multiple accounts may lead to sanctions.
+              </li>
+              <li>
+                The use of any form of hacking, fraud, or exploit to gain an
+                unfair advantage in the game is strictly prohibited.
+              </li>
+              <li>
+                Severe sanctions will be imposed for the use of bots or any
+                automated processes to manipulate the game.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Rewards and Prize Pool</b>
+            <ul>
+              <li>
+                Game rewards, including Chaos Tokens, are distributed based on
+                user performance and ranking.
+              </li>
+              <li>
+                The use of any form of hacking, fraud, or exploit to gain an
+                unfair advantage in the game is strictly prohibited.
+              </li>
+              <li>
+                The prize pool will be defined and published by the staff within
+                7 solar days and may vary each season.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Support and Official Communications</b>
+            <ul>
+              <li>
+                For game assistance and information, users should refer to the
+                official communications provided by the ChaosX-18 development
+                team.
+              </li>
+              <li>
+                The use of official channels is essential to receive updates and
+                important communications regarding the game.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Maintenance and Updates</b>
+            <ul>
+              <li>
+                Periodic maintenance may be performed to improve game stability
+                and user experience.
+              </li>
+              <li>
+                Updates to game features and mechanics may be implemented to
+                enhance gameplay and add new content.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Limitation of Liability</b>
+            <ul>
+              <li>
+                The game is not responsible for any damages or losses resulting
+                from disconnections or technical issues beyond its control.
+              </li>
+              <li>
+                Users are responsible for the security and protection of their
+                accounts and the resources contained within.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Legal Compliance</b>
+            <ul>
+              <li>
+                Users must comply with local laws and regulations regarding
+                games and cryptocurrencies.
+              </li>
+            </ul>
+          </li>
+        </ol>
         <p>
           Please respect all rules and play in a fair and respectful way.
           Remember, the most important thing is to have fun!
-        </p>
-      </div>
-      <div className={styles.container_gameInstructions}>
-        <h2>Game Instructions: ChaosX-18</h2>
-        <ul>
-          <li>
-            <b>Account Access:</b> Log in to the game using your WAX account. No
-            additional registration is required.
-          </li>
-          <li>
-            <b>Teleport NFT:</b> Obtain a Teleport NFT to access the game. This
-            acts as a game pass, allowing you to reach the mining planet
-            ChaosX-18. This NFT will be burned at the end of each game season.
-          </li>
-          <li>
-            <b>Aurum and Celium Mines:</b> Start your game with 2 mine slots,
-            one for each type - Aurum and Celium.
-          </li>
-          <li>
-            <b>Slot Building NFT:</b> If you have more mines, you can activate
-            them using the Slot Building NFT. Stake this NFT in the game to use
-            it. You can own a maximum of 20 Slot Building NFTs.
-          </li>
-          <li>
-            <b>Game Items:</b> All game items, including the Teleport NFT and
-            Slot Building NFT, can be found for sale in our official drop, or in
-            the secondary markets on neftyblocks.com and wax.atomichub.io.
-          </li>
-          <li>
-            <b>Mine Upgrades:</b> Increase your mine levels by using the
-            resources produced by your mines, along with a consumable item known
-            as Upgrade Token NFT. Remember, you can upgrade your mines up to
-            level 100 as of now.
-          </li>
-          <li>
-            <b>Daily Login:</b> Be sure to log in at least once a day. If you
-            miss logging in, and the production timer hits zero, your mines'
-            production will pause until your next login.
-          </li>
-          <li>
-            <b>Prize Pool:</b> Stay updated about the prize pool, which will be
-            defined and published by the staff within 7 solar days. The prize
-            pool can vary each season.
-          </li>
-          <li>
-            <b>Rewards:</b> Play and aim for the end-of-season rewards, which
-            are paid out in Chaos, the token that the game is based on. Chaos is
-            directly connected to WAX.
-          </li>
-          <li>
-            <b>Chaos Token Utility:</b> The Chaos token has various utilities
-            within the game. For detailed information, please refer to our
-            official channels.
-          </li>
-          <li>
-            <b>Leaderboards:</b> Keep track of your progress and standing in the
-            game by checking the live leaderboards. They show players'
-            cumulative points and the predicted percentage of the prize pool
-            share.
-          </li>
-          <li>
-            <b>Game Objective:</b> Your aim in ChaosX-18 is to continually
-            expand your empire, earning more and more rewards in Chaos
-            cryptocurrency.
-          </li>
-        </ul>
-        <p>
-          Remember, support and information regarding the game can be accessed
-          through our official channels. And most importantly, have fun while
-          playing ChaosX-18!
         </p>
       </div>
     </motion.div>

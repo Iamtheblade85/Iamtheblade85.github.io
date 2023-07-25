@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { UserService } from "../../UserService";
+import { User, UserService } from "../../UserService";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import styles from "./styles.module.scss";
@@ -10,13 +10,17 @@ import RequiredNftModal from "../../components/Modal/RequiredNftModal/RequiredNf
 import NoDataMessage from "./../../components/NoDataMessage/NoDataMessage";
 import Button from "../../components/Button/Button";
 import WithdrawAmountModal from "../../components/Modal/WithdrawAmountModal/WithdrawAmountModal";
+import { toast } from "react-toastify";
 const Mining = React.lazy(() => import("../../components/Mining/Mining"));
 
 const PlayerProfile = () => {
   const dispatch = useDispatch();
   const [allMines, setAllMines] = useState([]);
   const [player, setPlayer] = useState(null);
-  const { name } = useSelector((state) => state.user);
+  const [buttonLoader, setButtonLoader] = useState(null);
+  const { name, waxConnected, anchorConnected } = useSelector(
+    (state) => state.user
+  );
   const [modalIsOpen, setIsOpen] = useState(false);
   const pollingInterval = 10000;
 
@@ -27,6 +31,91 @@ const PlayerProfile = () => {
   function closeModal() {
     setIsOpen(false);
   }
+
+  // withdraw all
+  const withdrawAllWithAnchor = (player) => {
+    if (buttonLoader) return;
+
+    setButtonLoader(player.player);
+    User.anchorSession
+      ?.transact(
+        {
+          actions: [
+            {
+              account: "blockchain44",
+              name: "withdraw",
+              authorization: [
+                {
+                  actor: User.anchorSession?.auth?.actor.toString(),
+                  permission: "active",
+                },
+              ],
+              data: {
+                player: User.anchorSession?.auth?.actor.toString(),
+                amount: player.last_season_earning,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      )
+      .then((_) => {
+        toast.success("Withdraw all completed");
+        setButtonLoader(null);
+      })
+      .catch((_) => {
+        setButtonLoader(null);
+      });
+  };
+
+  const withdrawAllWithWaxCloud = (player) => {
+    if (buttonLoader) return;
+
+    setButtonLoader(player.player);
+    User.wax.api
+      .transact(
+        {
+          actions: [
+            {
+              account: "blockchain44",
+              name: "withdraw",
+              authorization: [
+                {
+                  actor: User.wax?.userAccount,
+                  permission: "active",
+                },
+              ],
+              data: {
+                player: User.wax?.userAccount,
+                amount: player.last_season_earning,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      )
+      .then((_) => {
+        toast.success("Withdraw all completed");
+        setButtonLoader(null);
+      })
+      .catch((_) => {
+        setButtonLoader(null);
+      });
+  };
+
+  const withdrawAll = () => {
+    if (waxConnected) {
+      withdrawAllWithWaxCloud(player);
+    } else if (anchorConnected) {
+      withdrawAllWithAnchor(player);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,28 +160,32 @@ const PlayerProfile = () => {
             <div>
               <p>{player.aurum}</p>
               <p>{player.celium}</p>
-              <p>{player.chaos}</p>
             </div>
           </div>
-          <div className={styles.container_mainInfo_limits}>
+          {/* <div className={styles.container_mainInfo_limits}>
             <h2>Capacity</h2>
             <div>
               <p>{player.labAurumLimit} AURUM</p>
               <p>{player.labCeliumLimit} CELIUM</p>
             </div>
-          </div>
+          </div> */}
           <div className={styles.container_mainInfo_earnings}>
-            <h2>Earnings</h2>
+            <h2>Season Earnings</h2>
             <div>
-              <p>Last Season: {player.last_season_earning}</p>
-              <p>Current Season: {player.curr_season_earning}</p>
+              <p>Last: {player.last_season_earning}</p>
+              <p>Current: {player.curr_season_earning}</p>
             </div>
           </div>
         </div>
       )}
-      <Button onClick={openModal} size="fit" color="blue">
-        Withdraw
-      </Button>
+      <div className={styles.container_btnWrapper}>
+        <Button onClick={openModal} size="fit" color="blue">
+          Withdraw
+        </Button>
+        <Button onClick={withdrawAll} size="fit" color="blue">
+          Withdraw all
+        </Button>
+      </div>
       <h2 className={styles.container_mining}>Mining</h2>
       <div className={styles.container_miningWrapper}>
         {allMines[0] ? (

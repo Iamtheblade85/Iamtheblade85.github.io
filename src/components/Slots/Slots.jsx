@@ -10,7 +10,7 @@ const MyNftCard = React.lazy(() =>
   import("../../components/Nft/MyNftCard/MyNftCard")
 );
 
-const Slots = ({ slot, stakeMinesIntoSlot, unstakeSlot }) => {
+const Slots = ({ slot, stakeMinesIntoSlot, unstakeSlot, fullSlot }) => {
   const scrollRef = useRef(null);
   const dispatch = useDispatch();
   const { myWorkingNfts } = useSelector((state) => state.nfts);
@@ -42,19 +42,31 @@ const Slots = ({ slot, stakeMinesIntoSlot, unstakeSlot }) => {
       whileInView="whileInView"
       className={styles.container}
     >
-        {myWorkingNfts[slot?.asset_id] && (
-          <React.Suspense fallback={<Loader size={250} />} key={slot.asset_id}>
+      {myWorkingNfts[slot?.asset_id] && (
+        <React.Suspense fallback={<Loader size={250} />} key={slot.asset_id}>
+          {slot.aur_mine_id !== 0 && slot.cel_mine_id !== 0 ? (
+            <MyNftCard
+              key={slot?.asset_id}
+              nft={myWorkingNfts[slot?.asset_id]}
+              image={buildingSlot}
+              unstakeSlot={unstakeSlot}
+              functional={true}
+              stakedSlot={true}
+              fullSlot={fullSlot}
+            />
+          ) : (
             <MyNftCard
               key={slot?.asset_id}
               nft={myWorkingNfts[slot?.asset_id]}
               image={buildingSlot}
               stakeMinesIntoSlot={stakeMinesIntoSlot}
-              unstakeSlot={unstakeSlot}
               functional={true}
               stakedSlot={true}
+              fullSlot={fullSlot}
             />
-          </React.Suspense>
-        )}
+          )}
+        </React.Suspense>
+      )}
     </motion.div>
   );
 };

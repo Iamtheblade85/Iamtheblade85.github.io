@@ -13,11 +13,11 @@ const Nft = ({
   stakeMinesIntoSlot,
   stakeSlot,
   unstakeSlot,
-  unstakeMine,
   burnNft,
   onSelect,
   selected,
   stakedSlot,
+  fullSlot,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const scrollRef = useRef(null);
@@ -41,7 +41,8 @@ const Nft = ({
 
   const shouldShowCheckbox =
     nft?.data.name === "ChaosX-18 Mine Aurum" ||
-    nft?.data.name === "ChaosX-18 Mine Celium";
+    nft?.data.name === "ChaosX-18 Mine Celium" ||
+    (nft?.data.name === "ChaosX-18 Building Slot " && stakedSlot === false);
 
   return (
     <>
@@ -84,6 +85,7 @@ const Nft = ({
                   Stake Slot
                 </Button>
               ) : nft?.data.name === "ChaosX-18 Building Slot " &&
+                fullSlot === false &&
                 stakedSlot === true ? (
                 <>
                   <Button
@@ -94,6 +96,11 @@ const Nft = ({
                   >
                     Stake Mines
                   </Button>
+                </>
+              ) : nft?.data.name === "ChaosX-18 Building Slot " &&
+                fullSlot === true &&
+                stakedSlot === true ? (
+                <>
                   <Button
                     onClick={() => unstakeSlot(nft)}
                     loader={buttonLoader}

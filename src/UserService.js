@@ -70,6 +70,7 @@ export class User {
       scope: "blockchain44", // Account that owns the data
       table: "mines", // Table name
       reverse: false, // Optional: Get reversed data
+      limit: 9999999, // Limit of the data (default 10)
       show_payer: false, // Optional: Show ram payer
     });
     return res?.rows.filter((mines) => mines.player === waxAccount)
@@ -82,6 +83,7 @@ export class User {
       scope: "blockchain44", // Account that owns the data
       table: "slots", // Table name
       reverse: false, // Optional: Get reversed data
+      limit: 9999999, // Limit of the data (default 10)
       show_payer: false, // Optional: Show ram payer
     });
     return res?.rows.filter((slots) => slots.player === waxAccount)
@@ -94,6 +96,7 @@ export class User {
       scope: "blockchain44", // Account that owns the data
       table: "players", // Table name
       reverse: false, // Optional: Get reversed data
+      limit: 9999999, // Limit of the data (default 10)
       show_payer: false, // Optional: Show ram payer
     });
     return res
