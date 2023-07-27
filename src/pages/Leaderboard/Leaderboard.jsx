@@ -24,7 +24,7 @@ const Leaderboard = () => {
   }, []);
 
   const sortedPlayers = allPlayers.sort(
-    (a, b) => b.curr_season_earning - a.curr_season_earning
+    (a, b) => b.leaderboardpts - a.leaderboardpts
   );
 
   return (
@@ -49,7 +49,7 @@ const Leaderboard = () => {
             <tr key={player.player}>
               <td>{index + 1}</td>
               <td>{player.player}</td>
-              <td>{player.curr_season_earning}</td>
+              <td>{player.leaderboardpts}</td>
             </tr>
           ))}
         </tbody>

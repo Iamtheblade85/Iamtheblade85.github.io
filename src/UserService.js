@@ -1,7 +1,7 @@
 import { WaxJS } from "@waxio/waxjs/dist";
 import AnchorLinkBrowserTransport from 'anchor-link-browser-transport'
 import AnchorLink from 'anchor-link'
-import { setWaxData, setWaxLogout } from './GlobalState/UserReducer';
+import { setPlayerIsLogged, setWaxData, setWaxLogout } from './GlobalState/UserReducer';
 import { store } from './GlobalState/Store';
 import { clearMyNfts } from "./GlobalState/NftsSlice/nftsSlice";
 import { toast } from "react-toastify";
@@ -129,6 +129,7 @@ export class User {
           }
         );
         toast.success("Player logged successfully using Anchor");
+        store.dispatch(setPlayerIsLogged(true))
       } else {
         await User.wax.api.transact(
           {
@@ -154,11 +155,12 @@ export class User {
           }
         );
         toast.success("Player login successful using Wax");
+        store.dispatch(setPlayerIsLogged(true))
       }
     } catch (error) {
       console.error("Error in loginAccount:", error);
-      // toast.error("Player doesn't exist, burn season pass nft to create an account");
       toast.error("Player login canceled");
+      store.dispatch(setPlayerIsLogged(false))
     }
   };
 
@@ -172,7 +174,9 @@ export class User {
             isLogged: true,
             balance: await UserService.getWaxBalance(User.wax.userAccount)
           }))
-          UserService.loginAccount(User.wax.userAccount, false)
+          if (!store.getState().user.playerIsLogged) {
+            UserService.loginAccount(User.wax.userAccount, false);
+          }
         }
       });
     }
@@ -189,7 +193,9 @@ export class User {
           isLogged: true,
           balance: await UserService.getWaxBalance(waxAddress)
         }))
-        UserService.loginAccount(waxAddress, true)
+        if (!store.getState().user.playerIsLogged) {
+          UserService.loginAccount(waxAddress, true);
+        }
       }
     }
   }
@@ -198,6 +204,7 @@ export class User {
     User.wax = undefined;
     store.dispatch(setWaxLogout())
     store.dispatch(clearMyNfts())
+    store.dispatch(setPlayerIsLogged(false))
     return true;
   }
 

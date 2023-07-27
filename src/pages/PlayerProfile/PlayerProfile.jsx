@@ -172,8 +172,8 @@ const PlayerProfile = () => {
           <div className={styles.container_mainInfo_earnings}>
             <h2>Season Earnings</h2>
             <div>
-              <p>Last: {player.last_season_earning}</p>
-              <p>Current: {player.curr_season_earning}</p>
+              <p>Last: {player.prev_leaderboardpts}</p>
+              <p>Current: {player.leaderboardpts}</p>
             </div>
           </div>
         </div>

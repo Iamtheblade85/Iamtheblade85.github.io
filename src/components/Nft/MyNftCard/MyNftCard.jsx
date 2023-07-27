@@ -13,11 +13,13 @@ const Nft = ({
   stakeMinesIntoSlot,
   stakeSlot,
   unstakeSlot,
+  // unstakeMine,
   burnNft,
   onSelect,
   selected,
   stakedSlot,
   fullSlot,
+  // miningNft,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const scrollRef = useRef(null);
@@ -125,6 +127,16 @@ const Nft = ({
               )}
             </>
           )}
+          {/* {functional === false && miningNft === true && (
+            <Button
+              onClick={() => unstakeMine(nft)}
+              loader={buttonLoader}
+              size="auto"
+              color="blue"
+            >
+              Unstake Mine
+            </Button>
+          )} */}
         </div>
       </motion.div>
       {modalOpen && (

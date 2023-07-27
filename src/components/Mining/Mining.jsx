@@ -236,6 +236,96 @@ const Mining = ({ mine }) => {
     }
   };
 
+  // // unstake mine
+  // const unstakeMineWithAnchor = (mine) => {
+  //   if (buttonLoader) return;
+
+  //   setButtonLoader(mine.asset_id);
+  //   User.anchorSession
+  //     ?.transact(
+  //       {
+  //         actions: [
+  //           {
+  //             account: "blockchain44",
+  //             name: "unstakemine",
+  //             authorization: [
+  //               {
+  //                 actor: User.anchorSession?.auth?.actor.toString(),
+  //                 permission: "active",
+  //               },
+  //             ],
+  //             data: {
+  //               player: User.anchorSession?.auth?.actor.toString(),
+  //               slotNftId: mine.asset_id,
+  //             },
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         blocksBehind: 3,
+  //         expireSeconds: 30,
+  //       }
+  //     )
+  //     .then((_) => {
+  //       toast.success("Mine successfully unstaked");
+  //       setButtonLoader(null);
+  //       dispatch(getMyNfts());
+  //     })
+  //     .catch((_) => {
+  //       setButtonLoader(null);
+  //       dispatch(getMyNfts());
+  //     });
+  // };
+
+  // const unstakeMineWithWaxCloud = (mine) => {
+  //   if (buttonLoader) return;
+
+  //   setButtonLoader(mine.asset_id);
+  //   User.wax.api
+  //     .transact(
+  //       {
+  //         actions: [
+  //           {
+  //             account: "blockchain44",
+  //             name: "unstakemine",
+  //             authorization: [
+  //               {
+  //                 actor: User.wax?.userAccount,
+  //                 permission: "active",
+  //               },
+  //             ],
+  //             data: {
+  //               player: User.wax?.userAccount,
+  //               slotNftId: mine.asset_id,
+  //             },
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         blocksBehind: 3,
+  //         expireSeconds: 30,
+  //       }
+  //     )
+  //     .then((_) => {
+  //       toast.success("Mine successfully unstaked");
+  //       setButtonLoader(null);
+  //       dispatch(getMyNfts());
+  //     })
+  //     .catch((_) => {
+  //       setButtonLoader(null);
+  //       dispatch(getMyNfts());
+  //     });
+  // };
+
+  // const unstakeMine = (mine) => {
+  //   console.log(mine);
+  //   if (anchorConnected) {
+  //     unstakeMineWithAnchor(mine);
+  //   } else if (waxConnected) {
+  //     unstakeMineWithWaxCloud(mine);
+  //   }
+  // };
+
   useEffect(() => {
     if (mine) {
       setTimeout(() => {
@@ -260,7 +350,9 @@ const Mining = ({ mine }) => {
             key={mine?.asset_id}
             nft={myWorkingNfts[mine?.asset_id]}
             image={images[myWorkingNfts[mine?.asset_id]?.name]}
+            // unstakeMine={unstakeMine}
             functional={false}
+            // miningNft={true}
           />
         </React.Suspense>
       )}
@@ -285,7 +377,6 @@ const Mining = ({ mine }) => {
           <div className={styles.container_miningInfo_timeInfo}>
             <p>
               <b>Last time mined: </b>
-              {/* {new Date(mine.lastMined).toLocaleString()} */}
               {new Date(mine.lastMined).toLocaleString() ===
               "1/1/1970, 12:00:00 AM"
                 ? "None"
@@ -293,7 +384,6 @@ const Mining = ({ mine }) => {
             </p>
             <p>
               <b>Last time upgrade: </b>
-              {/* {new Date(mine.lastUpgrade).toLocaleString()} */}
               {new Date(mine.lastUpgrade).toLocaleString() ===
               "1/1/1970, 12:00:00 AM"
                 ? "None"
@@ -301,7 +391,6 @@ const Mining = ({ mine }) => {
             </p>
             <p>
               <b>Unstake time: </b>
-              {/* {new Date(mine.unstake_time).toLocaleString()} */}
               {new Date(mine.unstake_time).toLocaleString() ===
               "1/1/1970, 12:00:00 AM"
                 ? "None"

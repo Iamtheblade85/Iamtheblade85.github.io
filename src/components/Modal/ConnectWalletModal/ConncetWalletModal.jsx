@@ -46,7 +46,7 @@ const ConnectWalletModal = ({ onClose }) => {
     });
     if (players.some((player) => player.player === waxAddress)) {
       await UserService.loginAccount(waxAddress, false);
-      dispatch(setPlayerIsLogged(true));
+      // dispatch(setPlayerIsLogged(true));
     } else {
       toast.error("Wax wallet is not connected");
       dispatch(setPlayerIsLogged(false));
@@ -74,7 +74,7 @@ const ConnectWalletModal = ({ onClose }) => {
       });
       if (players.some((player) => player.player === waxAddress)) {
         await UserService.loginAccount(waxAddress, true);
-        dispatch(setPlayerIsLogged(true));
+        // dispatch(setPlayerIsLogged(true));
       } else {
         toast.error(
           "Player doesn't exist, burn season pass nft to create an account"
