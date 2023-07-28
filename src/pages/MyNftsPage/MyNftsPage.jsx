@@ -684,8 +684,7 @@ const MyNftsPage = () => {
         <>
           <div className={styles.container_slotsBlock}>
             <div className={styles.container_slotsBlock_slotsInfoWrapper}>
-              <h2>Staked Building Slots: </h2>
-              <h2>{filledSlots.length}</h2>
+              <h2>Staked Building Slots: {filledSlots.length}</h2>
             </div>
             <div className={styles.container_slotsBlock_slotsSection}>
               {filledSlots.length > 0 ? (
@@ -726,8 +725,7 @@ const MyNftsPage = () => {
             <div
               className={styles.container_emptySlotsBlock_emptySlotsInfoWrapper}
             >
-              <h2>Empty Staked Building Slots: </h2>
-              <h2>{emptySlots.length}</h2>
+              <h2>Empty Staked Building Slots: {emptySlots.length}</h2>
             </div>
             <div className={styles.container_emptySlotsBlock_emptySlotsSection}>
               {emptySlots.length > 0 ? (
@@ -775,8 +773,9 @@ const MyNftsPage = () => {
                     styles.container_nftsBlock_tokenSection_tokeInfoWrapper
                   }
                 >
-                  <h3>{tokenName}: </h3>
-                  <h3>{nfts.length}</h3>
+                  <h3>
+                    {tokenName}: {nfts.length}
+                  </h3>
                 </div>
                 {tokenName === "ChaosX-18 Building Slot " &&
                 selectedSlots[0] ? (
