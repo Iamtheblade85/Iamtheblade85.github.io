@@ -158,8 +158,8 @@ const PlayerProfile = () => {
           <div className={styles.container_mainInfo_mines}>
             <h2>Mined</h2>
             <div>
-              <p>{player.aurum}</p>
-              <p>{player.celium}</p>
+              <p>Aurum: {player.aurum}</p>
+              <p>Celium: {player.celium}</p>
             </div>
           </div>
           {/* <div className={styles.container_mainInfo_limits}>

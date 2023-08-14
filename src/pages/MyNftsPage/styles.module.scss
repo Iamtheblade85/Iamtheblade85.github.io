@@ -73,11 +73,11 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      &_tokeInfoWrapper {
+      &_tokenInfoWrapper {
         display: flex;
         flex-direction: row;
         column-gap: 5px;
-        > h3 {
+        > h2 {
           color: $spaceBlue;
         }
       }
@@ -119,6 +119,13 @@
           text-align: center;
         }
       }
+      &_tokenSection {
+        &_tokenInfoWrapper {
+          justify-content: center;
+          text-align: center;
+          align-items: center;
+        }
+      }
       &_slotsSection,
       &_emptySlotsSection &_tokenSection {
         justify-content: center;
@@ -153,7 +160,7 @@
       &_tokenSection {
         &_tokeInfoWrapper {
           flex-direction: column;
-          > h3 {
+          > h2 {
             font-size: 20px;
           }
         }

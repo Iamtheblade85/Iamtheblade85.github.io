@@ -770,12 +770,12 @@ const MyNftsPage = () => {
               >
                 <div
                   className={
-                    styles.container_nftsBlock_tokenSection_tokeInfoWrapper
+                    styles.container_nftsBlock_tokenSection_tokenInfoWrapper
                   }
                 >
-                  <h3>
+                  <h2>
                     {tokenName}: {nfts.length}
-                  </h3>
+                  </h2>
                 </div>
                 {tokenName === "ChaosX-18 Building Slot " &&
                 selectedSlots[0] ? (
