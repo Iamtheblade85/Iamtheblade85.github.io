@@ -7,11 +7,14 @@
   padding: 10px;
   background-color: $blackBackground;
   border: 0.5px solid $blueBorder;
+
   @extend .divHoverEffect;
   > img {
     width: 100%;
-    height: 300px;
-    object-fit: contain;
+    margin-bottom: 5px;
+    object-position: center;
+    object-fit: cover;
+    border-radius: 8px;
   }
 
   &_mainInfo {
@@ -35,9 +38,6 @@
 @media (max-width: $mobile-screen) {
   .container {
     width: 50vw;
-    > img {
-      height: 200px;
-    }
     &_mainInfo {
       &_nftName {
         padding-top: 5px;

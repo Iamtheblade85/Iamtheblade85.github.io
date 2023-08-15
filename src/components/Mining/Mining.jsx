@@ -413,17 +413,19 @@ const Mining = ({ mine }) => {
           </div>
         </div>
       )}
-      <Button onClick={mineNft} loader={buttonLoader} size="fit" color="blue">
-        Mine
-      </Button>
-      <Button
-        onClick={() => upgradeNft(myWorkingNfts[mine?.asset_id])}
-        loader={buttonLoader}
-        size="fit"
-        color="blue"
-      >
-        Upgrade
-      </Button>
+      <div className={styles.container_buttonWrapper}>
+        <Button onClick={mineNft} loader={buttonLoader} size="fit" color="blue">
+          Mine
+        </Button>
+        <Button
+          onClick={() => upgradeNft(myWorkingNfts[mine?.asset_id])}
+          loader={buttonLoader}
+          size="fit"
+          color="blue"
+        >
+          Upgrade
+        </Button>
+      </div>
     </motion.div>
   );
 };

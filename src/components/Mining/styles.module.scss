@@ -30,6 +30,11 @@
       justify-content: space-around;
     }
   }
+  &_buttonWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
 }
 
 @media (max-width: $default-screen) {

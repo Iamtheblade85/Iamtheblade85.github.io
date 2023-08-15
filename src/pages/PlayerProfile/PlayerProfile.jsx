@@ -52,7 +52,7 @@ const PlayerProfile = () => {
               ],
               data: {
                 player: User.anchorSession?.auth?.actor.toString(),
-                amount: player.last_season_earning,
+                amount: player.prev_leaderboardpts,
               },
             },
           ],
@@ -90,7 +90,7 @@ const PlayerProfile = () => {
               ],
               data: {
                 player: User.wax?.userAccount,
-                amount: player.last_season_earning,
+                amount: player.prev_leaderboardpts,
               },
             },
           ],
@@ -153,36 +153,32 @@ const PlayerProfile = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      {player && (
-        <div className={styles.container_mainInfo}>
-          <div className={styles.container_mainInfo_mines}>
-            <h2>Mined</h2>
-            <div>
-              <p>Aurum: {player.aurum}</p>
-              <p>Celium: {player.celium}</p>
-            </div>
-          </div>
-          {/* <div className={styles.container_mainInfo_limits}>
-            <h2>Capacity</h2>
-            <div>
-              <p>{player.labAurumLimit} AURUM</p>
-              <p>{player.labCeliumLimit} CELIUM</p>
-            </div>
-          </div> */}
-          <div className={styles.container_mainInfo_earnings}>
-            <h2>Season Earnings</h2>
-            <div>
-              <p>Last: {player.prev_leaderboardpts}</p>
-              <p>Current: {player.leaderboardpts}</p>
-            </div>
+      <div className={styles.container_mainInfo}>
+        <div className={styles.container_mainInfo_mines}>
+          <h2>Mined</h2>
+          <div>
+            <p>Aurum: {!player ? 0 : player.aurum.slice(0, -4)}</p>
+            <p>Celium: {!player ? 0 : player.celium.slice(0, -4)}</p>
           </div>
         </div>
-      )}
+        <div className={styles.container_mainInfo_earnings}>
+          <h2>Gains</h2>
+          <div>
+            <p>Last: {!player ? 0 : player.prev_leaderboardpts.slice(0, -4)}</p>
+            <p>Current: {!player ? 0 : player.leaderboardpts.slice(0, -4)}</p>
+          </div>
+        </div>
+      </div>
       <div className={styles.container_btnWrapper}>
-        <Button onClick={openModal} size="fit" color="blue">
+        <Button onClick={openModal} size="fit" color="blue" disabled={!player}>
           Withdraw
         </Button>
-        <Button onClick={withdrawAll} size="fit" color="blue">
+        <Button
+          onClick={withdrawAll}
+          size="fit"
+          color="blue"
+          disabled={!player}
+        >
           Withdraw all
         </Button>
       </div>

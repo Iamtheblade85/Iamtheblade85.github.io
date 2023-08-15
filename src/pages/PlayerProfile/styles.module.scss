@@ -59,9 +59,12 @@
       &_limits,
       &_earnings {
         text-align: center;
+        > h2 {
+          font-size: 4vw;
+        }
         > div {
           > p {
-            font-size: 15px;
+            font-size: 2.4vw;
           }
         }
       }
@@ -84,7 +87,7 @@
         }
         > div {
           > p {
-            font-size: 3vw;
+            font-size: 2.3vw;
           }
         }
       }

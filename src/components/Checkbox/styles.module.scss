@@ -1,8 +1,11 @@
+@import "../../assets/styles/variables.scss";
+@import "../../assets/styles/global.scss";
 .checkbox {
-  position: relative;
+  position: absolute;
   display: inline-block;
   width: 20px;
   height: 20px;
+  margin: 5px;
 }
 
 .input {
@@ -43,4 +46,11 @@
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+@media (max-width: $mobile-screen) {
+  .checkmark {
+    width: 15px;
+    height: 15px;
+  }
 }

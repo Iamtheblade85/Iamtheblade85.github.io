@@ -7,19 +7,22 @@ import { clearMyNfts } from "./GlobalState/NftsSlice/nftsSlice";
 import { toast } from "react-toastify";
 
 // Class to manage user data; it will be saved on Login and deleted on Logout
-
 export class User {
   appName = 'Chaos Marketplace'
   static instance;
   // WAX configuration
   static rpcEndpoint = 'https://testnet.wax.pink.gg'
+  // for testnet
+  // https://testnet.wax.pink.gg
+  // for mainnet
+  // https://wax.pink.gg
   static wax = undefined;
   // Shows petition signing and current balance obtaining methods
   waxSession = undefined
   static anchorSession = null
 
   testnet = true
-  // For ANCHOR
+  // For Anchor Wallet application
   static transport = new AnchorLinkBrowserTransport()
   static anchorLink = new AnchorLink({
     transport: User.transport,
@@ -27,6 +30,12 @@ export class User {
       {
         chainId: 'f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12',
         nodeUrl: 'https://wax-testnet.eosphere.io',
+        // for testnet
+        // https://wax-testnet.eosphere.io
+        // f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12
+        // for mainnet
+        // https://wax.eosphere.io
+        // 1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4
       },
     ],
   })

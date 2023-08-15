@@ -54,7 +54,27 @@
 @media (max-width: $mobile-screen) {
   .dropdownMenu {
     position: fixed;
-    top: 20%;
+    top: 21%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 99vw;
+    align-items: center;
+  }
+}
+@media (max-width: 375px) and (min-width: 360px) {
+  .dropdownMenu {
+    position: fixed;
+    top: 26.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 99vw;
+    align-items: center;
+  }
+}
+@media (max-width: 414px) and (min-width: 376px) {
+  .dropdownMenu {
+    position: fixed;
+    top: 21%;
     left: 50%;
     transform: translate(-50%, -50%);
     min-width: 99vw;
