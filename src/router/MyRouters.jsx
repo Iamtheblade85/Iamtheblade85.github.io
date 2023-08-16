@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Footer } from "../components/Footer/Footer";
-import { Navbar } from "../components/Navbar/Navbar";
-import { Home } from "../pages/Home/Home";
+
+import Footer from "../components/Footer/Footer";
+import Navbar from "../components/Navbar/Navbar";
+import Home from "../pages/Home/Home";
 import MyNftsPage from "../pages/MyNftsPage/MyNftsPage";
 import GameRules from "../pages/GameRules/GameRules";
 import Leaderboard from "../pages/Leaderboard/Leaderboard";
 import Welcome from "../pages/Welcome/Welcome";
 import Error from "../pages/Error/Error";
 import PlayerProfile from "../pages/PlayerProfile/PlayerProfile";
+
 import "../App.scss";
 
 const MyRouters = () => {

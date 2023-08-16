@@ -1,21 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 import styles from "./styles.module.scss";
+import { User } from "../../UserService";
 import {
   getMyNfts,
   getMyWorkingNfts,
 } from "../../GlobalState/NftsSlice/nftsSlice";
-import { motion } from "framer-motion";
-import { User } from "../../UserService";
-import { toast } from "react-toastify";
 import Button from "../Button/Button";
+import Loader from "../Loader/Loader";
 
 import mineAurum from "../../assets/images/nfts/Mine-Aurum.webp";
 import mineCelium from "../../assets/images/nfts/Mine-Celium.webp";
 import buildingSlot from "../../assets/images/nfts/Building-Slot.webp";
 import levelUpToken from "../../assets/images/nfts/Level-Up-Token.webp";
 import teleportToChaos from "../../assets/images/nfts/Teleport.webp";
-import Loader from "../Loader/Loader";
 
 const MyNftCard = React.lazy(() =>
   import("../../components/Nft/MyNftCard/MyNftCard")
@@ -236,96 +236,6 @@ const Mining = ({ mine }) => {
     }
   };
 
-  // // unstake mine
-  // const unstakeMineWithAnchor = (mine) => {
-  //   if (buttonLoader) return;
-
-  //   setButtonLoader(mine.asset_id);
-  //   User.anchorSession
-  //     ?.transact(
-  //       {
-  //         actions: [
-  //           {
-  //             account: "xcryptochaos",
-  //             name: "unstakemine",
-  //             authorization: [
-  //               {
-  //                 actor: User.anchorSession?.auth?.actor.toString(),
-  //                 permission: "active",
-  //               },
-  //             ],
-  //             data: {
-  //               player: User.anchorSession?.auth?.actor.toString(),
-  //               slotNftId: mine.asset_id,
-  //             },
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         blocksBehind: 3,
-  //         expireSeconds: 30,
-  //       }
-  //     )
-  //     .then((_) => {
-  //       toast.success("Mine successfully unstaked");
-  //       setButtonLoader(null);
-  //       dispatch(getMyNfts());
-  //     })
-  //     .catch((_) => {
-  //       setButtonLoader(null);
-  //       dispatch(getMyNfts());
-  //     });
-  // };
-
-  // const unstakeMineWithWaxCloud = (mine) => {
-  //   if (buttonLoader) return;
-
-  //   setButtonLoader(mine.asset_id);
-  //   User.wax.api
-  //     .transact(
-  //       {
-  //         actions: [
-  //           {
-  //             account: "xcryptochaos",
-  //             name: "unstakemine",
-  //             authorization: [
-  //               {
-  //                 actor: User.wax?.userAccount,
-  //                 permission: "active",
-  //               },
-  //             ],
-  //             data: {
-  //               player: User.wax?.userAccount,
-  //               slotNftId: mine.asset_id,
-  //             },
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         blocksBehind: 3,
-  //         expireSeconds: 30,
-  //       }
-  //     )
-  //     .then((_) => {
-  //       toast.success("Mine successfully unstaked");
-  //       setButtonLoader(null);
-  //       dispatch(getMyNfts());
-  //     })
-  //     .catch((_) => {
-  //       setButtonLoader(null);
-  //       dispatch(getMyNfts());
-  //     });
-  // };
-
-  // const unstakeMine = (mine) => {
-  //   console.log(mine);
-  //   if (anchorConnected) {
-  //     unstakeMineWithAnchor(mine);
-  //   } else if (waxConnected) {
-  //     unstakeMineWithWaxCloud(mine);
-  //   }
-  // };
-
   useEffect(() => {
     if (mine) {
       setTimeout(() => {
@@ -350,9 +260,7 @@ const Mining = ({ mine }) => {
             key={mine?.asset_id}
             nft={myWorkingNfts[mine?.asset_id]}
             image={images[myWorkingNfts[mine?.asset_id]?.name]}
-            // unstakeMine={unstakeMine}
             functional={false}
-            // miningNft={true}
           />
         </React.Suspense>
       )}

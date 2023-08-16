@@ -1,9 +1,9 @@
-import { useRef, useState } from "react";
-import styles from "./styles.module.scss";
-import Button from "../../Button/Button";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import ViewNftDetailsModal from "../../Modal/ViewNftDetailsModal/ViewNftDetailsModal";
+import Button from "../../Button/Button";
 import Checkbox from "../../Checkbox/Checkbox";
+import ViewNftDetailsModal from "../../Modal/ViewNftDetailsModal/ViewNftDetailsModal";
+import styles from "./styles.module.scss";
 
 const Nft = ({
   nft,

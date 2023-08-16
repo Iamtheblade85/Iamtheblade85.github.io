@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import styles from "./styles.module.scss";
-import buildingSlot from "../../assets/images/nfts/Building-Slot.webp";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyWorkingNfts } from "../../GlobalState/NftsSlice/nftsSlice";
 import { motion } from "framer-motion";
+import { getMyWorkingNfts } from "../../GlobalState/NftsSlice/nftsSlice";
+import buildingSlot from "../../assets/images/nfts/Building-Slot.webp";
 import Loader from "../Loader/Loader";
+import styles from "./styles.module.scss";
 
 const MyNftCard = React.lazy(() =>
   import("../../components/Nft/MyNftCard/MyNftCard")

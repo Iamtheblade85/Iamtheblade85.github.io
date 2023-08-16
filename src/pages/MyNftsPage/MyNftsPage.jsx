@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 import styles from "./styles.module.scss";
 
-import { User, UserService } from "../../UserService";
-import { toast } from "react-toastify";
 import mineAurum from "../../assets/images/nfts/Mine-Aurum.webp";
 import mineCelium from "../../assets/images/nfts/Mine-Celium.webp";
 import buildingSlot from "../../assets/images/nfts/Building-Slot.webp";
 import levelUpToken from "../../assets/images/nfts/Level-Up-Token.webp";
 import teleportToChaos from "../../assets/images/nfts/Teleport.webp";
+
+import { User, UserService } from "../../UserService";
 
 import { getMyNfts, setMyNfts } from "../../GlobalState/NftsSlice/nftsSlice";
 
@@ -17,7 +19,6 @@ import NoDataMessage from "../../components/NoDataMessage/NoDataMessage";
 import Loader from "../../components/Loader/Loader";
 import Button from "../../components/Button/Button";
 import RequiredNftModal from "../../components/Modal/RequiredNftModal/RequiredNftModal";
-import { motion } from "framer-motion";
 import Slots from "../../components/Slots/Slots";
 
 const MyNftCard = React.lazy(() =>

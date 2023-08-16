@@ -1,14 +1,12 @@
 import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-
 import styles from "./styles.module.scss";
-import closeIcon from "../../../assets/images/icons/icons8-close-48.png";
-
+import { User } from "../../../UserService";
 import Button from "../../Button/Button";
 import Input from "../../Input/Input";
-import { toast } from "react-toastify";
-import { User } from "../../../UserService";
+import closeIcon from "../../../assets/images/icons/icons8-close-48.png";
 
 const WithdrawAmountModal = ({ player, onClose }) => {
   const modalRef = useRef(null);

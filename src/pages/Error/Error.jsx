@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 const Error = () => {
   return (

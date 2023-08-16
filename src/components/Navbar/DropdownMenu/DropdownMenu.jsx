@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import styles from "./styles.module.scss";
 import EnterIcon from "../../../assets/images/icons/enter.png";
 import ExitIcon from "../../../assets/images/icons/exit.png";
-import styles from "./styles.module.scss";
-import { motion } from "framer-motion";
 
 const DropdownMenu = ({
   closeMenu,

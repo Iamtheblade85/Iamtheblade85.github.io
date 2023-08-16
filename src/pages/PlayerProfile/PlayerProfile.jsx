@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { User, UserService } from "../../UserService";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+
 import styles from "./styles.module.scss";
+
+import { User, UserService } from "../../UserService";
 
 import Loader from "../../components/Loader/Loader";
 import { getMyNfts } from "../../GlobalState/NftsSlice/nftsSlice";
+
 import RequiredNftModal from "../../components/Modal/RequiredNftModal/RequiredNftModal";
-import NoDataMessage from "./../../components/NoDataMessage/NoDataMessage";
-import Button from "../../components/Button/Button";
 import WithdrawAmountModal from "../../components/Modal/WithdrawAmountModal/WithdrawAmountModal";
-import { toast } from "react-toastify";
+
+import NoDataMessage from "../../components/NoDataMessage/NoDataMessage";
+import Button from "../../components/Button/Button";
+
 const Mining = React.lazy(() => import("../../components/Mining/Mining"));
 
 const PlayerProfile = () => {

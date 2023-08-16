@@ -1,7 +1,7 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
+import { motion } from "framer-motion";
 import styles from "./styles.module.scss";
 import Button from "../../Button/Button";
-import { motion } from "framer-motion";
 import closeIcon from "../../../assets/images/icons/icons8-close-48.png";
 
 const ViewNftDetailsModal = ({ onClose, description, effect }) => {

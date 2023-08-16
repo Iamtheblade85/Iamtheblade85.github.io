@@ -1,20 +1,16 @@
-import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.scss";
+import { UserService } from "../../UserService";
+import { setPlayerIsLogged } from "../../GlobalState/UserReducer";
 import LogoIcon from "../../assets/images/icons/logo.png";
 import hamburgerIcon from "../../assets/images/icons/icons8-menu-48.png";
 import closeIcon from "../../assets/images/icons/icons8-close-48.png";
-
-import { UserService } from "../../UserService";
-
-import styles from "./styles.module.scss";
-
 import ConnectWalletModal from "../Modal/ConnectWalletModal/ConncetWalletModal";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
-import { setPlayerIsLogged } from "../../GlobalState/UserReducer";
 
-export const Navbar = () => {
+const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { name, balance, waxConnected, anchorConnected } = useSelector(
@@ -84,7 +80,7 @@ export const Navbar = () => {
             />
             {(waxConnected || anchorConnected) && (
               <div className={styles.container_navbar_logoDiv_walletBalance}>
-                {UserService.testnet && (
+                {name && (
                   <p style={{ textAlign: "center" }}>
                     Hi {name} <br /> Wallet: {balance}
                   </p>
@@ -126,3 +122,5 @@ export const Navbar = () => {
     </>
   );
 };
+
+export default Navbar;

@@ -1,10 +1,11 @@
 import { WaxJS } from "@waxio/waxjs/dist";
-import AnchorLinkBrowserTransport from 'anchor-link-browser-transport'
-import AnchorLink from 'anchor-link'
+import AnchorLink from 'anchor-link';
+import AnchorLinkBrowserTransport from 'anchor-link-browser-transport';
+import { toast } from "react-toastify";
+
 import { setPlayerIsLogged, setWaxData, setWaxLogout } from './GlobalState/UserReducer';
 import { store } from './GlobalState/Store';
 import { clearMyNfts } from "./GlobalState/NftsSlice/nftsSlice";
-import { toast } from "react-toastify";
 
 // Class to manage user data; it will be saved on Login and deleted on Logout
 export class User {

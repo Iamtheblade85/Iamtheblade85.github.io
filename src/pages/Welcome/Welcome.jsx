@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./styles.module.scss";
 import { motion } from "framer-motion";
-import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
+
+import Button from "../../components/Button/Button";
+
+import styles from "./styles.module.scss";
 
 import discordIcon from "../../assets/images/icons/icons8-discord.svg";
 import telegramIcon from "../../assets/images/icons/icons8-telegram-app.svg";
@@ -117,7 +119,7 @@ const Welcome = () => {
           NFT that offers the extraordinary ability to teleport players through
           the vast expanse of space to the heart of the planet. The Teleport
           will be your gateway to a world full of opportunities and thrilling
-          challenges.Once you touch down on Chaos X-18, your journey as a space
+          challenges. Once you touch down on Chaos X-18, your journey as a space
           miner begins. Here you will encounter the Aurum and Celium mines, two
           highly valuable NFTs. Aurum specializes in extracting cosmic gold, a
           rare and precious resource, while Celium focuses on mining celium, a
@@ -138,7 +140,15 @@ const Welcome = () => {
           powerful tools will allow you to simultaneously utilize up to 20 mines
           on Chaos X-18. This will provide you with a significant competitive
           advantage as you maximize resource production and compete for a share
-          of the generous prize pool put forth by E. Agostino. <br /> <br />{" "}
+          of the generous prize pool put forth by E. Agostino.
+        </motion.p>
+        <motion.p
+          transition={{ delay: 0.9 }}
+          variants={Variants}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ root: scrollRef, once: true }}
+        >
           Chaos X-18 is an active game on the Wax blockchain, contributing to
           the growth of this revolutionary ecosystem. Thanks to blockchain
           technology, you can enjoy secure and transparent transactions, as well
@@ -151,8 +161,8 @@ const Welcome = () => {
         </motion.p>
         <motion.div
           transition={{ delay: 1.2 }}
-          initial={{opacity:0}}
-          animate={{opacity:1}}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
         >
           <Button onClick={() => navigate("/home")} size="large" color="blue">
             Start

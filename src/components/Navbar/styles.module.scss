@@ -31,20 +31,20 @@
         margin-left: 15px;
       }
     }
-      &_dropDown {
-        position: relative;
-        cursor: pointer;
-        display: block;
+    &_dropDown {
+      position: relative;
+      cursor: pointer;
+      display: block;
 
-        &_openHamburger {
-          width: 25px;
-          height: 25px;
-        }
-        &_closeHamburger {
-          width: 25px;
-          height: 25px;
-        }
+      &_openHamburger {
+        width: 25px;
+        height: 25px;
       }
+      &_closeHamburger {
+        width: 25px;
+        height: 25px;
+      }
+    }
   }
 
   @media (max-width: $small-screen) {

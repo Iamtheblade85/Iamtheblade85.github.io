@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import { motion } from "framer-motion";
+import styles from "./styles.module.scss";
 
-export const Home = () => {
+const Home = () => {
   return (
     <motion.div
       className={styles.container}
@@ -56,3 +56,4 @@ export const Home = () => {
     </motion.div>
   );
 };
+export default Home;

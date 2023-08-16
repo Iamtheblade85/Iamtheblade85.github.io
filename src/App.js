@@ -1,11 +1,11 @@
 import './App.scss';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux'
-import { User } from './UserService';
-import MyRouters from './router/MyRouters'
+import { useDispatch } from 'react-redux';
+import { motion } from "framer-motion";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { motion } from "framer-motion"
+import { User } from './UserService';
+import MyRouters from './router/MyRouters';
 
 function App() {
   const dispatch = useDispatch()

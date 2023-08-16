@@ -1,12 +1,8 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
-import waxIcon from "../../../assets/images/icons/wax_icon.png";
-import closeIcon from "../../../assets/images/icons/icons8-close-48.png";
-import anchorIcon from "../../../assets/images/icons/anchor_icon.png";
-
-import styles from "./styles.module.scss";
 import { motion } from "framer-motion";
-
+import { toast } from "react-toastify";
+import styles from "./styles.module.scss";
 import { UserService } from "../../../UserService";
 import {
   setAnchorConnected,
@@ -15,7 +11,10 @@ import {
   setWaxData,
 } from "../../../GlobalState/UserReducer";
 import Button from "../../Button/Button";
-import { toast } from "react-toastify";
+
+import waxIcon from "../../../assets/images/icons/wax_icon.png";
+import closeIcon from "../../../assets/images/icons/icons8-close-48.png";
+import anchorIcon from "../../../assets/images/icons/anchor_icon.png";
 
 const ConnectWalletModal = ({ onClose }) => {
   const dispatch = useDispatch();

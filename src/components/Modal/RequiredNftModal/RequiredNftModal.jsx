@@ -1,6 +1,6 @@
-import { useRef } from "react";
-import styles from "./styles.module.scss";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
+import styles from "./styles.module.scss";
 import Button from "./../../Button/Button";
 
 const RequiredNftModal = () => {

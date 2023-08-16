@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles.module.scss";
-import { UserService } from "../../UserService";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { UserService } from "../../UserService";
+import styles from "./styles.module.scss";
 
 const Leaderboard = () => {
   const [allPlayers, setAllPlayers] = useState([]);
