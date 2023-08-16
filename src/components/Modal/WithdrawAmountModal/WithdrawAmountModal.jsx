@@ -32,7 +32,7 @@ const WithdrawAmountModal = ({ player, onClose }) => {
         {
           actions: [
             {
-              account: "blockchain44",
+              account: "xcryptochaos",
               name: "withdraw",
               authorization: [
                 {
@@ -70,7 +70,7 @@ const WithdrawAmountModal = ({ player, onClose }) => {
         {
           actions: [
             {
-              account: "blockchain44",
+              account: "xcryptochaos",
               name: "withdraw",
               authorization: [
                 {

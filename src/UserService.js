@@ -11,7 +11,7 @@ export class User {
   appName = 'Chaos Marketplace'
   static instance;
   // WAX configuration
-  static rpcEndpoint = 'https://testnet.wax.pink.gg'
+  static rpcEndpoint = 'https://wax.pink.gg'
   // for testnet
   // https://testnet.wax.pink.gg
   // for mainnet
@@ -21,15 +21,15 @@ export class User {
   waxSession = undefined
   static anchorSession = null
 
-  testnet = true
+  testnet = false
   // For Anchor Wallet application
   static transport = new AnchorLinkBrowserTransport()
   static anchorLink = new AnchorLink({
     transport: User.transport,
     chains: [
       {
-        chainId: 'f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12',
-        nodeUrl: 'https://wax-testnet.eosphere.io',
+        chainId: '1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4',
+        nodeUrl: 'https://wax.eosphere.io',
         // for testnet
         // https://wax-testnet.eosphere.io
         // f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12
@@ -75,8 +75,8 @@ export class User {
   async getMines(waxAccount) {
     const res = await User.wax?.rpc.get_table_rows({
       json: true,
-      code: "blockchain44", // Contract that we target
-      scope: "blockchain44", // Account that owns the data
+      code: "xcryptochaos", // Contract that we target
+      scope: "xcryptochaos", // Account that owns the data
       table: "mines", // Table name
       reverse: false, // Optional: Get reversed data
       limit: 9999999, // Limit of the data (default 10)
@@ -88,8 +88,8 @@ export class User {
   async getSlots(waxAccount) {
     const res = await User.wax?.rpc.get_table_rows({
       json: true,
-      code: "blockchain44", // Contract that we target
-      scope: "blockchain44", // Account that owns the data
+      code: "xcryptochaos", // Contract that we target
+      scope: "xcryptochaos", // Account that owns the data
       table: "slots", // Table name
       reverse: false, // Optional: Get reversed data
       limit: 9999999, // Limit of the data (default 10)
@@ -101,8 +101,8 @@ export class User {
   async getPlayers() {
     const res = await User.wax?.rpc.get_table_rows({
       json: true,
-      code: "blockchain44", // Contract that we target
-      scope: "blockchain44", // Account that owns the data
+      code: "xcryptochaos", // Contract that we target
+      scope: "xcryptochaos", // Account that owns the data
       table: "players", // Table name
       reverse: false, // Optional: Get reversed data
       limit: 9999999, // Limit of the data (default 10)
@@ -118,7 +118,7 @@ export class User {
           {
             actions: [
               {
-                account: "blockchain44",
+                account: "xcryptochaos",
                 name: "login",
                 authorization: [
                   {
@@ -144,7 +144,7 @@ export class User {
           {
             actions: [
               {
-                account: "blockchain44",
+                account: "xcryptochaos",
                 name: "login",
                 authorization: [
                   {

@@ -185,7 +185,7 @@ const MyNftsPage = () => {
               ],
               data: {
                 from: User.anchorSession?.auth?.actor.toString(),
-                to: "blockchain44",
+                to: "xcryptochaos",
                 asset_ids: [nft.asset_id],
                 memo: "stake@slot",
               },
@@ -227,7 +227,7 @@ const MyNftsPage = () => {
               ],
               data: {
                 from: User.wax?.userAccount,
-                to: "blockchain44",
+                to: "xcryptochaos",
                 asset_ids: [nft.asset_id],
                 memo: "stake@slot",
               },
@@ -278,7 +278,7 @@ const MyNftsPage = () => {
               ],
               data: {
                 from: User.anchorSession?.auth?.actor.toString(),
-                to: "blockchain44",
+                to: "xcryptochaos",
                 asset_ids: selectedAssetIds,
                 memo: "stake@slots",
               },
@@ -320,7 +320,7 @@ const MyNftsPage = () => {
               ],
               data: {
                 from: User.wax?.userAccount,
-                to: "blockchain44",
+                to: "xcryptochaos",
                 asset_ids: selectedAssetIds,
                 memo: "stake@slots",
               },
@@ -362,7 +362,7 @@ const MyNftsPage = () => {
         {
           actions: [
             {
-              account: "blockchain44",
+              account: "xcryptochaos",
               name: "unstakeslot",
               authorization: [
                 {
@@ -402,7 +402,7 @@ const MyNftsPage = () => {
         {
           actions: [
             {
-              account: "blockchain44",
+              account: "xcryptochaos",
               name: "unstakeslot",
               authorization: [
                 {
@@ -462,7 +462,7 @@ const MyNftsPage = () => {
               ],
               data: {
                 from: User.anchorSession?.auth?.actor.toString(),
-                to: "blockchain44",
+                to: "xcryptochaos",
                 asset_ids: selectedAssetIds,
                 memo: "stake@mines@" + slot.asset_id,
               },
@@ -504,7 +504,7 @@ const MyNftsPage = () => {
               ],
               data: {
                 from: User.wax?.userAccount,
-                to: "blockchain44",
+                to: "xcryptochaos",
                 asset_ids: selectedAssetIds,
                 memo: "stake@mines@" + slot.asset_id,
               },

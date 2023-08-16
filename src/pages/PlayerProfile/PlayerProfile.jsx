@@ -42,7 +42,7 @@ const PlayerProfile = () => {
         {
           actions: [
             {
-              account: "blockchain44",
+              account: "xcryptochaos",
               name: "withdraw",
               authorization: [
                 {
@@ -80,7 +80,7 @@ const PlayerProfile = () => {
         {
           actions: [
             {
-              account: "blockchain44",
+              account: "xcryptochaos",
               name: "withdraw",
               authorization: [
                 {

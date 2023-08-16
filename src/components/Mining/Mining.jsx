@@ -56,7 +56,7 @@ const Mining = ({ mine }) => {
         {
           actions: [
             {
-              account: "blockchain44",
+              account: "xcryptochaos",
               name: "minetoken",
               authorization: [
                 {
@@ -96,7 +96,7 @@ const Mining = ({ mine }) => {
         {
           actions: [
             {
-              account: "blockchain44",
+              account: "xcryptochaos",
               name: "minetoken",
               authorization: [
                 {
@@ -155,7 +155,7 @@ const Mining = ({ mine }) => {
               ],
               data: {
                 from: User.anchorSession?.auth?.actor.toString(),
-                to: "blockchain44",
+                to: "xcryptochaos",
                 asset_ids: [levelUp.asset_id],
                 memo: "burn@level@" + nft.asset_id,
               },
@@ -197,7 +197,7 @@ const Mining = ({ mine }) => {
               ],
               data: {
                 from: User.wax?.userAccount,
-                to: "blockchain44",
+                to: "xcryptochaos",
                 asset_ids: [levelUp.asset_id],
                 memo: "burn@level@" + nft.asset_id,
               },
@@ -246,7 +246,7 @@ const Mining = ({ mine }) => {
   //       {
   //         actions: [
   //           {
-  //             account: "blockchain44",
+  //             account: "xcryptochaos",
   //             name: "unstakemine",
   //             authorization: [
   //               {
@@ -286,7 +286,7 @@ const Mining = ({ mine }) => {
   //       {
   //         actions: [
   //           {
-  //             account: "blockchain44",
+  //             account: "xcryptochaos",
   //             name: "unstakemine",
   //             authorization: [
   //               {
