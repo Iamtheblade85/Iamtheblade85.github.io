@@ -167,7 +167,7 @@ const PlayerProfile = () => {
           </div>
         </div>
         <div className={styles.container_mainInfo_earnings}>
-          <h2>Gains</h2>
+          <h2>Rewards</h2>
           <div>
             <p>Last: {!player ? 0 : player.prev_leaderboardpts.slice(0, -4)}</p>
             <p>Current: {!player ? 0 : player.leaderboardpts.slice(0, -4)}</p>
