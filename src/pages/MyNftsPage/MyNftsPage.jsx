@@ -60,7 +60,6 @@ const MyNftsPage = () => {
         )
     )
     .reduce((groups, nft) => {
-      console.log(nft.template.template_id);
       const { name } = nft;
       if (!groups[name]) {
         groups[name] = [];

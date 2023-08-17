@@ -112,67 +112,120 @@ export class User {
     return res
   }
 
+  // async loginAccount(name, isConnected) {
+  //   try {
+  //     if (isConnected) {
+  //       await User.anchorSession.transact(
+  //         {
+  //           actions: [
+  //             {
+  //               account: "xcryptochaos",
+  //               name: "login",
+  //               authorization: [
+  //                 {
+  //                   actor: name,
+  //                   permission: "active",
+  //                 },
+  //               ],
+  //               data: {
+  //                 player: name,
+  //               },
+  //             },
+  //           ],
+  //         },
+  //         {
+  //           blocksBehind: 3,
+  //           expireSeconds: 30,
+  //         }
+  //       );
+  //       toast.success("Player logged successfully using Anchor");
+  //       store.dispatch(setPlayerIsLogged(true))
+  //     } else {
+  //       await User.wax.api.transact(
+  //         {
+  //           actions: [
+  //             {
+  //               account: "xcryptochaos",
+  //               name: "login",
+  //               authorization: [
+  //                 {
+  //                   actor: name,
+  //                   permission: "active",
+  //                 },
+  //               ],
+  //               data: {
+  //                 player: name,
+  //               },
+  //             },
+  //           ],
+  //         },
+  //         {
+  //           blocksBehind: 3,
+  //           expireSeconds: 30,
+  //         }
+  //       );
+  //       toast.success("Player login successful using Wax");
+  //       store.dispatch(setPlayerIsLogged(true))
+  //     }
+  //   } catch (error) {
+  //     console.error("Error in loginAccount:", error);
+  //     toast.error("Player login canceled");
+  //     store.dispatch(setPlayerIsLogged(false))
+  //   }
+  // };
+
   async loginAccount(name, isConnected) {
     try {
+      const contractAccount = "xcryptochaos";
+      const actionName = "login";
+      const authorization = [
+        {
+          actor: name,
+          permission: "active",
+        },
+      ];
+      const data = {
+        player: name,
+      };
+
+      let rpc;
       if (isConnected) {
-        await User.anchorSession.transact(
-          {
-            actions: [
-              {
-                account: "xcryptochaos",
-                name: "login",
-                authorization: [
-                  {
-                    actor: name,
-                    permission: "active",
-                  },
-                ],
-                data: {
-                  player: name,
-                },
-              },
-            ],
-          },
-          {
-            blocksBehind: 3,
-            expireSeconds: 30,
-          }
-        );
-        toast.success("Player logged successfully using Anchor");
-        store.dispatch(setPlayerIsLogged(true))
+        rpc = User.anchorSession;
+        toast.success("Player logged in successfully using Anchor");
       } else {
-        await User.wax.api.transact(
-          {
-            actions: [
-              {
-                account: "xcryptochaos",
-                name: "login",
-                authorization: [
-                  {
-                    actor: name,
-                    permission: "active",
-                  },
-                ],
-                data: {
-                  player: name,
-                },
-              },
-            ],
-          },
-          {
-            blocksBehind: 3,
-            expireSeconds: 30,
-          }
-        );
-        toast.success("Player login successful using Wax");
-        store.dispatch(setPlayerIsLogged(true))
+        rpc = User.wax.api;
+        toast.success("Player logged in successfully using Wax");
+      }
+
+      const transactionResult = await rpc.transact(
+        {
+          actions: [
+            {
+              account: contractAccount,
+              name: actionName,
+              authorization: authorization,
+              data: data,
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      );
+
+      // Check if the transaction was successful and the player is logged in
+      if (transactionResult && transactionResult.processed) {
+        store.dispatch(setPlayerIsLogged(true));
+      } else {
+        toast.error("Player login failed");
+        store.dispatch(setPlayerIsLogged(false));
       }
     } catch (error) {
       console.error("Error in loginAccount:", error);
-      toast.error("Player login canceled");
-      store.dispatch(setPlayerIsLogged(false))
     }
-  };
+  }
+
 
   static restoreWaxSession = async () => {
     if (store.getState().user.waxConnected) {
