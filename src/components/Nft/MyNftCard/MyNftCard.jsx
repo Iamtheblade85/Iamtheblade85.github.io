@@ -59,8 +59,8 @@ const Nft = ({
         )}
         <img
           rel="preload"
-          src={image ? image : ""}
-          alt={image ? nft.data.name + "'s image" : "no image"}
+          src={image ? image : `https://ipfs.io/ipfs/${nft.data.img}`}
+          alt={nft.data.name + "'s image"}
         />
         <div className={styles.container_mainInfo}>
           <h2 className={styles.container_mainInfo_nftName}>
