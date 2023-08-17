@@ -26,9 +26,9 @@ const MyNftCard = React.lazy(() =>
 );
 
 const images = {
-  "ChaosX-18 Mine Aurum": mineAurum,
+  "Chaos X-18 Mine Aurum": mineAurum,
   "ChaosX-18 Mine Celium": mineCelium,
-  "ChaosX-18 Building Slot ": buildingSlot,
+  "ChaosX-18 Building Slot": buildingSlot,
   "ChaosX-18 Level Up token": levelUpToken,
   "Teleport to ChaosX-18": teleportToChaos,
 };
@@ -51,14 +51,23 @@ const MyNftsPage = () => {
   const [player, setPlayer] = useState(null);
   const pollingInterval = 10000;
 
-  const groupedNfts = myNfts.reduce((groups, nft) => {
-    const { name } = nft;
-    if (!groups[name]) {
-      groups[name] = [];
-    }
-    groups[name].push(nft);
-    return groups;
-  }, {});
+  const filteredGroupedNfts = myNfts
+    .filter(
+      (nft) =>
+        nft.template &&
+        ["720129", "720135", "720134", "720120", "720123"].includes(
+          nft.template.template_id
+        )
+    )
+    .reduce((groups, nft) => {
+      console.log(nft.template.template_id);
+      const { name } = nft;
+      if (!groups[name]) {
+        groups[name] = [];
+      }
+      groups[name].push(nft);
+      return groups;
+    }, {});
 
   // See More logic
   const handleSeeMore = (tokenName) => {
@@ -634,7 +643,7 @@ const MyNftsPage = () => {
   useEffect(() => {
     if (myNfts.length > 0) {
       const initialVisibleNfts = {};
-      Object.keys(groupedNfts).forEach((tokenName) => {
+      Object.keys(filteredGroupedNfts).forEach((tokenName) => {
         initialVisibleNfts[tokenName] = 12;
       });
       setVisibleNfts(initialVisibleNfts);
@@ -764,7 +773,7 @@ const MyNftsPage = () => {
           </div>
 
           <div className={styles.container_nftsBlock}>
-            {Object.entries(groupedNfts).map(([tokenName, nfts]) => (
+            {Object.entries(filteredGroupedNfts).map(([tokenName, nfts]) => (
               <div
                 key={tokenName}
                 className={styles.container_nftsBlock_tokenSection}
@@ -775,7 +784,10 @@ const MyNftsPage = () => {
                   }
                 >
                   <h2>
-                    {tokenName}: {nfts.length}
+                    {tokenName === "Chaos X-18 Mine Aurum"
+                      ? "ChaosX-18 Mine Aurum"
+                      : tokenName}
+                    : {nfts.length}
                   </h2>
                 </div>
                 {tokenName === "ChaosX-18 Building Slot " &&

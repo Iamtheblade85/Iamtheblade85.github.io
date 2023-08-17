@@ -40,9 +40,9 @@ const Nft = ({
   };
 
   const shouldShowCheckbox =
-    nft?.data.name === "ChaosX-18 Mine Aurum" ||
+    nft?.data.name === "Chaos X-18 Mine Aurum" ||
     nft?.data.name === "ChaosX-18 Mine Celium" ||
-    (nft?.data.name === "ChaosX-18 Building Slot " && stakedSlot === false);
+    (nft?.data.name === "ChaosX-18 Building Slot" && stakedSlot === false);
 
   return (
     <>
@@ -64,7 +64,9 @@ const Nft = ({
         />
         <div className={styles.container_mainInfo}>
           <h2 className={styles.container_mainInfo_nftName}>
-            {nft?.data.name}
+            {nft?.data.name === "Chaos X-18 Mine Aurum"
+              ? "ChaosX-18 Mine Aurum"
+              : nft?.data.name}
           </h2>
           <span
             className={styles.container_mainInfo_description}
