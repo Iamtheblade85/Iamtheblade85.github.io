@@ -76,7 +76,7 @@ const Nft = ({
           </span>
           {functional && (
             <>
-              {nft?.data.name === "ChaosX-18 Building Slot " &&
+              {nft?.data.name === "ChaosX-18 Building Slot" &&
               stakedSlot === false ? (
                 <Button
                   onClick={() => stakeSlot(nft)}
@@ -86,7 +86,7 @@ const Nft = ({
                 >
                   Stake Slot
                 </Button>
-              ) : nft?.data.name === "ChaosX-18 Building Slot " &&
+              ) : nft?.data.name === "ChaosX-18 Building Slot" &&
                 fullSlot === false &&
                 stakedSlot === true ? (
                 <>
@@ -99,7 +99,7 @@ const Nft = ({
                     Stake Mines
                   </Button>
                 </>
-              ) : nft?.data.name === "ChaosX-18 Building Slot " &&
+              ) : nft?.data.name === "ChaosX-18 Building Slot" &&
                 fullSlot === true &&
                 stakedSlot === true ? (
                 <>

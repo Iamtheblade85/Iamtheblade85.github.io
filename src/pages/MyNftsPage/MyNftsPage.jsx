@@ -548,7 +548,7 @@ const MyNftsPage = () => {
   // selection
   const handleNftSelection = (nft) => {
     if (
-      nft.data.name === "ChaosX-18 Mine Aurum" ||
+      nft.data.name === "Chaos X-18 Mine Aurum" ||
       nft.data.name === "ChaosX-18 Mine Celium"
     ) {
       if (
@@ -568,7 +568,7 @@ const MyNftsPage = () => {
   };
 
   const handleSlotSelection = (nft) => {
-    if (nft.data.name === "ChaosX-18 Building Slot ") {
+    if (nft.data.name === "ChaosX-18 Building Slot") {
       setSelectedSlots((prevSelectedSlots) => {
         const isSelected = prevSelectedSlots.some(
           (selectedSlot) => selectedSlot.asset_id === nft.asset_id
@@ -789,8 +789,7 @@ const MyNftsPage = () => {
                     : {nfts.length}
                   </h2>
                 </div>
-                {tokenName === "ChaosX-18 Building Slot " &&
-                selectedSlots[0] ? (
+                {tokenName === "ChaosX-18 Building Slot" && selectedSlots[0] ? (
                   <Button size="fit" color="blue" onClick={() => stakeSlots()}>
                     Stake Slots
                   </Button>
@@ -816,12 +815,12 @@ const MyNftsPage = () => {
                         buttonLoader={buttonLoader === nft.asset_id}
                         functional={true}
                         onSelect={
-                          nft.data.name !== "ChaosX-18 Building Slot "
+                          nft.data.name !== "ChaosX-18 Building Slot"
                             ? () => handleNftSelection(nft)
                             : () => handleSlotSelection(nft)
                         }
                         selected={
-                          nft.data.name !== "ChaosX-18 Building Slot "
+                          nft.data.name !== "ChaosX-18 Building Slot"
                             ? selectedNfts.includes(nft)
                             : selectedSlots.includes(nft)
                         }
