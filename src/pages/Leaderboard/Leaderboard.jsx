@@ -3,17 +3,33 @@ import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { UserService } from "../../UserService";
 import styles from "./styles.module.scss";
+import { useSelector } from "react-redux";
+import Loader from "./../../components/Loader/Loader";
 
 const Leaderboard = () => {
-  const [allPlayers, setAllPlayers] = useState([]);
+  const [sortedPlayers, setSortedPlayers] = useState([]);
+  const { name } = useSelector((store) => store.user);
+  let currentPlayerIndex = -1;
+  let currentPlayer = null;
+
   const updatePlayersData = () => {
     UserService.getPlayers()
       .then((players) => {
-        setAllPlayers(players.rows);
+        const sorted = players?.rows
+          .sort((a, b) => b.leaderboardpts - a.leaderboardpts)
+          .slice(0, 10);
+        setSortedPlayers(sorted);
+
+        if (sorted?.length > 0) {
+          const currentPlayerIndex = sorted.findIndex(
+            (player) => player.player === name
+          );
+          currentPlayer = sorted[currentPlayerIndex];
+        }
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Failed to get players, come back later");
+        toast.error("Failed to get players");
       });
   };
 
@@ -21,11 +37,8 @@ const Leaderboard = () => {
     updatePlayersData();
     const interval = setInterval(updatePlayersData, 10000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const sortedPlayers = allPlayers.sort(
-    (a, b) => b.leaderboardpts - a.leaderboardpts
-  );
 
   return (
     <motion.div
@@ -45,13 +58,38 @@ const Leaderboard = () => {
           </tr>
         </thead>
         <tbody>
-          {sortedPlayers.map((player, index) => (
-            <tr key={player.player}>
-              <td>{index + 1}</td>
-              <td>{player.player}</td>
-              <td>{player.leaderboardpts}</td>
+          {sortedPlayers ? (
+            sortedPlayers?.map((player, index) => (
+              <tr key={player.player}>
+                <td>{index + 1}</td>
+                <td>{player.player}</td>
+                <td>{player.leaderboardpts}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td>
+                <Loader size={50} />
+              </td>
+              <td>
+                <Loader size={50} />
+              </td>
+              <td>
+                <Loader size={50} />
+              </td>
             </tr>
-          ))}
+          )}
+        </tbody>
+      </table>
+      <table className={styles.container_playersTable}>
+        <tbody style={{ borderTop: "1px solid #fffb00" }}>
+          {currentPlayerIndex >= 10 && (
+            <tr>
+              <td>{currentPlayerIndex + 1}</td>
+              <td>{currentPlayer.player}</td>
+              <td>{currentPlayer.leaderboardpts}</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </motion.div>
