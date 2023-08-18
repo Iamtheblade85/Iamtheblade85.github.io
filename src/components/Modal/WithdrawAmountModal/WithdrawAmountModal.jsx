@@ -54,7 +54,9 @@ const WithdrawAmountModal = ({ player, onClose }) => {
         toast.success("Withdraw completed");
         setButtonLoader(null);
       })
-      .catch((_) => {
+      .catch((error) => {
+        console.log(error)
+        toast.error("Value is more than balance or doesn't exist");
         setButtonLoader(null);
       });
   };
@@ -92,7 +94,9 @@ const WithdrawAmountModal = ({ player, onClose }) => {
         toast.success("Withdraw completed");
         setButtonLoader(null);
       })
-      .catch((_) => {
+      .catch((error) => {
+        console.log(error)
+        toast.error("Value is more than balance or doesn't exist");
         setButtonLoader(null);
       });
   };

@@ -71,7 +71,9 @@ const PlayerProfile = () => {
         toast.success("Withdraw all completed");
         setButtonLoader(null);
       })
-      .catch((_) => {
+      .catch((error) => {
+        console.log(error);
+        toast.error("Value is more than your balance or doesn't exist");
         setButtonLoader(null);
       });
   };
@@ -109,7 +111,9 @@ const PlayerProfile = () => {
         toast.success("Withdraw all completed");
         setButtonLoader(null);
       })
-      .catch((_) => {
+      .catch((error) => {
+        console.log(error);
+        toast.error("Value is more than your balance or doesn't exist");
         setButtonLoader(null);
       });
   };

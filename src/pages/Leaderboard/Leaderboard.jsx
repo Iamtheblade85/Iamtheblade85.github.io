@@ -13,7 +13,7 @@ const Leaderboard = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Failed to get players, try again");
+        toast.error("Failed to get players, come back later");
       });
   };
 

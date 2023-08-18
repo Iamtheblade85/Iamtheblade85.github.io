@@ -22,9 +22,9 @@ const MyNftCard = React.lazy(() =>
 );
 
 const images = {
-  "ChaosX-18 Mine Aurum": mineAurum,
+  "Chaos X-18 Mine Aurum": mineAurum,
   "ChaosX-18 Mine Celium": mineCelium,
-  "ChaosX-18 Building Slot ": buildingSlot,
+  "ChaosX-18 Building Slot": buildingSlot,
   "ChaosX-18 Level Up token": levelUpToken,
   "Teleport to ChaosX-18": teleportToChaos,
 };
@@ -173,7 +173,9 @@ const Mining = ({ mine }) => {
         );
         setButtonLoader(null);
       })
-      .catch((_) => {
+      .catch((error) => {
+        console.log(error);
+        toast.error("NFT doesn't upgraded, try again");
         setButtonLoader(null);
       });
   };
@@ -188,7 +190,7 @@ const Mining = ({ mine }) => {
           actions: [
             {
               account: "atomicassets",
-              name: "burnasset",
+              name: "transfer",
               authorization: [
                 {
                   actor: User.wax?.userAccount,
@@ -215,7 +217,9 @@ const Mining = ({ mine }) => {
         );
         setButtonLoader(null);
       })
-      .catch((_) => {
+      .catch((error) => {
+        console.log(error);
+        toast.error("NFT doesn't upgraded, try again");
         setButtonLoader(null);
       });
   };
