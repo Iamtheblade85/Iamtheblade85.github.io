@@ -9,8 +9,8 @@ import Loader from "./../../components/Loader/Loader";
 const Leaderboard = () => {
   const [sortedPlayers, setSortedPlayers] = useState([]);
   const { name } = useSelector((store) => store.user);
-  let currentPlayerIndex = -1;
-  let currentPlayer = null;
+  const [currentPlayerIndex, setCurrentPlayerIndex] = useState(-1);
+  const [currentPlayer, setCurrentPlayer] = useState(null);
 
   const updatePlayersData = () => {
     UserService.getPlayers()
@@ -19,12 +19,14 @@ const Leaderboard = () => {
           .sort((a, b) => b.leaderboardpts - a.leaderboardpts)
           .slice(0, 10);
         setSortedPlayers(sorted);
-
-        if (sorted?.length > 0) {
-          const currentPlayerIndex = sorted.findIndex(
+        if (players?.rows.length > 0) {
+          const index = players?.rows.findIndex(
             (player) => player.player === name
           );
-          currentPlayer = sorted[currentPlayerIndex];
+          if (index >= 0) {
+            setCurrentPlayerIndex(index);
+            setCurrentPlayer(players?.rows[index]);
+          }
         }
       })
       .catch((error) => {
@@ -85,9 +87,9 @@ const Leaderboard = () => {
         <tbody style={{ borderTop: "1px solid #fffb00" }}>
           {currentPlayerIndex >= 10 && (
             <tr>
-              <td>{currentPlayerIndex + 1}</td>
-              <td>{currentPlayer.player}</td>
-              <td>{currentPlayer.leaderboardpts}</td>
+              <td>{currentPlayerIndex}</td>
+              <td>{currentPlayer?.player}</td>
+              <td>{currentPlayer?.leaderboardpts}</td>
             </tr>
           )}
         </tbody>
