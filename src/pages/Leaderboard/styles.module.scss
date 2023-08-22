@@ -48,23 +48,9 @@
   }
 }
 
-@media (max-width: $mobile-screen) {
-  .container {
-    &_playersTable {
-      > thead {
-        > tr {
-          > th {
-            font-size: 4vw;
-          }
-        }
-      }
-      > tbody {
-        > tr {
-          > td {
-            font-size: 4vw;
-          }
-        }
-      }
-    }
+@media (max-width: $mobile-screen), (max-width: $small-screen) {
+  .container_playersTable > thead > tr > th,
+  .container_playersTable > tbody > tr > td {
+    font-size: 3vw;
   }
 }

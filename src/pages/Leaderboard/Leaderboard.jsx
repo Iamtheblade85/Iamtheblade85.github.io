@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import Loader from "./../../components/Loader/Loader";
 
 const Leaderboard = () => {
-  const [sortedPlayers, setSortedPlayers] = useState([]);
+  const [leaders, setLeaders] = useState([]);
   const { name } = useSelector((store) => store.user);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(-1);
   const [currentPlayer, setCurrentPlayer] = useState(null);
@@ -15,10 +15,10 @@ const Leaderboard = () => {
   const updatePlayersData = () => {
     UserService.getPlayers()
       .then((players) => {
-        const sorted = players?.rows
-          .sort((a, b) => b.leaderboardpts - a.leaderboardpts)
-          .slice(0, 10);
-        setSortedPlayers(sorted);
+        const sorted = players?.rows.sort(
+          (a, b) => b.leaderboardpts - a.leaderboardpts
+        );
+        setLeaders(sorted);
         if (players?.rows.length > 0) {
           const index = players?.rows.findIndex(
             (player) => player.player === name
@@ -60,8 +60,8 @@ const Leaderboard = () => {
           </tr>
         </thead>
         <tbody>
-          {sortedPlayers ? (
-            sortedPlayers?.map((player, index) => (
+          {leaders ? (
+            leaders?.map((player, index) => (
               <tr key={player.player}>
                 <td>{index + 1}</td>
                 <td>{player.player}</td>
@@ -87,7 +87,7 @@ const Leaderboard = () => {
         <tbody style={{ borderTop: "1px solid #fffb00" }}>
           {currentPlayerIndex >= 10 && (
             <tr>
-              <td>{currentPlayerIndex}</td>
+              <td>{currentPlayerIndex + 1 }</td>
               <td>{currentPlayer?.player}</td>
               <td>{currentPlayer?.leaderboardpts}</td>
             </tr>
