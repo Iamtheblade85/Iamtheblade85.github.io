@@ -60,6 +60,13 @@ const Leaderboard = () => {
           </tr>
         </thead>
         <tbody>
+        {currentPlayerIndex >= 10 && (
+            <tr className={styles.container_playersTable_currentTr}>
+              <td>{currentPlayerIndex + 1 }</td>
+              <td>{currentPlayer?.player}</td>
+              <td>{currentPlayer?.leaderboardpts}</td>
+            </tr>
+          )}
           {leaders ? (
             leaders?.map((player, index) => (
               <tr key={player.player}>
@@ -83,7 +90,7 @@ const Leaderboard = () => {
           )}
         </tbody>
       </table>
-      <table className={styles.container_playersTable}>
+      {/* <table className={styles.container_playersTable}>
         <tbody style={{ borderTop: "1px solid #fffb00" }}>
           {currentPlayerIndex >= 10 && (
             <tr>
@@ -93,7 +100,7 @@ const Leaderboard = () => {
             </tr>
           )}
         </tbody>
-      </table>
+      </table> */}
     </motion.div>
   );
 };

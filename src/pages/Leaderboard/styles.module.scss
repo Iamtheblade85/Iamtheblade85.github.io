@@ -24,6 +24,11 @@
         }
       }
     }
+    &_currentTr {
+      border-radius: 8px;
+      background-color: $blackBackground;
+      scale: (1.1);
+    }
     > tbody {
       > tr {
         transition: 0.2s ease-in-out;
