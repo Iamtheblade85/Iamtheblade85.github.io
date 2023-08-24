@@ -72,7 +72,6 @@ const PlayerProfile = () => {
         setButtonLoader(null);
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Value is more than your balance or doesn't exist");
         setButtonLoader(null);
       });
@@ -112,7 +111,6 @@ const PlayerProfile = () => {
         setButtonLoader(null);
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Value is more than your balance or doesn't exist");
         setButtonLoader(null);
       });
@@ -142,7 +140,6 @@ const PlayerProfile = () => {
           setPlayer(data);
         }
       } catch (error) {
-        console.log(error);
       }
     };
     fetchData();

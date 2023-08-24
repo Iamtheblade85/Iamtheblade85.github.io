@@ -82,7 +82,6 @@ const Mining = ({ mine }) => {
       })
       .catch((error) => {
         toast.error("You can't mine now");
-        console.log("Mining error: ", error);
         setButtonLoader(null);
       });
   };
@@ -122,7 +121,6 @@ const Mining = ({ mine }) => {
       })
       .catch((error) => {
         toast.error("You can't mine now");
-        console.log("Mining error: ", error);
         setButtonLoader(null);
       });
   };
@@ -174,7 +172,6 @@ const Mining = ({ mine }) => {
         setButtonLoader(null);
       })
       .catch((error) => {
-        console.log(error);
         toast.error("NFT doesn't upgraded, try again");
         setButtonLoader(null);
       });
@@ -218,7 +215,6 @@ const Mining = ({ mine }) => {
         setButtonLoader(null);
       })
       .catch((error) => {
-        console.log(error);
         toast.error("NFT doesn't upgraded, try again");
         setButtonLoader(null);
       });

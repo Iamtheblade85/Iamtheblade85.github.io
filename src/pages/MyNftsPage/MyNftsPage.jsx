@@ -121,7 +121,6 @@ const MyNftsPage = () => {
         dispatch(getMyNfts());
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Token doesn't burned, try again");
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -163,7 +162,6 @@ const MyNftsPage = () => {
         dispatch(getMyNfts());
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Token doesn't burned, try again");
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -216,7 +214,6 @@ const MyNftsPage = () => {
         dispatch(getMyNfts());
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Slot doesn't staked, try again");
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -260,7 +257,6 @@ const MyNftsPage = () => {
         dispatch(getMyNfts());
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Slot doesn't staked, try again");
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -313,7 +309,6 @@ const MyNftsPage = () => {
         dispatch(getMyNfts());
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Slots doesn't staked, try again");
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -357,7 +352,6 @@ const MyNftsPage = () => {
         dispatch(getMyNfts());
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Slots doesn't staked, try again");
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -409,7 +403,6 @@ const MyNftsPage = () => {
         dispatch(getMyNfts());
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Slot doesn't unstaked, try again");
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -451,7 +444,6 @@ const MyNftsPage = () => {
         dispatch(getMyNfts());
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Slot doesn't unstaked, try again");
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -459,7 +451,6 @@ const MyNftsPage = () => {
   };
 
   const unstakeSlot = (slot) => {
-    console.log(slot);
     if (anchorConnected) {
       unstakeSlotWithAnchor(slot);
     } else if (waxConnected) {
@@ -505,7 +496,6 @@ const MyNftsPage = () => {
         dispatch(getMyNfts());
       })
       .catch((error) => {
-        console.log(error);
         toast.error("NFT doesn't staked, try again");
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -549,7 +539,6 @@ const MyNftsPage = () => {
         dispatch(getMyNfts());
       })
       .catch((error) => {
-        console.log(error);
         toast.error("NFT doesn't staked, try again");
         setButtonLoader(null);
         dispatch(getMyNfts());
@@ -634,7 +623,6 @@ const MyNftsPage = () => {
         setPlayer(data);
       }
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -654,7 +642,6 @@ const MyNftsPage = () => {
       .catch((error) => {
         setLoader(false);
         toast.error("Failed to get your nfts");
-        console.log(error);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, name]);

@@ -2,6 +2,7 @@
   "name": "chaosx-18",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://chaosx18.live/#/home",
   "dependencies": {
     "@eosdacio/ual-wax": "^1.4.4",
     "@reduxjs/toolkit": "^1.9.5",

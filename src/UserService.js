@@ -224,10 +224,8 @@ export class User {
     try {
       User.restoreWaxSession();
       User.restoreAnchorSession();
-    } catch (e) {
-      console.log(e)
+    } catch (error) {
     }
-
   }
 
   static new() {

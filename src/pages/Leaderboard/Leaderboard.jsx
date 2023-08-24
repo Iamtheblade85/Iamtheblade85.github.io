@@ -30,7 +30,6 @@ const Leaderboard = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Failed to get players");
       });
   };
@@ -60,9 +59,9 @@ const Leaderboard = () => {
           </tr>
         </thead>
         <tbody>
-        {currentPlayerIndex >= 10 && (
+          {currentPlayerIndex >= 10 && (
             <tr className={styles.container_playersTable_currentTr}>
-              <td>{currentPlayerIndex + 1 }</td>
+              <td>{currentPlayerIndex + 1}</td>
               <td>{currentPlayer?.player}</td>
               <td>{currentPlayer?.leaderboardpts}</td>
             </tr>

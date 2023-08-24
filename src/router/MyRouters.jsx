@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
@@ -57,7 +57,7 @@ const MyRouters = () => {
   }, []);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {pages.map(({ component: Component, path }) => (
           <Route
@@ -84,7 +84,7 @@ const MyRouters = () => {
         ))}
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
