@@ -138,7 +138,7 @@ export class User {
             expireSeconds: 30,
           }
         );
-        toast.success("Player logged successfully using Anchor");
+        toast.success("Player login successful using Anchor");
         store.dispatch(setPlayerIsLogged(true))
       } else {
         await User.wax.api.transact(
@@ -185,6 +185,7 @@ export class User {
             isLogged: true,
             balance: await UserService.getWaxBalance(User.wax.userAccount)
           }))
+          UserService.loginAccount(User.wax.userAccount, false);
           if (!store.getState().user.playerIsLogged) {
             UserService.loginAccount(User.wax.userAccount, false);
           }
@@ -204,6 +205,7 @@ export class User {
           isLogged: true,
           balance: await UserService.getWaxBalance(waxAddress)
         }))
+        UserService.loginAccount(waxAddress, true);
         if (!store.getState().user.playerIsLogged) {
           UserService.loginAccount(waxAddress, true);
         }
