@@ -4,7 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { rootReducer as reducer } from './reducers';
 
 const persistConfig = {
-  key: "root",
+  key: "chaos_root",
   version: 1,
   storage,
   whitelist: ['user'],
