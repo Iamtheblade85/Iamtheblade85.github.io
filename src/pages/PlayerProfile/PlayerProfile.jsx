@@ -163,15 +163,15 @@ const PlayerProfile = () => {
         <div className={styles.container_mainInfo_mines}>
           <h2>Mined</h2>
           <div>
-            <p>Aurum: {!player ? 0 : player.aurum.slice(0, -4)}</p>
-            <p>Celium: {!player ? 0 : player.celium.slice(0, -4)}</p>
+            <p>Aurum: {!player ? 0 : player.aurum.slice(0, -10)}</p>
+            <p>Celium: {!player ? 0 : player.celium.slice(0, -10)}</p>
           </div>
         </div>
         <div className={styles.container_mainInfo_earnings}>
           <h2>Rewards</h2>
           <div>
-            <p>Last: {!player ? 0 : player.prev_leaderboardpts.slice(0, -4)}</p>
-            <p>Current: {!player ? 0 : player.leaderboardpts.slice(0, -4)}</p>
+            <p>Last: {!player ? 0 : player.prev_leaderboardpts.slice(0, -10)}</p>
+            <p>Current: {!player ? 0 : player.leaderboardpts.slice(0, -10)}</p>
           </div>
         </div>
       </div>
