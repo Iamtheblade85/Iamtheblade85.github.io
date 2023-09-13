@@ -77,11 +77,11 @@ const Mining = ({ mine }) => {
         }
       )
       .then((_) => {
-        toast.success("Mining started successfully");
+        toast.success("Resources collecting has successfully started");
         setButtonLoader(null);
       })
       .catch((error) => {
-        toast.error("You can't mine now");
+        toast.error("You can't mine now, upgrade in progress");
         setButtonLoader(null);
       });
   };
@@ -116,11 +116,11 @@ const Mining = ({ mine }) => {
         }
       )
       .then((_) => {
-        toast.success("Mining started successfully");
+        toast.success("Resources collecting has successfully started");
         setButtonLoader(null);
       })
       .catch((error) => {
-        toast.error("You can't mine now");
+        toast.error("You can't mine now, upgrade in progress");
         setButtonLoader(null);
       });
   };
@@ -167,12 +167,12 @@ const Mining = ({ mine }) => {
       )
       .then((_) => {
         toast.success(
-          "NFT successfully upgraded, you can mine it after 24 hours"
+          "Mine upgrading started, you can mine it when it will be finished"
         );
         setButtonLoader(null);
       })
       .catch((error) => {
-        toast.error("NFT doesn't upgraded, try again");
+        toast.error("Mine doesn't upgraded, try again after one minute");
         setButtonLoader(null);
       });
   };
@@ -210,12 +210,12 @@ const Mining = ({ mine }) => {
       )
       .then((_) => {
         toast.success(
-          "NFT successfully upgraded, you can mine it after 24 hours"
+          "Mine upgrading started, you can mine it when it will be finished"
         );
         setButtonLoader(null);
       })
       .catch((error) => {
-        toast.error("NFT doesn't upgraded, try again");
+        toast.error("Mine doesn't upgraded, try again after one minute");
         setButtonLoader(null);
       });
   };
